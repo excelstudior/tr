@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/excelstudior/tr/issues"
   },
-  "homepage": "https://github.com/excelstudior/tr#readme"
+  "homepage": "https://github.com/excelstudior/tr#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
