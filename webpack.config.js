@@ -1,11 +1,11 @@
 let path = require('path');
 let nodeExternals = require('webpack-node-externals');
 const moduleObj = {
-    loaders: [
+    rules: [
         {
             test: /\.js$/,
             exclude: /node_modules/,
-            loaders: ["babel-loader"],
+            use: ["babel-loader"],
         }
     ],
 };
@@ -16,7 +16,7 @@ const client = {
     target: 'web',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist/public')
     },
     module: moduleObj
 };
