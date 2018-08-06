@@ -7,7 +7,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   todo:(mode)=>dispatch(todo(mode)),
-  updateSort:(sortBy,sortOrder)=>dispatch(updateSort(sortBy,sortOrder))
 })
 
 export default connect(
