@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import SortButton from './sortButtion'
 import StatusButton from './statusButton'
-import { sort_by_key,get_total_count_on_value } from '../../util/ud_functions'
+import { get_total_count_on_value } from '../../util/ud_functions'
 import {TODO_STATUS} from '../constants'
 
 
@@ -10,7 +10,8 @@ import {TODO_STATUS} from '../constants'
 
 const TodoList = ({ todos,updateTodoPriority,leastPriority,updateTodoStatus,modes }) => (
   <div>
-    {todos.length > 0 && get_total_count_on_value(todos,"priority",0)!==todos.length ? 
+    {modes.sortBy+modes.sortOrder}
+    {todos.length > 0 && get_total_count_on_value(todos,"priority",0)!==todos.length  ? 
       <table>
         <tbody>
           <tr>
@@ -22,7 +23,7 @@ const TodoList = ({ todos,updateTodoPriority,leastPriority,updateTodoStatus,mode
           </tr>
 
 
-          {sort_by_key(todos, modes.sortBy,modes.sortOrder).filter(todo=>todo.priority>0).map(todo => <tr key={todo.id}>
+          {todos.filter(todo=>todo.priority>0).map(todo => <tr key={todo.id}>
             <td>{todo.priority}</td>
             <td>{todo.text}</td>
             <td>{todo.status}</td>

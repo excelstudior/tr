@@ -1,13 +1,10 @@
 import { connect } from 'react-redux'
 import { updateTodoPriority,updateTodoStatus } from '../action/todo'
 import TodoList from '../component/todoList'
-import {get_max_value} from '../../util/ud_functions'
-
-
-
+import {sort_by_key,get_max_value} from '../../util/ud_functions'
 
 const mapStateToProps = state => ({
-  todos: state.todos,
+  todos: sort_by_key(state.todos, state.modes.sortBy,state.modes.sortOrder),
   modes:state.modes,
   leastPriority:state.todos.length>=1?get_max_value(state.todos,"priority"):0
 })
