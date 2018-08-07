@@ -10,8 +10,8 @@ export const updateSort = (sortBy, sortOrder) => (
         sortOrder
     })
 
-export const updateFilter = (fileterBy, value) => ({
+export const updateFilter = (filterBy, value) => ({
     type: 'UPDATE_FILTER',
-    fileterBy,
+    filterBy,
     value
 })

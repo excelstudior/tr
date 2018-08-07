@@ -11,7 +11,7 @@ const Menu = ({ modes, todo,todos}) => (
             <button disabled={modes.todo === 'ADD'}
                 onClick={() => todo('ADD')}>Add</button>
             <SortList values={SORT_ORDER}/>
-            <Filter types={todos.length>0?Object.keys(todos[0]):[""]}/>
+            <Filter types={["ddd","aaa"]}/>
         </div>
 
         {modes.todo === 'ADD' && <AddTodo />}

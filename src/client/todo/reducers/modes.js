@@ -4,6 +4,7 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
             return { ...state, todo: action.mode }
 
         case 'SORT':
+            console.log(state)
             if (action.sortBy === null && action.sortOrder !== null) {
                 return { ...state, sortOrder: action.sortOrder }
             }
@@ -15,11 +16,14 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
 
         case 'UPDATE_FILTER':
             console.log(state);
-            return {
-                ...state, filters: filters.filter(f => f.filterBy === action.filterBy).length === 0
-                    ? filters.push({ filterBy: action.filterBy, value: action })
-                    : filters.map(f => { f.filterBy === action.filterBy ? f.value = aciton.value : f})
+            console.log(typeof(state.filters));
+            
+            return{
+                ...state, filters:[{filterBy:action.filterBy,value:action.value}]
             }
+
+
+
         default:
             return state
     }

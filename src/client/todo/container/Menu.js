@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {todo,updateSort} from '../action/mode';
 import Menu from '../component/menu';
 const mapStateToProps = state => ({
-    modes: state.modes,
+    modes:state.modes,
     todos:state.todos
   })
 
