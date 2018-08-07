@@ -2,14 +2,16 @@ import React from 'react';
 import AddTodo from '../container/AddTodo'
 import PropTypes from 'prop-types'
 import {SORT_ORDER} from '../constants'
-import SelectList from '../../commonContainer/selectList'
-const Menu = ({ modes, todo}) => (
+import SortList from '../../commonContainer/sortList'
+import Filter from '../../commonContainer/filter'
+const Menu = ({ modes, todo,todos}) => (
 
     <div>
         <div>
             <button disabled={modes.todo === 'ADD'}
                 onClick={() => todo('ADD')}>Add</button>
-            <SelectList values={SORT_ORDER}/>
+            <SortList values={SORT_ORDER}/>
+            <Filter types={todos.length>0?Object.keys(todos[0]):[""]}/>
         </div>
 
         {modes.todo === 'ADD' && <AddTodo />}
@@ -17,6 +19,17 @@ const Menu = ({ modes, todo}) => (
 )
 
 Menu.propTypes = {
+    todos: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          text: PropTypes.string.isRequired,
+          status: PropTypes.string.isRequired,
+          priority: PropTypes.number.isRequired,
+          dueDate: PropTypes.instanceOf(Date).isRequired,
+          owner: PropTypes.instanceOf(Object)
+        })
+    
+      ),
     todo: PropTypes.func.isRequired,
     modes: PropTypes.instanceOf(Object).isRequired,
 }

@@ -3,6 +3,11 @@ import { updateTodoPriority,updateTodoStatus } from '../action/todo'
 import TodoList from '../component/todoList'
 import {sort_by_key,get_max_value} from '../../util/ud_functions'
 
+// const getVisiableTodo=(state)=>({
+
+// })
+
+
 const mapStateToProps = state => ({
   todos: sort_by_key(state.todos, state.modes.sortBy,state.modes.sortOrder),
   modes:state.modes,

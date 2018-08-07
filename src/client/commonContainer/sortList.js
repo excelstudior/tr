@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateSort } from '../todo/action/mode'
 
-const SelectList = ({ dispatch, values }) => {
+const SortList = ({ dispatch, values }) => {
     let selectedOption;
     return (
         <select ref={node => selectedOption = node}
@@ -16,4 +16,4 @@ const SelectList = ({ dispatch, values }) => {
 }
 
 
-export default connect()(SelectList);
+export default connect()(SortList);
