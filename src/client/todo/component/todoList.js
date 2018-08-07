@@ -10,7 +10,6 @@ import {TODO_STATUS} from '../constants'
 
 const TodoList = ({ todos,updateTodoPriority,leastPriority,updateTodoStatus,modes }) => (
   <div>
-    {modes.sortBy+modes.sortOrder}
     {todos.length > 0 && get_total_count_on_value(todos,"priority",0)!==todos.length  ? 
       <table>
         <tbody>
@@ -27,7 +26,7 @@ const TodoList = ({ todos,updateTodoPriority,leastPriority,updateTodoStatus,mode
             <td>{todo.priority}</td>
             <td>{todo.text}</td>
             <td>{todo.status}</td>
-            <td>{todo.dueDate.getFullYear().toString()}-{('0'+todo.dueDate.getMonth().toString()).slice(-2)}-{('0'+todo.dueDate.getDate().toString()).slice(-2)}</td>
+            <td>{todo.dueDate.toLocaleDateString()} {todo.dueDate.toLocaleTimeString()}</td>
             <td>{todo.owner?todo.owner.name:"Unassigned"}</td>
             <td><SortButton value="UP" action={()=>updateTodoPriority(todo.id,todo.priority,"UP")} leastPriority={leastPriority} currentPriority={todo.priority}/></td>
             <td><SortButton value="DOWN" action={()=>updateTodoPriority(todo.id,todo.priority,"DOWN")} leastPriority={leastPriority} currentPriority={todo.priority} /></td>
