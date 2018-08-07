@@ -1,4 +1,4 @@
-const modes = (state = { todo: 'VIEW',sortBy:'priority',sortOrder:-1 }, action) => {
+const modes = (state = { todo: 'VIEW',sortBy:'priority',sortOrder:1 }, action) => {
     switch (action.type) {
         case 'TODO':
             return { ...state, todo: action.mode }
