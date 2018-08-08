@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import {SORT_ORDER} from '../constants'
 import SortList from '../../commonContainer/sortList'
 import Filter from '../../commonContainer/filter'
+import {TODO_STATUS} from '../constants'
+import {updateFilter} from '../action/mode'
 const Menu = ({ modes, todo,todos}) => (
 
     <div>
@@ -11,7 +13,7 @@ const Menu = ({ modes, todo,todos}) => (
             <button disabled={modes.todo === 'ADD'}
                 onClick={() => todo('ADD')}>Add</button>
             <SortList values={SORT_ORDER}/>
-            <Filter types={["ddd","aaa"]}/>
+            <Filter values={TODO_STATUS} filterType={"TODO_STATUS"} actions={updateFilter}/>
         </div>
 
         {modes.todo === 'ADD' && <AddTodo />}

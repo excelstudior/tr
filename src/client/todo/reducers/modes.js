@@ -15,13 +15,19 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
 
 
         case 'UPDATE_FILTER':
-            console.log(state);
-            console.log(typeof(state.filters));
-            
-            return{
-                ...state, filters:[{filterBy:action.filterBy,value:action.value}]
-            }
+            let isFiltersEmpty = (state.filters.length === 0)
+            let doesFilterExists = !isFiltersEmpty && (state.filters.filter(f => f.filterBy === action.filterBy)).length === 1
 
+            console.log(isFiltersEmpty,doesFilterExists)
+            
+               if (isFiltersEmpty || !doesFilterExists){
+                   return { ...state, filters: [...state.filters, { filterBy: action.filterBy, value: action.value }] }
+               } else {
+                   return { ...state, filters: state.filters.map(f => (f.filterBy === action.filterBy) ? {...f,value:action.value} : f) }
+               }
+       
+           
+            
 
 
         default:

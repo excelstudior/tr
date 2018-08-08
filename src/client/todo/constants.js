@@ -1,9 +1,9 @@
 export const TODO_STATUS = {
-    OPEN: "OPEN",
-    PROGRESSING: "PROGRESSING",
-    ON_HOLD: "ON_HOLD",
-    COMPLETED: "COMPLETED",
-    REOPENED: "REOPENED",
+    OPEN: "Open",
+    PROGRESSING: "Progressing",
+    ON_HOLD: "On hold",
+    COMPLETED: "Completed",
+    REOPENED: "Reopened",
 };
 
 export const SORT_ORDER={
