@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { updateTodoPriority,updateTodoStatus } from '../action/todo'
+import {todo} from '../action/mode'
 import TodoList from '../component/todoList'
 import {sort_by_key,get_max_value} from '../../util/ud_functions'
 
@@ -17,7 +18,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateTodoPriority: (id,currentPriorty,change) => dispatch(updateTodoPriority(id,currentPriorty,change)),
   updateTodoStatus: (id,currentPriorty,change) => dispatch(updateTodoStatus(id,currentPriorty,change)),
-
+  changeTodoMode:(mode)=>dispatch(todo(mode)),
 })
 
 
