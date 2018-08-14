@@ -5,7 +5,7 @@ const SortButton = ({ value, action, currentPriority,leastPriority,modes }) => (
         disabled={((currentPriority === 1 && value === 'UP')
             || (currentPriority === leastPriority && value === 'DOWN')
             || (currentPriority === 0))
-            ||modes.todo==="EDIT"}
+            ||modes.todo!=="EDIT"}
 
     >{value}</button>
 )

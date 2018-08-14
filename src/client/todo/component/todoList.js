@@ -4,6 +4,7 @@ import SortButton from './sortButtion'
 import StatusButton from './statusButton'
 //import EditTodo from '../container/EditTodo'
 import EditButton from './editButton'
+import SaveButton from './editButton'
 import { get_total_count_on_value } from '../../util/ud_functions'
 import { TODO_STATUS } from '../constants'
 
@@ -16,7 +17,7 @@ const TodoList = ({ todos, updateTodoPriority, leastPriority, updateTodoStatus, 
       <table>
         <tbody>
           <tr>
-            <th></th>
+            {modes.todo==='EDIT'?<th></th>:<th><EditButton modes={modes} onClick={()=>changeTodoMode('EDIT')}/></th>}
             <th>Priority</th>
             <th>Description</th>
             <th>Status</th>
@@ -28,7 +29,7 @@ const TodoList = ({ todos, updateTodoPriority, leastPriority, updateTodoStatus, 
 
 
           {todos.filter(todo => todo.priority > 0).map(todo => <tr key={todo.id}>
-            <td><EditButton todo={todo} onClick={()=>changeTodoMode("EDIT")}/></td>
+            {modes.todo!=='EDIT'?<td></td>:<td><SaveButton modes={modes} onClick={()=>changeTodoMode('SAVE')}/></td>}
             <td>{todo.priority}</td>
             {modes.todo!=="EDIT"?<td>{todo.text}</td>:<td><input type="text"  defaultValue={todo.text}/></td>}
             <td>{todo.status}</td>
