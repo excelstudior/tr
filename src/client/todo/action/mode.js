@@ -20,3 +20,4 @@ export const createPendingTodos = (pendingTodos) => ({
     type: 'CREATE_PENDING_TODOS',
     pendingTodos
 })
+

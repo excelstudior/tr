@@ -1,5 +1,3 @@
-import todo from './todos';
-
 const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters: [], pendingTodos: [] }, action) => {
     switch (action.type) {
         case 'TODO':
@@ -28,7 +26,11 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
                 return { ...state, filters: state.filters.map(f => (f.filterBy === action.filterBy) ? { ...f, value: action.value } : f) }
             }
 
-        case 'CREATE_PENDING_TODOS':          
+        case 'CREATE_PENDING_TODOS':   
+        console.log ('pending todos',action.pendingTodos)  
+            if (action.pendingTodos===null){
+                return {...state,pendingTodos:[]}
+            }     
             return {...state,pendingTodos:[...action.pendingTodos]}
         default:
             return state
