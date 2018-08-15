@@ -44,8 +44,8 @@ const todos = (state = [], action) => {
                 switch (action.change) {
                     case TODO_STATUS.COMPLETED:
                         return (todo.id === action.id)
-                            ? { ...todo, priority:0,status: TODO_STATUS.COMPLETED}
-                            : ((todo.id !== action.id) && (action.currentPriority<todo.priority)&&todo.priority!==null)
+                            ? { ...todo, priority: 0, status: TODO_STATUS.COMPLETED }
+                            : ((todo.id !== action.id) && (action.currentPriority < todo.priority) && todo.priority !== null)
                                 ? { ...todo, priority: todo.priority - 1 }
                                 : todo
 
@@ -57,6 +57,15 @@ const todos = (state = [], action) => {
                         return todo
                 }
             })
+
+        case 'SAVE_PENDING_TODOS':
+            if (action.pendingTodos === null || action.pendingTodos === undefined) {
+                return state
+            } else {
+                return [...action.pendingTodos]
+            }
+
+            
         default:
             return state
     }

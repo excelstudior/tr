@@ -18,20 +18,29 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
             let isFiltersEmpty = (state.filters.length === 0)
             let doesFilterExists = !isFiltersEmpty && (state.filters.filter(f => f.filterBy === action.filterBy)).length === 1
 
-            console.log(isFiltersEmpty, doesFilterExists)
-
             if (isFiltersEmpty || !doesFilterExists) {
                 return { ...state, filters: [...state.filters, { filterBy: action.filterBy, value: action.value }] }
             } else {
                 return { ...state, filters: state.filters.map(f => (f.filterBy === action.filterBy) ? { ...f, value: action.value } : f) }
             }
 
-        case 'CREATE_PENDING_TODOS':   
-        console.log ('pending todos',action.pendingTodos)  
-            if (action.pendingTodos===null){
-                return {...state,pendingTodos:[]}
-            }     
-            return {...state,pendingTodos:[...action.pendingTodos]}
+        case 'CREATE_PENDING_TODOS':
+            if (action.pendingTodos === null) {
+                return { ...state, pendingTodos: [] }
+            }
+            return { ...state, pendingTodos: [...action.pendingTodos] }
+
+        case 'UPDATE_PENDING_TODOS':
+            let isPendingTodosEmpty = (state.pendingTodos.length === 0)
+            let doesTodoExist = !isPendingTodosEmpty && (state.pendingTodos.filter(pt => pt.id === action.id)).length === 1
+            let keyToUpdate = action.key
+            if (doesTodoExist) {
+                return { ...state, pendingTodos: state.pendingTodos.map(pt => (pt.id === action.id) ? { ...pt, [keyToUpdate]: action.value } : pt) }
+            }
+
+            return state
+
+        
         default:
             return state
     }

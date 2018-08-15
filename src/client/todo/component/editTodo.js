@@ -1,15 +1,14 @@
 import React from 'react';
 import Todo from '../container/Todo';
 import SaveButton from '../component/editButton';
-import todo from '../action/todo'
 
-const EditTodo=({todos,changeTodoMode,modes})=>(
+const EditTodo=({todos,saveTodos,modes,updatePendingTodo})=>(
     <div>
         {todos.length>0&&modes.todo==='EDIT'?
                 <div>
-                <SaveButton modes={modes} onClick={()=>changeTodoMode('VIEW',null)}/>
+                <SaveButton modes={modes} onClick={()=>saveTodos('VIEW',todos)}/>
                     <div>
-                    {todos.map(todo=><Todo index={todos.indexOf(todo)}/>)} 
+                    {todos.map(todo=><Todo index={todos.indexOf(todo)} updatePendingTodo={updatePendingTodo} />)} 
                     </div>
                 </div>:<div></div>}
     </div>

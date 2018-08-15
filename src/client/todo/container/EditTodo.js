@@ -1,21 +1,26 @@
 import { connect } from 'react-redux';
 import EditTodo from '../component/editTodo'
-import {todo,createPendingTodos} from '../action/mode'
+import { todo, createPendingTodos, updatePendingTodo } from '../action/mode'
+import {savePendingTodos} from '../action/todo'
 
 
 const mapStateToProps = state => ({
-    todos:state.modes.pendingTodos,
-    modes:state.modes
-  })
+  todos: state.modes.pendingTodos,
+  modes: state.modes
+})
 const mapDispatchToProps = dispatch => ({
-    changeTodoMode:(mode,todos)=>{
-      console.log('dispatch',mode,todos)
-        dispatch(todo(mode));
-        dispatch(createPendingTodos(todos))},
-  
-  })
+  saveTodos: (mode, todos) => {
+    console.log('dispatch', mode, todos)
+    dispatch(todo(mode));
+    dispatch(savePendingTodos(todos))
+  },
+  updatePendingTodo: (id, key, value) => {
+    console.log(id, key, value)
+    dispatch(updatePendingTodo(id, key, value))
+  }
+})
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(EditTodo)
+  mapStateToProps,
+  mapDispatchToProps
+)(EditTodo)

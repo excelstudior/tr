@@ -21,3 +21,8 @@ export const updateTodoStatus= (id, currentPriority,change) => ({
     currentPriority,
     change
 })
+
+export const savePendingTodos = (pendingTodos) => ({
+    type: 'SAVE_PENDING_TODOS',
+    pendingTodos
+})

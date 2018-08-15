@@ -21,3 +21,9 @@ export const createPendingTodos = (pendingTodos) => ({
     pendingTodos
 })
 
+export const updatePendingTodo = (id,key,value) => ({
+    type: 'UPDATE_PENDING_TODOS',
+    id,
+    key,
+    value
+})

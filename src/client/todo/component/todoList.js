@@ -4,7 +4,6 @@ import SortButton from './sortButtion'
 import StatusButton from './statusButton'
 //import EditTodo from '../container/EditTodo'
 import EditButton from './editButton'
-import SaveButton from './editButton'
 import { get_total_count_on_value } from '../../util/ud_functions'
 import { TODO_STATUS } from '../constants'
 

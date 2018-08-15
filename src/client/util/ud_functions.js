@@ -1,4 +1,8 @@
 export const sort_by_key=(array,key,order)=>{
+    if (!Array.isArray(array)){
+        return console.log('Type of this object is '+typeof(array))
+    }
+
     let ordering;
     if (order===1||order===-1){
         ordering=order
