@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { updateTodoPriority,updateTodoStatus } from '../action/todo'
-import {todo} from '../action/mode'
+import {todo,createPendingTodos} from '../action/mode'
 import TodoList from '../component/todoList'
 import {sort_by_key,get_max_value} from '../../util/ud_functions'
 
 const getVisiableTodo=state=>{
-  return sort_by_key(state.todos, state.modes.sortBy,state.modes.sortOrder)
+   return sort_by_key(state.todos, state.modes.sortBy,state.modes.sortOrder)
 }
 
 
@@ -18,7 +18,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateTodoPriority: (id,currentPriorty,change) => dispatch(updateTodoPriority(id,currentPriorty,change)),
   updateTodoStatus: (id,currentPriorty,change) => dispatch(updateTodoStatus(id,currentPriorty,change)),
-  changeTodoMode:(mode)=>dispatch(todo(mode)),
+  changeTodoMode:(mode,todos)=>{
+      dispatch(todo(mode));
+      dispatch(createPendingTodos(todos))},
+
 })
 
 

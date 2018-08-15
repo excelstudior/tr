@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Menu from '../todo/container/Menu'
 import TodoList from './container/VisiableTodoList'
-
+import EditTodo from './container/EditTodo'
 
 
 class Todo extends Component {
@@ -14,6 +14,9 @@ class Todo extends Component {
                 </div>
                 <div>
                     <TodoList />
+                </div>
+                <div>
+                    <EditTodo/>
                 </div>
             </div>
 

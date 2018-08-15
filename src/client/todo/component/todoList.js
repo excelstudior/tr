@@ -17,7 +17,7 @@ const TodoList = ({ todos, updateTodoPriority, leastPriority, updateTodoStatus, 
       <table>
         <tbody>
           <tr>
-            {modes.todo==='EDIT'?<th></th>:<th><EditButton modes={modes} onClick={()=>changeTodoMode('EDIT')}/></th>}
+            {modes.todo==='EDIT'?<th></th>:<th><EditButton modes={modes} onClick={()=>changeTodoMode('EDIT',todos)}/></th>}
             <th>Priority</th>
             <th>Description</th>
             <th>Status</th>

@@ -1,4 +1,6 @@
-const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters: [] }, action) => {
+import todo from './todos';
+
+const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters: [], pendingTodos: [] }, action) => {
     switch (action.type) {
         case 'TODO':
             return { ...state, todo: action.mode }
@@ -18,18 +20,16 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
             let isFiltersEmpty = (state.filters.length === 0)
             let doesFilterExists = !isFiltersEmpty && (state.filters.filter(f => f.filterBy === action.filterBy)).length === 1
 
-            console.log(isFiltersEmpty,doesFilterExists)
-            
-               if (isFiltersEmpty || !doesFilterExists){
-                   return { ...state, filters: [...state.filters, { filterBy: action.filterBy, value: action.value }] }
-               } else {
-                   return { ...state, filters: state.filters.map(f => (f.filterBy === action.filterBy) ? {...f,value:action.value} : f) }
-               }
-       
-           
-            
+            console.log(isFiltersEmpty, doesFilterExists)
 
+            if (isFiltersEmpty || !doesFilterExists) {
+                return { ...state, filters: [...state.filters, { filterBy: action.filterBy, value: action.value }] }
+            } else {
+                return { ...state, filters: state.filters.map(f => (f.filterBy === action.filterBy) ? { ...f, value: action.value } : f) }
+            }
 
+        case 'CREATE_PENDING_TODOS':          
+            return {...state,pendingTodos:[...action.pendingTodos]}
         default:
             return state
     }

@@ -15,3 +15,8 @@ export const updateFilter = (filterBy, value) => ({
     filterBy,
     value
 })
+
+export const createPendingTodos = (pendingTodos) => ({
+    type: 'CREATE_PENDING_TODOS',
+    pendingTodos
+})
