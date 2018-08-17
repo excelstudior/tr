@@ -34,8 +34,14 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
             let isPendingTodosEmpty = (state.pendingTodos.length === 0)
             let doesTodoExist = !isPendingTodosEmpty && (state.pendingTodos.filter(pt => pt.id === action.id)).length === 1
             let keyToUpdate = action.key
+            let value;
+            if (keyToUpdate==='dueDate'){
+                value=new Date(action.value)
+            } else {
+                value=action.value
+            }
             if (doesTodoExist) {
-                return { ...state, pendingTodos: state.pendingTodos.map(pt => (pt.id === action.id) ? { ...pt, [keyToUpdate]: action.value } : pt) }
+                return { ...state, pendingTodos: state.pendingTodos.map(pt => (pt.id === action.id) ? { ...pt, [keyToUpdate]: value } : pt) }
             }
 
             return state
