@@ -1,4 +1,19 @@
+import { TODO_STATUS } from '../../todo/constants';
+
+const updatePendingTodoStatus=(todo,newStatus,maxPriority)=>{
+    switch (newStatus){
+        case TODO_STATUS.COMPLETED:
+        return { ...todo, priority: 0, status: TODO_STATUS.COMPLETED }
+        case TODO_STATUS.REOPENED:
+        return { ...todo, priority: maxPriority + 1 ,status: TODO_STATUS.REOPENED}
+        default:
+        return {...todo,status:newStatus}
+    }
+}
+
+
 const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters: [], pendingTodos: [] }, action) => {
+    let maxPriority = (state.pendingTodos.length !== 0) ? state.pendingTodos.map(todo => todo.priority).reduce((a, b) => Math.max(a, b)) : 0;
     switch (action.type) {
         case 'TODO':
             return { ...state, todo: action.mode }
@@ -40,6 +55,11 @@ const modes = (state = { todo: 'VIEW', sortBy: 'priority', sortOrder: 1, filters
             } else {
                 value=action.value
             }
+            if (keyToUpdate==='status'){
+                let updatedPendingTodos=state.pendingTodos.map(pt=>(pt.id===action.id)?updatePendingTodoStatus(pt,action.value,maxPriority):pt)
+                return {...state,pendingTodos:updatedPendingTodos}
+            }
+
             if (doesTodoExist) {
                 return { ...state, pendingTodos: state.pendingTodos.map(pt => (pt.id === action.id) ? { ...pt, [keyToUpdate]: value } : pt) }
             }

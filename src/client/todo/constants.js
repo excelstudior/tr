@@ -3,7 +3,7 @@ export const TODO_STATUS = {
     PROGRESSING: "Progressing",
     ON_HOLD: "On hold",
     COMPLETED: "Completed",
-    REOPENED: "Reopened",
+    REOPENED: "ReOpened",
 };
 
 export const SORT_ORDER={
