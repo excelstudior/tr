@@ -12,7 +12,7 @@ const moduleObj = {
 };
 const client = {
     entry: {
-        'client': './src/client/index.js',
+        'client': ['babel-polyfill','./src/client/index.js'],
     },
     target: 'web',
     output: {
@@ -28,7 +28,7 @@ const client = {
 };
 const server = {
     entry: {
-        'server': './src/server/index.js'
+        'server': ['babel-polyfill','./src/server/index.js']
     },
     target: 'node',
     output: {
