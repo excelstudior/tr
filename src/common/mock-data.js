@@ -4,7 +4,7 @@ const faker=require('faker');
 const _=require('lodash');
 
 const users=generateUsers(5);
-const contacts=_.mapKeys(users,'user_id');
+export const contacts=_.mapKeys(users,'user_id');
 const getMessages=messagePerUser=>{
     let messages={};
     _.forEach(users,user=>{
@@ -24,7 +24,7 @@ function generateUser(){
     }
 }
 
-function generateUsers(numberOfUsers){
+export function generateUsers(numberOfUsers){
     return Array.from({length:numberOfUsers},()=>generateUser())
 }
 
@@ -40,7 +40,7 @@ function generateMessages(numberOfMessages){
     return Array.from({length:numberOfMessages},(el,i)=>generateMessage(i))
 }
 
-const state={
+export const state={
     user:generateUser(),
     messages:getMessages(5),
     typing:"",
@@ -52,5 +52,5 @@ const state={
 // console.log(users);
 // console.log(contacts);
 // console.log(getMessages(5));
-console.log(state);
+//console.log(state);
 //console.log(generateMessage(1))
