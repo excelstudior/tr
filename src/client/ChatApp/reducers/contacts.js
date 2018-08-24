@@ -1,7 +1,7 @@
 
 
 const contacts=(state={},action)=>{
-    console.log(state)
+    console.log('contacts are',state)
     return state
 }
 export default contacts

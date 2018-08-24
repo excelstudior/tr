@@ -43,7 +43,7 @@ function generateMessages(numberOfMessages){
 export const state={
     user:generateUser(),
     messages:getMessages(10),
-    typing:"",
+    messageInput:"",
     contacts,
     activeUserId:null
 }
