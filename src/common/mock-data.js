@@ -42,7 +42,7 @@ function generateMessages(numberOfMessages){
 
 export const state={
     user:generateUser(),
-    messages:getMessages(5),
+    messages:getMessages(10),
     typing:"",
     contacts,
     activeUserId:null
