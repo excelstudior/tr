@@ -10,34 +10,36 @@ const moduleObj = {
         },
         {
             test: /\.css$/,
-            use:["style-loader","css-loader"]
+            use: ["style-loader", "css-loader"]
         }
     ],
 };
 const client = {
     entry: {
-        'client': ['babel-polyfill','./src/client/index.js'],
+        'client': ['babel-polyfill', './src/client/index.js'],
     },
     target: 'web',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist/public')
+        path: path.resolve(__dirname, 'dist/public'),
     },
     module: moduleObj,
     plugins: [
         new HtmlWebPackPlugin({
-          template: 'src/client/index.html'
+            template: 'src/client/index.html'
         })
-      ]
+    ],
+    
 };
 const server = {
     entry: {
-        'server': ['babel-polyfill','./src/server/index.js']
+        'server': ['babel-polyfill', './src/server/index.js']
     },
     target: 'node',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+
     },
     module: moduleObj,
     externals: [nodeExternals()]
