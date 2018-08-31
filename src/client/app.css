@@ -1,5 +1,13 @@
 .App {
-    height: 100%;
     display: flex;
     color: rgba(189, 189, 192, 1);
+    margin:0;
+    background: #222;
+    flex-direction: column
   }
+  .App::after{
+    content: '';
+    display: table;
+    clear: both;
+
+}

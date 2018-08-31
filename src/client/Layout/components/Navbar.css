@@ -1,0 +1,82 @@
+.container{
+    width: 100%;
+    background:#55d6aa;
+    color:rgba(68, 67, 67, 0.945);
+    margin: 0 auto;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.container::after{
+    content: '';
+    display: table;
+    clear: both;
+
+}
+
+.top-left-navbar{
+  float:left;
+  margin:2px auto;
+}
+
+.top-left-navbar ul{
+    margin:0px 0px 0px 5px ;
+    padding: 0;
+    list-style: none;
+}
+
+.top-left-navbar ul:hover{
+    color:#000;
+}
+.top-left-navbar ul li {
+    display: inline-block;
+    padding:0 auto;
+    position: relative;
+    margin: 10px 5px;
+    
+}
+.top-left-navbar ul li a{
+    text-decoration: none;
+    color:rgba(68, 67, 67, 0.945);
+}
+
+
+.top-left-navbar ul li::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background-color: #444;
+  
+    position: absolute;
+    bottom: -5px;
+    width: 0%;
+  
+    transition: all ease-in-out 300ms;
+}
+
+.top-left-navbar ul li:hover{
+    color:#000;
+}
+
+
+.top-left-navbar ul li:hover::before{
+    width: 100%;
+}
+
+.top-right-auth-button{
+    float:right;
+    margin:2px auto;
+}
+
+.top-right-auth-button ul{
+    margin:0px 5px 0px 0px;
+    padding: 0;
+    list-style: none;
+}
+.top-right-auth-button ul li {
+    display: inline-block;
+    padding:0px auto;
+    position: relative;
+    margin: 10px 5px;
+
+}
