@@ -41,6 +41,28 @@
 }
 
 
+.apps-menu-app{
+    visibility: hidden; /* hides sub-menu*/
+    opacity: 0; 
+    position: absolute;
+    top:100%;
+    left:-10px;
+    transform: translateY(-2em);
+    z-index: -1;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+.apps-menu:focus .apps-menu-app,
+.apps-menu:focus-within .apps-menu-app,
+.apps-menu:hover .apps-menu-app{ 
+    background: #55d6aa;
+    visibility: visible; /* shows sub-menu */
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0%);
+    transition-delay: 0.1s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+
 .top-left-navbar ul li::before {
     content: '';
     display: block;

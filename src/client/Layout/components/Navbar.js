@@ -22,10 +22,15 @@ class Navbar extends Component {
                 <div className="container">
                     <div className='top-left-navbar'>
                         <ul>
-                            <li>Home</li>
+                            <li><Link to='/'>Home</Link></li>
                             <li>About</li>
                             <li>Contact</li>
-                            <li><Link to='/reddit'>Reddit</Link></li>
+                            <li className='apps-menu'>
+                                <span>APPs</span>
+                                <ul className='apps-menu-app'>
+                                   <li><Link to='/reddit'>Reddit</Link></li> 
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <div className='top-right-auth-button'>
