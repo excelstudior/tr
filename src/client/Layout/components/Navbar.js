@@ -35,8 +35,8 @@ class Navbar extends Component {
                     </div>
                     <div className='top-right-auth-button'>
                         <ul>
-                            <li>Sign Up</li>
-                            <li>Log In</li>
+                            <li><Link to='/register'>Sign up</Link></li>
+                            <li><Link to='/signIn'>Sign In</Link></li>
                         </ul>
                     </div>
                 </div>

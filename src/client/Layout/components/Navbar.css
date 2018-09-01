@@ -25,7 +25,7 @@
     list-style: none;
 }
 
-.top-left-navbar ul:hover{
+.top-left-navbar ul li:hover{
     color:#000;
 }
 .top-left-navbar ul li {
@@ -61,6 +61,9 @@
     transform: translateY(0%);
     transition-delay: 0.1s; /* this removes the transition delay so the menu will be visible while the other styles transition */
 }
+.apps-menu:hover .apps-menu-app li a{ 
+    color:#000;
+}
 
 
 .top-left-navbar ul li::before {
@@ -76,7 +79,7 @@
     transition: all ease-in-out 300ms;
 }
 
-.top-left-navbar ul li:hover{
+.top-left-navbar ul li a:hover{
     color:#000;
 }
 
@@ -101,4 +104,11 @@
     position: relative;
     margin: 10px 5px;
 
+}
+.top-right-auth-button ul li a{
+    text-decoration: none;
+    color:rgba(68, 67, 67, 0.945);
+}
+.top-right-auth-button ul li a:hover{
+    color:#000;
 }
