@@ -19,13 +19,15 @@ class Register extends Component {
     }
 
     onChange(e){
+        console.log(this.props.history)
         this.newUser={...this.newUser,[e.target.name]:e.target.value}
     }
 
 
     onSubmit(e){
         e.preventDefault();
-        this.props.registerUser(this.newUser);
+        console.log(this.props.history)
+        this.props.registerUser(this.newUser,this.props.history);
     }
 
     render() {
