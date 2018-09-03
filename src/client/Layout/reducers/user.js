@@ -1,6 +1,6 @@
 import {Register_User} from '../actions/constants';
 
-const user=(state={},action)=>{
+export const user=(state={},action)=>{
     switch (action.type){
         case Register_User:
         console.log(state,action.user);
@@ -15,3 +15,4 @@ const user=(state={},action)=>{
 }
 
 export default user
+

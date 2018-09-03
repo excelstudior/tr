@@ -43,7 +43,7 @@ module.exports = function validateRegisterInput(data) {
     // check if password are confirm password equals
 
     if (!Validator.equals(data.password, data.confirmPassword)) {
-        errors.confirmPasswordPassword = 'Confirmed Password is not the same as password';
+        errors.confirmPassword = 'Confirmed Password is not the same as password';
     }
     return {
         errors,

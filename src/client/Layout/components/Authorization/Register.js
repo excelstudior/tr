@@ -19,18 +19,18 @@ class Register extends Component {
     }
 
     onChange(e){
-        console.log(this.props.history)
         this.newUser={...this.newUser,[e.target.name]:e.target.value}
     }
 
 
     onSubmit(e){
         e.preventDefault();
-        console.log(this.props.history)
         this.props.registerUser(this.newUser,this.props.history);
     }
 
     render() {
+        const {validationErrors}=this.props;
+
         return (
     
                 <div className='register-container'>
@@ -44,7 +44,7 @@ class Register extends Component {
                             name="name"
                             defaultValue={this.newUser.name}
                             onChange={this.onChange}/>
-                            <div className='register-invalid-input'></div>
+                            <div className='register-invalid-input'>{validationErrors!=={}?validationErrors.name:''}</div>
                         </div>
                         <div>
                             <input 
@@ -53,7 +53,7 @@ class Register extends Component {
                             name="email"
                             defaultValue={this.newUser.email}
                             onChange={this.onChange}/>
-                            <div className='register-invalid-input'></div>
+                            <div className='register-invalid-input'>{validationErrors!=={}?validationErrors.email:''}</div>
                         </div>
                         <div>
                             <input type='password'
@@ -61,15 +61,15 @@ class Register extends Component {
                             name="password"
                             defaultValue={this.newUser.password}
                             onChange={this.onChange}/>
-                            <div className='register-invalid-input'></div>
+                            <div className='register-invalid-input'>{validationErrors!=={}?validationErrors.password:''}</div>
                         </div>
                         <div>
                             <input type='password'
                             placeholder='confirmPassword'
                             name='confirmPassword'
-                            defaultValue={this.newUser.password2}
+                            defaultValue={this.newUser.confirmPassword}
                             onChange={this.onChange}/>
-                            <div className='register-invalid-input'></div>
+                            <div className='register-invalid-input'>{validationErrors!=={}?validationErrors.confirmPassword:''}</div>
                         </div>
                         
                         <button type='submit' on>Submit</button>
@@ -82,7 +82,7 @@ class Register extends Component {
 
 Register.PropTypes={
     registerUser:PropTypes.func.isRequired,
-    user:PropTypes.object.isRequired
+    validationErrors:PropTypes.object.isRequired
 }
 
 export default Register

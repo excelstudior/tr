@@ -3,7 +3,7 @@ import {registerUser} from '../../actions/index'
 import Register from '../../components/Authorization/Register';
 import { withRouter } from 'react-router-dom';
 const mapStateToProps = (state,ownProps) => ({
-   user:state.user
+   validationErrors:state.validationErrors
 })
 const mapDispatchToProps = (dispatch) => ({
     registerUser:(user,history)=>dispatch(registerUser(user,history))
