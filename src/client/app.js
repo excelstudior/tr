@@ -9,11 +9,15 @@ import Footer from './Layout/components/Footer';
 import {
     Route
 } from 'react-router-dom';
-export default class App extends Component {
+
+
+class App extends Component {
+
 
     render() {
-
-        return <div className='App'>
+    
+       
+        return( <div className='App'>
 
             <Navbar />
             <Route path='/reddit' component={Reddit}/>
@@ -22,6 +26,8 @@ export default class App extends Component {
             <Route path='/signIn' component={SignIn}/>
             <Footer/>
             
-        </div>
+        </div>)
     }
 }
+
+export default App

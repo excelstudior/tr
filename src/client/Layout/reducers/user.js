@@ -1,13 +1,9 @@
-import {Register_User} from '../actions/constants';
+import {SET_CURRENT_USER} from '../actions/constants';
 
 export const user=(state={},action)=>{
     switch (action.type){
-        case Register_User:
-        console.log(state,action.user);
-
-
-
-        return action.user;
+        case SET_CURRENT_USER:
+        return action.decodedToken;
         default:
         return state;
     }

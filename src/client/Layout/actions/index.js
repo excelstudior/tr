@@ -1,11 +1,16 @@
 
 import axios from 'axios'
-import {GET_REGISTER_USER_VALIDATION_ERRORS} from './constants'
-export const registerUser=(user,history)=>dispatch=>{
+import {
+    GET_REGISTER_USER_VALIDATION_ERRORS,
+    SET_CURRENT_USER
+} from './constants';
+import { setAuthToken } from '../../util/setAuthToken'
+import jwt_decode from 'jwt-decode';
+export const registerUser = (user, history) => dispatch => {
     axios
-        .post('/api/users/register',user)
-        .then(res=>{history.push('/signIn')})
-        .catch(err=>dispatch(getRegisterUserValidationErrors(err.response.data)))
+        .post('/api/users/register', user)
+        .then(res => { history.push('/signIn') })
+        .catch(err => dispatch(getRegisterUserValidationErrors(err.response.data)))
 }
 
 // ({
@@ -13,7 +18,26 @@ export const registerUser=(user,history)=>dispatch=>{
 //     user
 // }) err.response.data
 
-export const getRegisterUserValidationErrors=(errors)=>({
-    type:GET_REGISTER_USER_VALIDATION_ERRORS,
+export const signInUser = (user, history) => dispatch => {
+    //console.log(user, history)
+    //setAuthToken
+    axios.post('/api/users/login', user)
+        .then(res => {
+            //console.log(res.data)
+            const { token } = res.data;
+            localStorage.setItem('jwtToken', token);
+            //setAuthToken(token);
+           // const decoded=jwt_decode(token);
+            //console.log(decoded);
+        })
+        .catch(err =>err.response.data!==undefined?dispatch(getRegisterUserValidationErrors(err.response.data)):console.log(err))
+        //.catch(err=>console.log(err.respnse.data))
+}
+const getRegisterUserValidationErrors = (errors) => ({
+    type: GET_REGISTER_USER_VALIDATION_ERRORS,
     errors
+})
+export const setCurrentUser = (decodedToken) => ({
+    type:SET_CURRENT_USER,
+    decodedToken
 })
