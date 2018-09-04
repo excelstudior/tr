@@ -4,7 +4,7 @@ import {
     GET_REGISTER_USER_VALIDATION_ERRORS,
     SET_CURRENT_USER
 } from './constants';
-import { setAuthToken } from '../../util/setAuthToken'
+import setAuthToken  from '../../util/setAuthToken'
 import jwt_decode from 'jwt-decode';
 export const registerUser = (user, history) => dispatch => {
     axios
@@ -26,9 +26,11 @@ export const signInUser = (user, history) => dispatch => {
             //console.log(res.data)
             const { token } = res.data;
             localStorage.setItem('jwtToken', token);
-            //setAuthToken(token);
-           // const decoded=jwt_decode(token);
-            //console.log(decoded);
+           setAuthToken(token);
+           const decoded=jwt_decode(token);
+            dispatch(setCurrentUser(decoded));
+            history.push('./')
+        
         })
         .catch(err =>err.response.data!==undefined?dispatch(getRegisterUserValidationErrors(err.response.data)):console.log(err))
         //.catch(err=>console.log(err.respnse.data))
