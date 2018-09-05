@@ -29,7 +29,7 @@ export const signInUser = (user, history) => dispatch => {
            setAuthToken(token);
            const decoded=jwt_decode(token);
             dispatch(setCurrentUser(decoded));
-            history.push('./')
+            history.push('/reddit')
         
         })
         .catch(err =>err.response.data!==undefined?dispatch(getRegisterUserValidationErrors(err.response.data)):console.log(err))

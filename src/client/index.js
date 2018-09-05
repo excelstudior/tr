@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
-    BrowserRouter as Router,Route
+    BrowserRouter as Router, Route
 } from 'react-router-dom';
 import configureStore from '../client/store/index'
 
-import App from './app';
+import App from './appContainer';
 import './index.css'
 
 

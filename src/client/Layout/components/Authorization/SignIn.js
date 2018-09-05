@@ -15,9 +15,13 @@ class SignIn extends Component {
     }
 
     componentDidMount() {
-
+        
     }
-
+    // componentWillReceiveProps(nextProps) {
+    //     if (Object.keys(nextProps.user).length!==0) {
+    //       this.props.history.push('/');
+    //     }
+    //   }
     componentDidUpdate() {
 
     }
@@ -68,7 +72,8 @@ class SignIn extends Component {
 
 SignIn.PropTypes={
     signInUser:PropTypes.func.isRequired,
-    validationErrors:PropTypes.object.isRequired
+    validationErrors:PropTypes.object.isRequired,
+    user:PropTypes.object.isRequired
 }
 
 export default SignIn

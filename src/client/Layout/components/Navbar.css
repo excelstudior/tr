@@ -97,17 +97,20 @@
     margin:0px 5px 0px 0px;
     padding: 0;
     list-style: none;
+    
 }
 .top-right-auth-button ul li {
     display: inline-block;
     padding:0px auto;
     position: relative;
     margin: 10px 5px;
+    text-transform: none;
 
 }
 .top-right-auth-button ul li a{
     text-decoration: none;
     color:rgba(68, 67, 67, 0.945);
+    
 }
 .top-right-auth-button ul li a:hover{
     color:#000;
