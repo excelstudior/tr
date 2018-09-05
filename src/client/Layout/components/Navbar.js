@@ -37,7 +37,11 @@ class Navbar extends Component {
                 </div>
                 <div className='top-right-auth-button'>
 
-                    {Object.keys(user).length!==0 ?<ul><li>Hello {user.name}</li></ul> 
+                    {Object.keys(user).length!==0 
+                    ?<ul>
+                        <li>Hello {user.name}</li>
+                        <li>Sign Out</li>
+                    </ul> 
                     :<ul><li><Link to='/register'>Sign up</Link></li>
                             <li><Link to='/signIn'>Sign In</Link></li>
                         </ul>
