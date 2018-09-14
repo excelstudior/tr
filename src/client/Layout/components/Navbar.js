@@ -31,6 +31,7 @@ class Navbar extends Component {
                             <span>APPs</span>
                             <ul className='apps-menu-app'>
                                 <li><Link to='/reddit'>Reddit</Link></li>
+                                <li><Link to='/editor'>CKEditor</Link></li>
                             </ul>
                         </li>
                     </ul>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {isAuthenticated} from './util/isAuthenticated'
 import './app.css';
+import Editor from './CKEditor/components/Editor'
 import Reddit from './Reddit/containers/Reddits';
 import Navbar from './Layout/containers/Navbar';
 import Register from './Layout/containers/Authorization/Register';
@@ -54,6 +55,7 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path='/register' component={Register} />
                     <Route path='/signIn' component={SignIn} />
+                    <Route path='/editor' component={Editor}/>
                     <Footer />
 
                 </div>

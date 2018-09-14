@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/excelstudior/tr#readme",
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^11.0.1",
+    "@ckeditor/ckeditor5-react": "^1.0.0-beta.1",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -38,6 +40,8 @@
     "mongoose": "^5.2.13",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^0.5.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
