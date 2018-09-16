@@ -29,7 +29,7 @@ export const signInUser = (user, history) => dispatch => {
            setAuthToken(token);
            const decoded=jwt_decode(token);
             dispatch(setCurrentUser(decoded));
-            history.push('/reddit')
+            history.push('/dashboard')
         
         })
         .catch(err =>err.response.data!==undefined?dispatch(getRegisterUserValidationErrors(err.response.data)):console.log(err))
@@ -43,3 +43,12 @@ export const setCurrentUser = (decodedToken) => ({
     type:SET_CURRENT_USER,
     decodedToken
 })
+export const signOutUser=(history)=>dispatch=>{
+    //Remove token from localStorage
+    localStorage.removeItem('jwtToken');
+    //Remove authentication header
+    setAuthToken(false);
+    //Set current user to {}
+    dispatch(setCurrentUser({}))
+    history.push('/signIn')
+};

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 class Navbar extends Component {
     constructor(props) {
         super(props);
+        this.signOut = this.signOut.bind(this);
     }
 
     componentDidMount() {
@@ -16,33 +17,43 @@ class Navbar extends Component {
 
     }
 
+    signOut() {
+        this.props.signOutUser(this.props.history)
+    }
+
     render() {
-        const {user}=this.props
+        const { user } = this.props
         console.log(user)
         return (
 
             <div className="container">
                 <div className='top-left-navbar'>
-                    <ul>
-                        <li><Link to='/'>Home</Link></li>
-                        <li>About</li>
-                        <li>Contact</li>
-                        <li className='apps-menu'>
+                    {Object.keys(user).length === 0
+                        ? <ul>
+                            <li><Link to='/'>Home</Link></li>
+                            <li>About</li>
+                            <li>Contact</li>
+                        </ul>
+                        : <ul><li className='apps-menu'>
                             <span>APPs</span>
                             <ul className='apps-menu-app'>
                                 <li><Link to='/reddit'>Reddit</Link></li>
                             </ul>
                         </li>
-                    </ul>
+                        </ul>
+                    }
+
+
+
                 </div>
                 <div className='top-right-auth-button'>
 
-                    {Object.keys(user).length!==0 
-                    ?<ul>
-                        <li>Hello {user.name}</li>
-                        <li>Sign Out</li>
-                    </ul> 
-                    :<ul><li><Link to='/register'>Sign up</Link></li>
+                    {Object.keys(user).length !== 0
+                        ? <ul>
+                            <li>Hello {user.name}</li>
+                            <li onClick={this.signOut}>Sign Out</li>
+                        </ul>
+                        : <ul><li><Link to='/register'>Sign up</Link></li>
                             <li><Link to='/signIn'>Sign In</Link></li>
                         </ul>
                     }
@@ -55,7 +66,8 @@ class Navbar extends Component {
 }
 
 Navbar.PropTypes = {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    signOutUser: PropTypes.func.isRequired
 }
 
 export default Navbar

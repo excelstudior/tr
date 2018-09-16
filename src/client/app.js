@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {isAuthenticated} from './util/isAuthenticated'
 import './app.css';
 import Reddit from './Reddit/containers/Reddits';
+import Dashboard from './Layout/containers/Dashboard'
 import Navbar from './Layout/containers/Navbar';
 import Register from './Layout/containers/Authorization/Register';
 import SignIn from './Layout/containers/Authorization/SignIn';
@@ -11,18 +12,13 @@ import Footer from './Layout/components/Footer';
 import {
     Route, BrowserRouter as Router,
 } from 'react-router-dom';
-import { signInUser } from './Layout/actions';
 
-// let signedInUser=isAuthenticated()
-// if(signedInUser!==null){
-//     console.log(signedInUser)
-// }
+
 
 
 class App extends Component {
     constructor(props) {
         super(props);
-        // this.checkSignedInUser=this.checkSignedInUser.bind(this)
         
     }
 
@@ -54,6 +50,7 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path='/register' component={Register} />
                     <Route path='/signIn' component={SignIn} />
+                    <Route path='/dashboard' component={Dashboard}/>
                     <Footer />
 
                 </div>
@@ -67,12 +64,5 @@ App.PropTypes = {
     user: PropTypes.object.isRequired
 }
 
-// const mapStateToProps = (state,ownProps) => ({
-//     validationErrors:state.validationErrors,
-//     user:state.user
-//  })
-//  const mapDispatchToProps = (dispatch) => ({
-//     signInUser:(user,history)=>dispatch(signInUser(user,history))
-//  })
 
 export default App

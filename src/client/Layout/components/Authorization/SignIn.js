@@ -62,7 +62,7 @@ class SignIn extends Component {
                         />
                         <div className='invalid-input'>{validationErrors!=={}?validationErrors.password:''}</div>
                     </div>
-                    <input type='submit'/>
+                    <input type='submit' value='Sign In'/>
                 </form>
             </div>
 
