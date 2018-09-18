@@ -5,7 +5,7 @@
     margin: 0 auto;
     font-weight: 600;
     font-size: 14px;
-    border-bottom: solid 1px #000
+    border-bottom: solid 1px rgb(148, 147, 147)
     /* text-transform: uppercase; */
 }
 .container::after{
