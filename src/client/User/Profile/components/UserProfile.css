@@ -1,0 +1,18 @@
+.userProfile{
+    display: inline-block;
+}
+.user{
+    background: yellowgreen;
+    float: left;
+    width: 20%;
+}
+.profile{
+    background: rgb(238, 97, 191);
+    float: left;
+    width: 40%;
+}
+.extra{
+    background: rgb(110, 109, 110);
+    float: left;
+    width: 40%;
+}

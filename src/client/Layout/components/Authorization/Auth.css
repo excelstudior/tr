@@ -1,0 +1,10 @@
+.register-container{
+    text-align: center;
+    display: inline-block;
+}
+.signIn-Container{
+    padding-top:10px;
+    padding-bottom: 10px;
+    text-align: center;
+    display: inline-block;
+}

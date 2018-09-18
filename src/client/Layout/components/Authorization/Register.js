@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Register.css'
+import './Auth.css'
 import PropTypes from 'prop-types';
 
 
@@ -34,7 +34,6 @@ class Register extends Component {
         return (
     
                 <div className='register-container'>
-                    <h2>Sign Up</h2>
                     <h4>Create your account</h4>
                     <form onSubmit={this.onSubmit}>
                         <div>

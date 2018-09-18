@@ -1,8 +1,8 @@
 .App {
     display: flex;
-    color: rgba(189, 189, 192, 1);
+    color: #3c4859;
     margin:0;
-    background: #222;
+    background: #ffffff;
     flex-direction: column
   }
   .App::after{
@@ -12,7 +12,10 @@
 
 }
 .Footer{
-  background:#55d6aa;
-  color:rgba(68, 67, 67, 0.945);
+  background:#ffffff;
+  color:#3c4859;
   text-align: center;
+  font-size: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

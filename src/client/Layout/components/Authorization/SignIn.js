@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './SignIn.css'
+import './Auth.css'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -39,8 +39,7 @@ class SignIn extends Component {
         const {validationErrors}=this.props;
         return (
 
-            <div>
-                <h2>Sign In</h2>
+            <div className='signIn-Container'>
                 <form onSubmit={this.onSubmit} >
                     <div>
                         <input

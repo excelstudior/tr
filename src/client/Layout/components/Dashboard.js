@@ -20,7 +20,7 @@ class Dashboard extends Component {
         return (
     
                 <div className='Dashboard'>
-                    Today is {new Date().getMonth() - new Date().getDate()}
+                    Today is {new Date().toLocaleDateString()} and time now is {new Date().toLocaleTimeString()}
                 </div>
 
         )
