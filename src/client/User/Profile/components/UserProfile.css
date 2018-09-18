@@ -1,18 +1,51 @@
 .userProfile{
     display: inline-block;
+    height: 900px;
+    margin:3px auto;
+    width: 98%
 }
 .user{
-    background: yellowgreen;
+    background: rgb(231, 230, 230);
     float: left;
-    width: 20%;
+    width: 19%;
+    height: inherit;
+    border-right: 1px solid #b1cbdd;
+    border-left:1px solid#b1cbdd;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .profile{
-    background: rgb(238, 97, 191);
     float: left;
     width: 40%;
+    height: inherit;
+    overflow: scroll;
 }
 .extra{
     background: rgb(110, 109, 110);
     float: left;
     width: 40%;
+    height: inherit;
+    overflow: scroll;
+}
+.user_img img{
+padding:10px;
+}
+.user{
+    text-align: center;
+}
+.profile div{
+    margin:20px auto;
+    width: 30%;
+    display: grid;
+}
+.profile div a{
+    text-decoration: none;
+    background: #b1cbdd;
+    border: 1px solid grey;
+    text-align: center;
+    padding:5px;
+    border-radius: 2px;
+}
+.profile div a:hover{
+    background: #b0d9f7;
 }

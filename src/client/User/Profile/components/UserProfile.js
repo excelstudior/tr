@@ -18,20 +18,27 @@ class UserProfile extends Component {
 
     render() {
         const {user,profile}=this.props;
-        
-        console.log(profile, typeof(profile),Object.keys(profile))
-        console.log(user,typeof(user),Object.keys(user))
+
         return (
     
-                <div className='UserProfile'>
+                <div className='userProfile'>
                     {/* <h3> User {user.name}'s Profile </h3>
                     <label>{profile.handle}</label> */}
+                   
 
                 <div className='user'>
-                        User column
+                    <div className='user_img'>
+                    {<img src={user.avatar} alt={user.name}/>}
+                    </div>
+                    <div className='user_account'>
+                        <p>{user.name}</p>
+                    </div>
                 </div>
                 <div className='profile'>
-                        profile column
+                    <div>
+                    {Object.keys(profile).length===0?<Link to='/createUserProfile'>Add Profile</Link>:'User Profile'}
+                    </div>
+                        
                 </div>
                 <div className='extra'>
                 extra column

@@ -5,6 +5,7 @@ import './app.css';
 import Reddit from './Reddit/containers/Reddits';
 import Dashboard from './Layout/containers/Dashboard'
 import UserProfile from './User/Profile/containers/UserProfile';
+import CreateUserProfile from './User/Profile/containers/CreateUserProfile';
 import Navbar from './Layout/containers/Navbar';
 import Register from './Layout/containers/Authorization/Register';
 import SignIn from './Layout/containers/Authorization/SignIn';
@@ -55,7 +56,8 @@ class App extends Component {
                     <Route path='/register' component={Register} />
                     <Route path='/signIn' component={SignIn} />
                     <Route path='/dashboard' component={Dashboard}/>
-                    <Route path='/userProfile' component={UserProfile}/>
+                    <Route path='/userProfile' component={UserProfile} />
+                    <Route path='/createUserProfile' component={CreateUserProfile} />
                     <Footer />
 
                 </div>

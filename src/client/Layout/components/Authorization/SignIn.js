@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Auth.css'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import TextField from '../../../CommonComponents/TextField';
 
 class SignIn extends Component {
     constructor(props) {
@@ -41,26 +42,22 @@ class SignIn extends Component {
 
             <div className='signIn-Container'>
                 <form onSubmit={this.onSubmit} >
-                    <div>
-                        <input
-                            type="email"
-                            placeholder="User email address"
-                            name="email"
-                            defaultValue={this.signIn.email}
-                            onChange={this.onChange}
-                        />
-                        <div className='invalid-input'>{validationErrors!=={}?validationErrors.email:''}</div>
-                    </div>
-                    <div>
-                        <input
-                            type="password"
-                            placeholder="User password"
-                            name="password"
-                            defaultValue={this.signIn.password}
-                            onChange={this.onChange}
-                        />
-                        <div className='invalid-input'>{validationErrors!=={}?validationErrors.password:''}</div>
-                    </div>
+                    <TextField
+                        type={'email'}
+                        name={'email'}
+                        placeholder={'User email address'}
+                        defaultValue={this.signIn.email}
+                        onChange={this.onChange}
+                        error={validationErrors!=={}?validationErrors.email:''}
+                    />
+                    <TextField
+                        type={'password'}
+                        name={'password'}
+                        placeholder={'password'}
+                        defaultValue={this.signIn.password}
+                        onChange={this.onChange}
+                        error={validationErrors!=={}?validationErrors.password:''}
+                    />
                     <input type='submit' value='Sign In'/>
                 </form>
             </div>
