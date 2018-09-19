@@ -1,7 +1,10 @@
 import {
     GET_REGISTER_USER_VALIDATION_ERRORS,
-    CLEAR_VALIDATION_ERROR
+    CLEAR_VALIDATION_ERROR,
 } from '../actions/constants'
+import {
+    GET_PROFILE_VALIDATION_ERRORS
+} from '../../User/Profile/actions/constants'
 
 const validationErrors = (state = {}, action) => {
     switch (action.type) {
@@ -10,6 +13,8 @@ const validationErrors = (state = {}, action) => {
             return action.errors;
         case CLEAR_VALIDATION_ERROR:
             return {}
+        case GET_PROFILE_VALIDATION_ERRORS:
+        return action.errors;
         default:
             return state;
     }

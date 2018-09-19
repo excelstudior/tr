@@ -2,7 +2,7 @@ import {
     GET_PROFILE,
     PROFILE_LOADING,
     CLEAR_CURRENT_PROFILE,
-    GET_PROFILE_VALIDATION_ERRORS
+    
 } from '../actions/constants';
 const initialState = {
     profile: {},
@@ -31,6 +31,7 @@ const userProfile = (state = initialState, action) => {
                 profiles: {},
                 loading: false
             }
+         
         default:
             return state
     }
