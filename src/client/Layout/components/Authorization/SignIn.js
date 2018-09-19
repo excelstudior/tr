@@ -27,6 +27,10 @@ class SignIn extends Component {
 
     }
 
+    componentWillUnmount(){
+        this.props.clearValidationErrors()
+    }
+
     onChange(e){
         this.signIn={...this.signIn,[e.target.name]:e.target.value}
         console.log(this.signIn);
@@ -69,6 +73,7 @@ class SignIn extends Component {
 SignIn.PropTypes={
     signInUser:PropTypes.func.isRequired,
     validationErrors:PropTypes.object.isRequired,
+    clearValidationErrors:PropTypes.func.isRequired,
     user:PropTypes.object.isRequired
 }
 

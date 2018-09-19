@@ -2,7 +2,8 @@
 import axios from 'axios'
 import {
     GET_REGISTER_USER_VALIDATION_ERRORS,
-    SET_CURRENT_USER
+    SET_CURRENT_USER,
+    CLEAR_VALIDATION_ERROR,
 } from './constants';
 import {
     getCurrentProfile
@@ -58,3 +59,7 @@ export const signOutUser = (history) => dispatch => {
     dispatch(clearCurrentProfile())
     history.push('/signIn')
 };
+
+export const clearValidationErrors=()=>({
+    type:CLEAR_VALIDATION_ERROR
+})

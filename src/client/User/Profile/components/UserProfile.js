@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './UserProfile.css'
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class UserProfile extends Component {
     constructor(props) {
@@ -17,18 +17,14 @@ class UserProfile extends Component {
     }
 
     render() {
-        const {user,profile}=this.props;
+        const { user, profile } = this.props;
 
         return (
-    
-                <div className='userProfile'>
-                    {/* <h3> User {user.name}'s Profile </h3>
-                    <label>{profile.handle}</label> */}
-                   
 
+            <div className='userProfile'>
                 <div className='user'>
                     <div className='user_img'>
-                    {<img src={user.avatar} alt={user.name}/>}
+                        {<img src={user.avatar} alt={user.name} />}
                     </div>
                     <div className='user_account'>
                         <p>{user.name}</p>
@@ -36,21 +32,21 @@ class UserProfile extends Component {
                 </div>
                 <div className='profile'>
                     <div>
-                    {Object.keys(profile).length===0?<Link to='/createUserProfile'>Add Profile</Link>:'User Profile'}
+                        {Object.keys(profile).length === 0 ? <Link to='/createUserProfile'>Add Profile</Link> : 'User Profile'}
                     </div>
-                        
+
                 </div>
                 <div className='extra'>
-                extra column
+                    extra column
                 </div>
-    </div>
+            </div>
         )
     }
 }
 
-UserProfile.PropTypes={
-    profile:PropTypes.object.isRequired,
-    user:PropTypes.object.isRequired
+UserProfile.PropTypes = {
+    profile: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
 }
 
 export default UserProfile

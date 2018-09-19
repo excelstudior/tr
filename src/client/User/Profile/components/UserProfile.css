@@ -28,8 +28,10 @@
     overflow: scroll;
 }
 .user_img img{
-padding:10px;
+    padding:10px;
+    border-radius: 50%;
 }
+
 .user{
     text-align: center;
 }
@@ -45,6 +47,8 @@ padding:10px;
     text-align: center;
     padding:5px;
     border-radius: 2px;
+    font-size: 14px;
+    font-weight: 400
 }
 .profile div a:hover{
     background: #b0d9f7;

@@ -28,6 +28,10 @@ class Register extends Component {
         this.props.registerUser(this.newUser,this.props.history);
     }
 
+    componentWillUnmount(){
+        this.props.clearValidationErrors()
+    }
+
     render() {
         const {validationErrors}=this.props;
 
@@ -81,7 +85,8 @@ class Register extends Component {
 
 Register.PropTypes={
     registerUser:PropTypes.func.isRequired,
-    validationErrors:PropTypes.object.isRequired
+    validationErrors:PropTypes.object.isRequired,
+    clearValidationErrors:PropTypes.func.isRequired
 }
 
 export default Register
