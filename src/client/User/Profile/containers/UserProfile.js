@@ -4,6 +4,7 @@ import UserProfile from '../components/UserProfile';
 const mapStateToProps = (state,ownProps) => ({
     profile:state.userProfile.profile,
     user:state.user,
+    errors:state.validationErrors,
  })
 //  const mapDispatchToProps = (dispatch) => ({
 //     signOutUser:(history)=>dispatch(signOutUser(history))
