@@ -27,7 +27,7 @@ class App extends Component {
     componentDidMount() {
         let signedInUser=isAuthenticated()
         if(signedInUser!==null &&signedInUser!==undefined){
-            this.props.setCurrentUser(signedInUser);
+            this.props.loadUserContent(signedInUser);
         } else { 
            console.log('location',this.props.location);
            // this.props.history.push('/signIn')
@@ -40,9 +40,6 @@ class App extends Component {
 
     }
 
-    // checkSignedInUser(){
-       
-    // }
     render() {
 
 
@@ -66,7 +63,7 @@ class App extends Component {
 }
 
 App.PropTypes = {
-    setCurrentUser:PropTypes.func.isRequired,
+    loadUserContent:PropTypes.func.isRequired,
     validationErrors: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
 }

@@ -29,7 +29,7 @@ class UserProfile extends Component {
     }
 
     componentDidMount() {
-       
+        this.props.clearValidationErrors()
     }
   
     componentWillReceiveProps(props){
@@ -41,7 +41,7 @@ class UserProfile extends Component {
             bio: props.profile.bio!==undefined?props.profile.bio:'',
             status: props.profile.status!==undefined?props.profile.status:'',
             githubusername: props.profile.githubusername!==undefined?props.profile.githubusername:'',
-            skills: props.profile.skills!==undefined?props.profile.skills:'',
+            skills: props.profile.skills!==undefined?props.profile.skills.toString():'',
             youtube: props.profile.youtube!==undefined?props.profile.youtube:'',
             twitter: props.profile.twitter!==undefined?props.profile.twitter:'',
             facebook: props.profile.facebook!==undefined?props.profile.facebook:'',
@@ -54,6 +54,10 @@ class UserProfile extends Component {
 
     }
 
+    componentWillUnmount(){
+        this.props.clearValidationErrors()
+    }
+
     onChange(e){
         this.setState({ [e.target.name]: e.target.value })
         console.log(this.state[e.target.name])
@@ -63,8 +67,26 @@ class UserProfile extends Component {
         console.log(this.state)
     }
 
-    onSubmit(){
+    onSubmit(e){
+        this.props.clearValidationErrors()
+        const profile={}
+        profile.handle=this.state.handle;
+        profile.company=this.state.company;
+        profile.website=this.state.website;
+        profile.location=this.state.location;
+        profile.bio=this.state.bio;
+        profile.status=this.state.status;
+        profile.githubusername=this.state.githubusername;
+        profile.skills=this.state.skills;
+        profile.youtube=this.state.youtube;
+        profile.twitter=this.state.twitter;
+        profile.facebook=this.state.facebook;
+        profile.linkedin=this.state.linkedin;
+        profile.instagram=this.state.instagram;
 
+        console.log(profile);
+        e.preventDefault();
+        this.props.createUserProfile(profile,this.props.history);
     }
     render() {
         const { user, profile,errors } = this.props;
@@ -165,8 +187,10 @@ class UserProfile extends Component {
                     onChange={this.onChange}
                     error={errors.skills !== undefined ? errors.skills : ''}
                 />
-                <input type='submit' value='Create'/>
-                </form></div>}
+                <input type='submit' value='Save'/>
+                </form>
+                </div>
+            }
                 <button onClick={this.onClick}>Test</button>
 
                 </div>
@@ -181,7 +205,9 @@ class UserProfile extends Component {
 UserProfile.PropTypes = {
     profile: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    errors:PropTypes.object.isRequired
+    errors:PropTypes.object.isRequired,
+    createUserProfile:PropTypes.func.isRequired,
+    clearValidationErrors:PropTypes.func.isRequired,
 }
 
 export default UserProfile
