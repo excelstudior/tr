@@ -18,7 +18,7 @@
     float: left;
     width: 40%;
     height: inherit;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .extra{
     background: rgb(110, 109, 110);
@@ -37,7 +37,7 @@
     text-align: center;
 }
 .profile div{
-    margin:20px auto;
+    margin:10px auto;
     width: 30%;
     display: grid;
 }
@@ -46,7 +46,7 @@
     background: #b1cbdd;
     border: 1px solid grey;
     text-align: center;
-    padding:5px;
+    padding:3px 5px;
     border-radius: 2px;
     font-size: 14px;
     font-weight: 400

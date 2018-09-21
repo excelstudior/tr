@@ -8,7 +8,7 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            handle: "",
+            handle:"",
             company: "",
             website: "",
             location: "",
@@ -24,26 +24,50 @@ class UserProfile extends Component {
             errors: {}
         }
         this.onChange = this.onChange.bind(this);
-       // this.onClick = this.onClick.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
     }
 
     componentDidMount() {
-
+       
+    }
+  
+    componentWillReceiveProps(props){
+        this.setState({
+            handle:props.profile.handle!==undefined?props.profile.handle:'',
+            company: props.profile.company!==undefined?props.profile.company:'',
+            website: props.profile.website!==undefined?props.profile.website:'',
+            location: props.profile.location!==undefined?props.profile.location:'',
+            bio: props.profile.bio!==undefined?props.profile.bio:'',
+            status: props.profile.status!==undefined?props.profile.status:'',
+            githubusername: props.profile.githubusername!==undefined?props.profile.githubusername:'',
+            skills: props.profile.skills!==undefined?props.profile.skills:'',
+            youtube: props.profile.youtube!==undefined?props.profile.youtube:'',
+            twitter: props.profile.twitter!==undefined?props.profile.twitter:'',
+            facebook: props.profile.facebook!==undefined?props.profile.facebook:'',
+            linkedin: props.profile.linkedin!==undefined?props.profile.linkedin:'',
+            instagram: props.profile.instagram!==undefined?props.profile.instagram:'',
+        })
     }
 
     componentDidUpdate() {
 
     }
 
-    onChange(){
+    onChange(e){
+        this.setState({ [e.target.name]: e.target.value })
+        console.log(this.state[e.target.name])
+    }
 
+    onClick() {
+        console.log(this.state)
     }
 
     onSubmit(){
 
     }
     render() {
+        const { user, profile,errors } = this.props;
         const { handle,
             company,
             website,
@@ -58,7 +82,7 @@ class UserProfile extends Component {
             linkedin,
             instagram,
             } = this.state;
-        const { user, profile,errors } = this.props;
+        
 
         return (
 
@@ -74,7 +98,7 @@ class UserProfile extends Component {
                 <div className='profile'>
                     
                         {Object.keys(profile).length === 0 
-                            ? <Link to='/createUserProfile'>Add Profile</Link>
+                            ? <div><Link to='/createUserProfile'>Add Profile</Link></div>
                             : <div><h3>'User Profile'</h3>
                 <form onSubmit={this.onSubmit} >
                 <TextField
@@ -143,7 +167,7 @@ class UserProfile extends Component {
                 />
                 <input type='submit' value='Create'/>
                 </form></div>}
-                
+                <button onClick={this.onClick}>Test</button>
 
                 </div>
                 <div className='extra'>
