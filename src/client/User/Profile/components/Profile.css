@@ -9,10 +9,7 @@
     float: left;
     width: 19%;
     height: inherit;
-    border-right: 1px solid #b1cbdd;
-    border-left:1px solid#b1cbdd;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    text-align: center;
 }
 .profile{
     float: left;
@@ -30,12 +27,8 @@
 .user_img img{
     padding:10px;
     border-radius: 50%;
-    
 }
 
-.user{
-    text-align: center;
-}
 .btn-profile-functions{
     padding:2px 2px;
 }
@@ -47,13 +40,15 @@
 }
 .btn-profile-functions ul li{
     display: inline-block;
-    font-weight: 600;
-    font-size: 14px;
-    padding-left: 10px;
-    padding-right:10px;
+}
+.btn-profile-functions ul li button{
+    
+    font-weight: 400;
+    font-size: 12px;
+    padding:3px 6px;
     background: #b1cbdd;
     margin-right: 10px;
-    
+    border: none;
 }
 
 .profile-content{

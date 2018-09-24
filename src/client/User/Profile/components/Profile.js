@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './Profile.css'
+import './Profile.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import TextField from '../../../CommonComponents/TextField'
-import List from '../../../CommonComponents/List';
+import TextField from '../../../CommonComponents/TextField';
+import ListItem from '../../../CommonComponents/ListItem';
+import { ADD, SAVE, DELETE, EDIT, CANCEL, NONE } from '../../../CommonComponents/Constants';
 
 class Profile extends Component {
     constructor(props) {
@@ -23,12 +24,13 @@ class Profile extends Component {
             linkedin: "",
             instagram: "",
             errors: {},
-            isEditing: false
+            isEditing: { status: false, action: NONE }
         }
         this.onChange = this.onChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.changeEditingStatus=this.changeEditingStatus.bind(this)
+        this.changeEditingStatus = this.changeEditingStatus.bind(this);
+        this.handleCancelChange=this.handleCancelChange.bind(this);
     }
 
     componentDidMount() {
@@ -50,7 +52,7 @@ class Profile extends Component {
             facebook: props.profile.facebook !== undefined ? props.profile.facebook : '',
             linkedin: props.profile.linkedin !== undefined ? props.profile.linkedin : '',
             instagram: props.profile.instagram !== undefined ? props.profile.instagram : '',
-            isEditing:false
+            
         })
     }
 
@@ -70,8 +72,18 @@ class Profile extends Component {
     onClick() {
         console.log(this.state)
     }
-    changeEditingStatus(){
-        this.setState({isEditing:!this.state.isEditing})
+    changeEditingStatus(e) {
+        let actionValue=e.target.value;
+        console.log(actionValue)
+
+
+        this.setState(prevState=>({
+            isEditing:{status:!prevState.isEditing.status,action:actionValue}
+        }))
+    }
+
+    handleCancelChange(){
+        this.setState({isEditing:{status: false, action: NONE}})
     }
 
     onSubmit(e) {
@@ -113,7 +125,7 @@ class Profile extends Component {
             isEditing,
         } = this.state;
         const hasProfile = Object.keys(profile).length !== 0 ? true : false;
-console.log(isEditing,hasProfile)
+        console.log(isEditing, hasProfile)
         return (
 
             <div className='userProfile'>
@@ -128,26 +140,32 @@ console.log(isEditing,hasProfile)
                 <div className='profile'>
                     <div className='btn-profile-functions'>
 
-                        {isEditing === false && !hasProfile
-                        // ? <ul> <li onClick={this.changeEditingStatus}>Add</li></ul>
-                        //     : isEditing === false && hasProfile
-                        //         ? <ul><li onClick={this.changeEditingStatus}>Edit</li>
-                        //         <li onClick={this.changeEditingStatus}>Delete</li>
-                        //         </ul>
-                        //         :<ul><li onClick={this.changeEditingStatus}>Save</li></ul>
-                            ? <List items={['Add']} onClick={this.changeEditingStatus}></List>
-                            : isEditing === false && hasProfile
-                                ? <List items={['Edit']} onClick={this.changeEditingStatus}></List>
-                                :<List items={['SAVE']} onClick={this.changeEditingStatus}></List>
-                            }
+                        {isEditing.status === false&& isEditing.action===NONE && !hasProfile
+                            // ? <ul> <li onClick={this.changeEditingStatus}>Add</li></ul>
+                            //     : isEditing === false && hasProfile
+                            //         ? <ul><li onClick={this.changeEditingStatus}>Edit</li>
+                            //         <li onClick={this.changeEditingStatus}>Delete</li>
+                            //         </ul>
+                            //         :<ul><li onClick={this.changeEditingStatus}>Save</li></ul>
+                            ? <ul><ListItem item={ADD} onClick={this.changeEditingStatus}></ListItem></ul>
+                            : isEditing.status === false&&isEditing.action===NONE && hasProfile
+                                ? <ul><ListItem item={EDIT} onClick={this.changeEditingStatus}></ListItem>
+                                    <ListItem item={DELETE} onClick={this.changeEditingStatus}></ListItem></ul>
+                                : isEditing.status === true && isEditing.action === EDIT && hasProfile
+                                    ? <ul><ListItem item={SAVE} onClick={this.changeEditingStatus}></ListItem>
+                                        <ListItem item={CANCEL} onClick={this.handleCancelChange}></ListItem></ul>
+                                    : <ul><ListItem item={CANCEL} onClick={this.handleCancelChange}></ListItem></ul>
+                        }
+
                     </div>
 
                     <div className='profile-content'></div>
-
+<button onClick={this.onClick}>Test</button>
                 </div>
                 <div className='extra'>
                     extra column
                 </div>
+                
             </div>
         )
     }
