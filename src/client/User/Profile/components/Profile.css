@@ -80,6 +80,8 @@
 .profile-content-tableContent input{
     border: none;
     background: inherit;
-    font-size: 14px;
-    
+    font-size: 14px;   
+}
+.profile-content-tableContent small{
+   color: black;
 }
