@@ -36,7 +36,7 @@ TextField.PropTypes={
     defaultValue:PropTypes.string.isRequired,
     value:PropTypes.string,
     onChange:PropTypes.func.isRequired,
-    disabled:PropTypes.sting,
+    disabled:PropTypes.boolean,
     info:PropTypes.string,
     error:PropTypes.string
 }

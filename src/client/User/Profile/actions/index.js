@@ -6,6 +6,7 @@ import {
     , GET_PROFILE_VALIDATION_ERRORS
     , CLEAR_CURRENT_PROFILE
 } from './constants';
+import {clearValidationErrors} from '../../../Layout/actions/index'
 
 //Get Current Profile
 export const getCurrentProfile = () => dispatch => {
@@ -30,7 +31,9 @@ export const createUserProfile = (profile,history) => dispatch => {
                 type: GET_PROFILE,
                 payload: res.data
             });
-            history.push('/userProfile')
+            dispatch(clearValidationErrors())
+            //history.push('/profile')
+            // history.push('/userProfile')
         })
         .catch(err => err.response.data !== undefined ? dispatch(getProfileValidationErrors(err.response.data)) : console.log(err))
 }

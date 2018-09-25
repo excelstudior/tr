@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 const ListItem=({item,onClick})=>{
-    console.log('ListItem',item,onClick)
     return(
   
         <li><button onClick={onClick} value={item} name={item}>{item}</button></li>

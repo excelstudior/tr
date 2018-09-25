@@ -23,22 +23,25 @@ class Profile extends Component {
             facebook: "",
             linkedin: "",
             instagram: "",
-            errors: {},
-            isEditing: { status: false, action: NONE }
+            isEditing: { status: false, action: NONE },
+            errors:{}
         }
         this.onChange = this.onChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.changeEditingStatus = this.changeEditingStatus.bind(this);
-        this.handleCancelChange=this.handleCancelChange.bind(this);
+        this.cancelProfileChange = this.cancelProfileChange.bind(this);
+        this.addProfile = this.addProfile.bind(this);
+        this.editProfile = this.editProfile.bind(this);
+        this.deleteProfile = this.deleteProfile.bind(this);
+        this.saveProfile = this.saveProfile.bind(this);
     }
 
     componentDidMount() {
-        this.props.clearValidationErrors()
+        this.props.clearValidationErrors();
+        
     }
 
     componentWillReceiveProps(props) {
-        this.setState({
+        console.log(props.errors)
+        this.setState(prevState=>({
             handle: props.profile.handle !== undefined ? props.profile.handle : '',
             company: props.profile.company !== undefined ? props.profile.company : '',
             website: props.profile.website !== undefined ? props.profile.website : '',
@@ -52,41 +55,40 @@ class Profile extends Component {
             facebook: props.profile.facebook !== undefined ? props.profile.facebook : '',
             linkedin: props.profile.linkedin !== undefined ? props.profile.linkedin : '',
             instagram: props.profile.instagram !== undefined ? props.profile.instagram : '',
-            
-        })
-    }
-
-    componentDidUpdate() {
-
-    }
-
-    componentWillUnmount() {
-        this.props.clearValidationErrors()
-    }
-
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
-        console.log(this.state[e.target.name])
-    }
-
-    onClick() {
-        console.log(this.state)
-    }
-    changeEditingStatus(e) {
-        let actionValue=e.target.value;
-        console.log(actionValue)
-
-
-        this.setState(prevState=>({
-            isEditing:{status:!prevState.isEditing.status,action:actionValue}
+            isEditing:Object.keys(props.errors).length===0?{ status: false, action: NONE }:prevState.isEditing,
+            errors:props.errors,
         }))
     }
 
-    handleCancelChange(){
-        this.setState({isEditing:{status: false, action: NONE}})
+    componentDidUpdate() {
+       // this.props.clearValidationErrors()
     }
 
-    onSubmit(e) {
+    componentWillUnmount() {
+         // this.props.clearValidationErrors()
+    }
+
+    onChange(e) {
+       
+        this.setState({ [e.target.name]: e.target.value })
+        console.log(this.state[e.target.name]) 
+
+    }
+
+    cancelProfileChange() {
+        this.setState({ isEditing: { status: false, action: NONE } })
+    }
+    addProfile() {
+        this.setState({ isEditing: { status: true, action: ADD } })
+    }
+    editProfile() {
+        this.setState({ isEditing: { status: true, action: EDIT } })
+    }
+    deleteProfile() {
+        this.setState({ isEditing: { status: true, action: DELETE } })
+    }
+    saveProfile(e) {
+        //save profile, return new profile
         this.props.clearValidationErrors()
         const profile = {}
         profile.handle = this.state.handle;
@@ -102,13 +104,16 @@ class Profile extends Component {
         profile.facebook = this.state.facebook;
         profile.linkedin = this.state.linkedin;
         profile.instagram = this.state.instagram;
-
-        console.log(profile);
         e.preventDefault();
-        this.props.createUserProfile(profile, this.props.history);
+        this.props.createUserProfile(profile,this.props.history);
+    //console.log(this.state.errors,Object.keys(this.state.errors).length);
+    //     if(Object.keys(this.props.errors).length===0){
+    //         this.setState({ isEditing: { status: false, action: NONE } })
+    //     }
     }
+
     render() {
-        const { user, profile, errors } = this.props;
+        const { user, profile} = this.props;
         const { handle,
             company,
             website,
@@ -123,9 +128,10 @@ class Profile extends Component {
             linkedin,
             instagram,
             isEditing,
+            errors,
         } = this.state;
         const hasProfile = Object.keys(profile).length !== 0 ? true : false;
-        console.log(isEditing, hasProfile)
+        console.log(errors)
         return (
 
             <div className='userProfile'>
@@ -140,32 +146,131 @@ class Profile extends Component {
                 <div className='profile'>
                     <div className='btn-profile-functions'>
 
-                        {isEditing.status === false&& isEditing.action===NONE && !hasProfile
-                            // ? <ul> <li onClick={this.changeEditingStatus}>Add</li></ul>
-                            //     : isEditing === false && hasProfile
-                            //         ? <ul><li onClick={this.changeEditingStatus}>Edit</li>
-                            //         <li onClick={this.changeEditingStatus}>Delete</li>
-                            //         </ul>
-                            //         :<ul><li onClick={this.changeEditingStatus}>Save</li></ul>
-                            ? <ul><ListItem item={ADD} onClick={this.changeEditingStatus}></ListItem></ul>
-                            : isEditing.status === false&&isEditing.action===NONE && hasProfile
-                                ? <ul><ListItem item={EDIT} onClick={this.changeEditingStatus}></ListItem>
-                                    <ListItem item={DELETE} onClick={this.changeEditingStatus}></ListItem></ul>
-                                : isEditing.status === true && isEditing.action === EDIT && hasProfile
-                                    ? <ul><ListItem item={SAVE} onClick={this.changeEditingStatus}></ListItem>
-                                        <ListItem item={CANCEL} onClick={this.handleCancelChange}></ListItem></ul>
-                                    : <ul><ListItem item={CANCEL} onClick={this.handleCancelChange}></ListItem></ul>
+                        {isEditing.status === false && isEditing.action === NONE && !hasProfile
+                            ? <ul><ListItem item={ADD} onClick={this.addProfile}></ListItem></ul>
+                            : isEditing.status === false && isEditing.action === NONE && hasProfile
+                                ? <ul><ListItem item={EDIT} onClick={this.editProfile}></ListItem>
+                                    <ListItem item={DELETE} onClick={this.deleteProfile}></ListItem></ul>
+                                : isEditing.status === true && (isEditing.action !== DELETE ||Object.keys(errors).length>0)
+                                    ? <ul><ListItem item={SAVE} onClick={this.saveProfile}></ListItem>
+                                        <ListItem item={CANCEL} onClick={this.cancelProfileChange}></ListItem></ul>
+                                    : <ul><ListItem item={CANCEL} onClick={this.cancelProfileChange}></ListItem></ul>
                         }
-
                     </div>
 
                     <div className='profile-content'></div>
-<button onClick={this.onClick}>Test</button>
+                {(hasProfile ||isEditing.status)&&<table>
+                        <tbody>
+                            <tr>
+                                <td>Handle</td>
+                                <td>
+                                    <TextField
+                                        type='text'
+                                        name='handle'
+                                        placeholder='handle'
+                                        value={handle}
+                                        onChange={this.onChange}
+                                        disabled={!isEditing.status}
+                                        error={errors.handle !== undefined ? errors.handle : ''}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Company</td>
+                                <td>
+                                    <TextField
+                                        type='text'
+                                        name='company'
+                                        placeholder='company'
+                                        value={company}
+                                        onChange={this.onChange}
+                                        disabled={!isEditing.status}
+                                        error={errors.company !== undefined ? errors.company : ''}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Website</td>
+                                <td><TextField
+                                    type='text'
+                                    name='website'
+                                    placeholder='website'
+                                    value={website}
+                                    onChange={this.onChange}
+                                    disabled={!isEditing.status}
+                                    error={errors.website !== undefined ? errors.website : ''}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>
+                                    <TextField
+                                        type='text'
+                                        name='location'
+                                        placeholder='location'
+                                        value={location}
+                                        onChange={this.onChange}
+                                        disabled={!isEditing.status}
+                                        error={errors.location !== undefined ? errors.location : ''}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bio</td>
+                                <td><TextField
+                                    type='text'
+                                    name='bio'
+                                    placeholder='bio'
+                                    value={bio}
+                                    onChange={this.onChange}
+                                    disabled={!isEditing.status}
+                                    error={errors.bio !== undefined ? errors.bio : ''}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td><TextField
+                                    type='text'
+                                    name='status'
+                                    placeholder='status'
+                                    value={status}
+                                    onChange={this.onChange}
+                                    disabled={!isEditing.status}
+                                    error={errors.status !== undefined ? errors.status : ''}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Githubusername</td>
+                                <td><TextField
+                                    type='text'
+                                    name='githubusername'
+                                    placeholder='githubusername'
+                                    value={githubusername}
+                                    onChange={this.onChange}
+                                    disabled={!isEditing.status}
+                                    error={errors.githubusername !== undefined ? errors.githubusername : ''}
+                                /></td>
+                            </tr>
+                            <tr>
+                                <td>Skills</td>
+                                <td><TextField
+                                    type='textarea'
+                                    name='skills'
+                                    placeholder='skills'
+                                    value={skills.toString()}
+                                    onChange={this.onChange}
+                                    disabled={!isEditing.status}
+                                    error={errors.skills !== undefined ? errors.skills : ''}
+                                    info={'please use comma to seperate skills'}
+                                /></td>
+                            </tr>
+                        </tbody>
+                    </table>}
                 </div>
                 <div className='extra'>
                     extra column
                 </div>
-                
+
             </div>
         )
     }
