@@ -44,14 +44,42 @@
 .btn-profile-functions ul li button{
     
     font-weight: 400;
-    font-size: 12px;
-    padding:3px 6px;
+    font-size: 14px;
+    padding:5px 10px;
     background: #b1cbdd;
     margin-right: 10px;
     border: none;
 }
 
 .profile-content{
-    margin: 5px 5px;
-    background:grey;
+    margin: 10px 0px;
+}
+.profile-content table{
+    padding-left: 5px;
+    margin: 2px 2px;
+    font-size:14px;
+}
+.profile-content table tr{
+    padding:2px 1px;
+    margin-bottom: 2px;
+}
+.profile-content table tr td:first-child{
+    font-weight: 400;
+    color: black;
+}
+.profile-content table tr:nth-child(even){
+    background: #b1cbdd;
+}
+.profile-content-tableContent {
+    font-size:14px;
+    display: flex;
+    margin:0px 0px 2px 0px;
+    background: inherit;
+    flex-direction: column;
+}
+.profile-content-tableContent input{
+    border: none;
+    background: inherit;
+    font-size: 14px;
+    
 }

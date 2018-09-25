@@ -35,7 +35,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-console.log(this.state)
+        console.log(this.state)
 
     }
 
@@ -106,7 +106,7 @@ console.log(this.state)
     onChange(e) {
 
         this.setState({ [e.target.name]: e.target.value })
-        
+
 
     }
 
@@ -206,114 +206,123 @@ console.log(this.state)
                         }
                     </div>
 
-                    <div className='profile-content'></div>
-                    {(hasProfile || isEditing.status) && <table>
-                        <tbody>
-                            <tr>
-                                <td>Handle</td>
-                                <td>
-                                    <TextField
+                    <div className='profile-content'>
+                        {(hasProfile || isEditing.status) && <table>
+                            <tbody>
+                                <tr>
+                                    <td>Handle</td>
+                                    <td>
+                                        <TextField
+                                            type='text'
+                                            name='handle'
+                                            placeholder='handle'
+                                            value={handle}
+                                            classname={'profile-content-tableContent'}
+                                            onChange={this.onChange}
+                                            disabled={!isEditing.status}
+                                            error={errors.handle !== undefined ? errors.handle : ''}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Company</td>
+                                    <td>
+                                        <TextField
+                                            type='text'
+                                            name='company'
+                                            placeholder='company'
+                                            value={company}
+                                            classname={'profile-content-tableContent'}
+                                            onChange={this.onChange}
+                                            disabled={!isEditing.status}
+                                            error={errors.company !== undefined ? errors.company : ''}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Website</td>
+                                    <td><TextField
                                         type='text'
-                                        name='handle'
-                                        placeholder='handle'
-                                        value={handle}
+                                        name='website'
+                                        placeholder='website'
+                                        value={website}
+                                        classname={'profile-content-tableContent'}
                                         onChange={this.onChange}
                                         disabled={!isEditing.status}
-                                        error={errors.handle !== undefined ? errors.handle : ''}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Company</td>
-                                <td>
-                                    <TextField
+                                        error={errors.website !== undefined ? errors.website : ''}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td>
+                                        <TextField
+                                            type='text'
+                                            name='location'
+                                            placeholder='location'
+                                            value={location}
+                                            classname={'profile-content-tableContent'}
+                                            onChange={this.onChange}
+                                            disabled={!isEditing.status}
+                                            error={errors.location !== undefined ? errors.location : ''}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bio</td>
+                                    <td><TextField
                                         type='text'
-                                        name='company'
-                                        placeholder='company'
-                                        value={company}
+                                        name='bio'
+                                        placeholder='bio'
+                                        value={bio}
+                                        classname={'profile-content-tableContent'}
                                         onChange={this.onChange}
                                         disabled={!isEditing.status}
-                                        error={errors.company !== undefined ? errors.company : ''}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Website</td>
-                                <td><TextField
-                                    type='text'
-                                    name='website'
-                                    placeholder='website'
-                                    value={website}
-                                    onChange={this.onChange}
-                                    disabled={!isEditing.status}
-                                    error={errors.website !== undefined ? errors.website : ''}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td>Location</td>
-                                <td>
-                                    <TextField
+                                        error={errors.bio !== undefined ? errors.bio : ''}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td><TextField
                                         type='text'
-                                        name='location'
-                                        placeholder='location'
-                                        value={location}
+                                        name='status'
+                                        placeholder='status'
+                                        value={status}
+                                        classname={'profile-content-tableContent'}
                                         onChange={this.onChange}
                                         disabled={!isEditing.status}
-                                        error={errors.location !== undefined ? errors.location : ''}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Bio</td>
-                                <td><TextField
-                                    type='text'
-                                    name='bio'
-                                    placeholder='bio'
-                                    value={bio}
-                                    onChange={this.onChange}
-                                    disabled={!isEditing.status}
-                                    error={errors.bio !== undefined ? errors.bio : ''}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td><TextField
-                                    type='text'
-                                    name='status'
-                                    placeholder='status'
-                                    value={status}
-                                    onChange={this.onChange}
-                                    disabled={!isEditing.status}
-                                    error={errors.status !== undefined ? errors.status : ''}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td>Githubusername</td>
-                                <td><TextField
-                                    type='text'
-                                    name='githubusername'
-                                    placeholder='githubusername'
-                                    value={githubusername}
-                                    onChange={this.onChange}
-                                    disabled={!isEditing.status}
-                                    error={errors.githubusername !== undefined ? errors.githubusername : ''}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td>Skills</td>
-                                <td><TextField
-                                    type='textarea'
-                                    name='skills'
-                                    placeholder='skills'
-                                    value={skills.toString()}
-                                    onChange={this.onChange}
-                                    disabled={!isEditing.status}
-                                    error={errors.skills !== undefined ? errors.skills : ''}
-                                    info={'please use comma to seperate skills'}
-                                /></td>
-                            </tr>
-                        </tbody>
-                    </table>}
+                                        error={errors.status !== undefined ? errors.status : ''}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td>Githubusername</td>
+                                    <td><TextField
+                                        type='text'
+                                        name='githubusername'
+                                        placeholder='githubusername'
+                                        value={githubusername}
+                                        classname={'profile-content-tableContent'}
+                                        onChange={this.onChange}
+                                        disabled={!isEditing.status}
+                                        error={errors.githubusername !== undefined ? errors.githubusername : ''}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td>Skills</td>
+                                    <td><TextField
+                                        type='textarea'
+                                        name='skills'
+                                        placeholder='skills'
+                                        value={skills.toString()}
+                                        classname={'profile-content-tableContent'}
+                                        onChange={this.onChange}
+                                        disabled={!isEditing.status}
+                                        error={errors.skills !== undefined ? errors.skills : ''}
+                                        info={'please use comma to seperate skills'}
+                                    /></td>
+                                </tr>
+                            </tbody>
+                        </table>}
+                    </div>
                 </div>
                 <div className='extra'>
                     extra column

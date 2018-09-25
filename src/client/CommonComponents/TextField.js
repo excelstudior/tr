@@ -10,11 +10,12 @@ const TextField=({
     onChange,
     disabled,
     info,
-    error
+    error,
+    classname
 
 })=>{
     return (
-        <div>
+        <div className={classname}>
             <input
                 type={type}
                 name={name}
@@ -25,7 +26,7 @@ const TextField=({
                 disabled={disabled}
             />
             {info&&<small>{info}</small>}
-            {error&&<small>{error}</small>}
+            {error&&<small>x {error}</small>}
         </div>
     )
 }
@@ -38,7 +39,8 @@ TextField.PropTypes={
     onChange:PropTypes.func.isRequired,
     disabled:PropTypes.boolean,
     info:PropTypes.string,
-    error:PropTypes.string
+    error:PropTypes.string,
+    classname:PropTypes.string,
 }
 TextField.defaultProps={
     type:'text'
