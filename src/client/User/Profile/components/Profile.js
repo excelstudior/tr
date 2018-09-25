@@ -10,19 +10,19 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            handle: "",
-            company: "",
-            website: "",
-            location: "",
-            bio: "",
-            status: "",
-            githubusername: "",
-            skills: "",
-            youtube: "",
-            twitter: "",
-            facebook: "",
-            linkedin: "",
-            instagram: "",
+            handle: props.profile.handle !== undefined ? props.profile.handle : "",
+            company: props.profile.company !== undefined ? props.profile.company : "",
+            website: props.profile.website !== undefined ? props.profile.website : "",
+            location: props.profile.location !== undefined ? props.profile.location : "",
+            bio: props.profile.bio !== undefined ? props.profile.bio : "",
+            status: props.profile.status !== undefined ? props.profile.status : "",
+            githubusername: props.profile.githubusername !== undefined ? props.profile.githubusername : "",
+            skills: props.profile.skills !== undefined ? props.profile.skills.toString() : "",
+            youtube: props.profile.youtube !== undefined ? props.profile.youtube : "",
+            twitter: props.profile.twitter !== undefined ? props.profile.twitter : "",
+            facebook: props.profile.facebook !== undefined ? props.profile.facebook : "",
+            linkedin: props.profile.linkedin !== undefined ? props.profile.linkedin : "",
+            instagram: props.profile.instagram !== undefined ? props.profile.instagram : "",
             isEditing: { status: false, action: NONE },
             errors: {}
         }
@@ -35,7 +35,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-
+console.log(this.state)
 
     }
 
@@ -179,6 +179,7 @@ class Profile extends Component {
             errors,
         } = this.state;
         const hasProfile = Object.keys(profile).length !== 0 ? true : false;
+        console.log(this.state)
         return (
 
             <div className='userProfile'>
