@@ -35,7 +35,7 @@ export const signInUser = (user, history) => dispatch => {
             const decoded = jwt_decode(token);
             dispatch(setCurrentUser(decoded));
             dispatch(getCurrentProfile());
-            history.push('/userProfile')
+            history.push('/profile')
 
         })
         .catch(err => err.response.data !== undefined ? dispatch(getRegisterUserValidationErrors(err.response.data)) : console.log(err))

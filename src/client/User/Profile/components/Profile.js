@@ -24,7 +24,7 @@ class Profile extends Component {
             linkedin: "",
             instagram: "",
             isEditing: { status: false, action: NONE },
-            errors:{}
+            errors: {}
         }
         this.onChange = this.onChange.bind(this);
         this.cancelProfileChange = this.cancelProfileChange.bind(this);
@@ -35,48 +35,100 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        this.props.clearValidationErrors();
-        
+
+
     }
 
     componentWillReceiveProps(props) {
-        console.log(props.errors)
-        this.setState(prevState=>({
-            handle: props.profile.handle !== undefined ? props.profile.handle : '',
-            company: props.profile.company !== undefined ? props.profile.company : '',
-            website: props.profile.website !== undefined ? props.profile.website : '',
-            location: props.profile.location !== undefined ? props.profile.location : '',
-            bio: props.profile.bio !== undefined ? props.profile.bio : '',
-            status: props.profile.status !== undefined ? props.profile.status : '',
-            githubusername: props.profile.githubusername !== undefined ? props.profile.githubusername : '',
-            skills: props.profile.skills !== undefined ? props.profile.skills.toString() : '',
-            youtube: props.profile.youtube !== undefined ? props.profile.youtube : '',
-            twitter: props.profile.twitter !== undefined ? props.profile.twitter : '',
-            facebook: props.profile.facebook !== undefined ? props.profile.facebook : '',
-            linkedin: props.profile.linkedin !== undefined ? props.profile.linkedin : '',
-            instagram: props.profile.instagram !== undefined ? props.profile.instagram : '',
-            isEditing:Object.keys(props.errors).length===0?{ status: false, action: NONE }:prevState.isEditing,
-            errors:props.errors,
+        const action = this.state.isEditing.action
+        this.setState(prevState => ({
+            handle: props.profile.handle === undefined
+                ? prevState.handle
+                : prevState.handle !== props.profile.handle && action !== EDIT
+                    ? props.profile.handle : prevState.handle,
+            company: props.profile.company === undefined
+                ? prevState.company
+                : prevState.company !== props.profile.company && action !== EDIT
+                    ? props.profile.company : prevState.company,
+            website: props.profile.website === undefined
+                ? prevState.website
+                : prevState.website !== props.profile.website && action !== EDIT
+                    ? props.profile.website : prevState.website,
+            location: props.profile.location === undefined
+                ? prevState.location
+                : prevState.location !== props.profile.location && action !== EDIT
+                    ? props.profile.location : prevState.location,
+            bio: props.profile.bio === undefined
+                ? prevState.bio
+                : prevState.bio !== props.profile.bio && action !== EDIT
+                    ? props.profile.bio : prevState.bio,
+            status: props.profile.status === undefined
+                ? prevState.status
+                : prevState.status !== props.profile.status && action !== EDIT
+                    ? props.profile.status : prevState.status,
+            githubusername: props.profile.githubusername === undefined
+                ? prevState.githubusername
+                : prevState.githubusername !== props.profile.githubusername && action !== EDIT
+                    ? props.profile.githubusername : prevState.githubusername,
+            skills: props.profile.skills === undefined
+                ? prevState.skills
+                : prevState.skills !== props.profile.skills.toString() && action !== EDIT
+                    ? props.profile.skills.toString() : prevState.skills,
+            youtube: props.profile.youtube === undefined
+                ? prevState.youtube
+                : prevState.youtube !== props.profile.youtube && action !== EDIT
+                    ? props.profile.youtube : prevState.youtube,
+            youtube: props.profile.youtube === undefined
+                ? prevState.youtube
+                : prevState.youtube !== props.profile.youtube && action !== EDIT
+                    ? props.profile.youtube : prevState.youtube,
+            twitter: props.profile.twitter === undefined
+                ? prevState.twitter
+                : prevState.twitter !== props.profile.twitter && action !== EDIT
+                    ? props.profile.twitter : prevState.twitter,
+            facebook: props.profile.facebook === undefined
+                ? prevState.facebook
+                : prevState.facebook !== props.profile.facebook && action !== EDIT
+                    ? props.profile.facebook : prevState.facebook,
+            linkedin: props.profile.linkedin === undefined
+                ? prevState.linkedin
+                : prevState.linkedin !== props.profile.linkedin && action !== EDIT
+                    ? props.profile.linkedin : prevState.linkedin,
+            instagram: props.profile.instagram === undefined
+                ? prevState.instagram
+                : prevState.instagram !== props.profile.instagram && action !== EDIT
+                    ? props.profile.instagram : prevState.instagram,
+            isEditing: Object.keys(props.errors).length === 0 ? { status: false, action: NONE } : prevState.isEditing,
+            errors: props.errors,
         }))
     }
 
-    componentDidUpdate() {
-       // this.props.clearValidationErrors()
-    }
-
-    componentWillUnmount() {
-         // this.props.clearValidationErrors()
-    }
-
     onChange(e) {
-       
+
         this.setState({ [e.target.name]: e.target.value })
-        console.log(this.state[e.target.name]) 
+        
 
     }
 
     cancelProfileChange() {
-        this.setState({ isEditing: { status: false, action: NONE } })
+        const props = this.props;
+        this.setState({
+            handle: props.profile.handle !== undefined ? props.profile.handle : "",
+            company: props.profile.company !== undefined ? props.profile.company : "",
+            website: props.profile.website !== undefined ? props.profile.website : "",
+            location: props.profile.location !== undefined ? props.profile.location : "",
+            bio: props.profile.bio !== undefined ? props.profile.bio : "",
+            status: props.profile.status !== undefined ? props.profile.status : "",
+            githubusername: props.profile.githubusername !== undefined ? props.profile.githubusername : "",
+            skills: props.profile.skills !== undefined ? props.profile.skills.toString() : "",
+            youtube: props.profile.youtube !== undefined ? props.profile.youtube : "",
+            twitter: props.profile.twitter !== undefined ? props.profile.twitter : "",
+            facebook: props.profile.facebook !== undefined ? props.profile.facebook : "",
+            linkedin: props.profile.linkedin !== undefined ? props.profile.linkedin : "",
+            instagram: props.profile.instagram !== undefined ? props.profile.instagram : "",
+            isEditing: { status: false, action: NONE },
+            errors: {},
+        })
     }
     addProfile() {
         this.setState({ isEditing: { status: true, action: ADD } })
@@ -85,11 +137,11 @@ class Profile extends Component {
         this.setState({ isEditing: { status: true, action: EDIT } })
     }
     deleteProfile() {
-        this.setState({ isEditing: { status: true, action: DELETE } })
+        this.setState({ isEditing: { status: false, action: DELETE } })
     }
     saveProfile(e) {
         //save profile, return new profile
-        this.props.clearValidationErrors()
+
         const profile = {}
         profile.handle = this.state.handle;
         profile.company = this.state.company;
@@ -105,15 +157,11 @@ class Profile extends Component {
         profile.linkedin = this.state.linkedin;
         profile.instagram = this.state.instagram;
         e.preventDefault();
-        this.props.createUserProfile(profile,this.props.history);
-    //console.log(this.state.errors,Object.keys(this.state.errors).length);
-    //     if(Object.keys(this.props.errors).length===0){
-    //         this.setState({ isEditing: { status: false, action: NONE } })
-    //     }
+        this.props.createUserProfile(profile, this.props.history);
     }
 
     render() {
-        const { user, profile} = this.props;
+        const { user, profile } = this.props;
         const { handle,
             company,
             website,
@@ -131,7 +179,6 @@ class Profile extends Component {
             errors,
         } = this.state;
         const hasProfile = Object.keys(profile).length !== 0 ? true : false;
-        console.log(errors)
         return (
 
             <div className='userProfile'>
@@ -151,7 +198,7 @@ class Profile extends Component {
                             : isEditing.status === false && isEditing.action === NONE && hasProfile
                                 ? <ul><ListItem item={EDIT} onClick={this.editProfile}></ListItem>
                                     <ListItem item={DELETE} onClick={this.deleteProfile}></ListItem></ul>
-                                : isEditing.status === true && (isEditing.action !== DELETE ||Object.keys(errors).length>0)
+                                : isEditing.status === true && (isEditing.action !== DELETE || Object.keys(errors).length > 0)
                                     ? <ul><ListItem item={SAVE} onClick={this.saveProfile}></ListItem>
                                         <ListItem item={CANCEL} onClick={this.cancelProfileChange}></ListItem></ul>
                                     : <ul><ListItem item={CANCEL} onClick={this.cancelProfileChange}></ListItem></ul>
@@ -159,7 +206,7 @@ class Profile extends Component {
                     </div>
 
                     <div className='profile-content'></div>
-                {(hasProfile ||isEditing.status)&&<table>
+                    {(hasProfile || isEditing.status) && <table>
                         <tbody>
                             <tr>
                                 <td>Handle</td>

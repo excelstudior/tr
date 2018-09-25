@@ -32,10 +32,11 @@ export const createUserProfile = (profile,history) => dispatch => {
                 payload: res.data
             });
             dispatch(clearValidationErrors())
-            //history.push('/profile')
-            // history.push('/userProfile')
+            history.push('/profile')
         })
-        .catch(err => err.response.data !== undefined ? dispatch(getProfileValidationErrors(err.response.data)) : console.log(err))
+        .catch(err => {err.response.data !== undefined 
+            ?dispatch(getProfileValidationErrors(err.response.data))
+            : console.log(err)})
 }
 
 //Get Validation error

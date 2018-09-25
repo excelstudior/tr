@@ -40,7 +40,6 @@ class Navbar extends Component {
                                 <li><Link to='/reddit'>Reddit</Link></li>
                             </ul>
                         </li>
-                            <li><Link to='/userProfile'>My Profile</Link></li>
                             <li><Link to='/profile'>Profile</Link></li>
                         </ul>
                     }
