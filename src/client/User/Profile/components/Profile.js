@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TextField from '../../../CommonComponents/TextField';
 import ListItem from '../../../CommonComponents/ListItem';
+import RandomColorListItem from '../../../CommonComponents/RandomColorListItem';
 import { ADD, SAVE, DELETE, EDIT, CANCEL, NONE } from '../../../CommonComponents/Constants';
 
 class Profile extends Component {
@@ -308,8 +309,9 @@ class Profile extends Component {
                                 </tr>
                                 <tr>
                                     <td>Skills</td>
-                                    <td><TextField
-                                        type='textarea'
+                                    <td>{isEditing.status
+                                    ?<TextField
+                                        type={'textarea'}
                                         name='skills'
                                         placeholder='skills'
                                         value={skills.toString()}
@@ -318,7 +320,10 @@ class Profile extends Component {
                                         disabled={!isEditing.status}
                                         error={errors.skills !== undefined ? errors.skills : ''}
                                         info={'please use comma to seperate skills'}
-                                    /></td>
+                                    />
+                                    :<ul className='profile-listItems'>{skills.split(',').map((skill,i)=>{
+                                        return <RandomColorListItem item={skill}/>
+                                    })}</ul>}</td>
                                 </tr>
                             </tbody>
                         </table>}

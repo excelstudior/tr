@@ -67,9 +67,6 @@
     font-weight: 400;
     color: black;
 }
-.profile-content table tr:nth-child(even){
-    background: #b1cbdd;
-}
 .profile-content-tableContent {
     font-size:14px;
     display: flex;
@@ -84,4 +81,17 @@
 }
 .profile-content-tableContent small{
    color: black;
+}
+.profile-listItems{
+    display: flex;
+    padding: 0px;
+}
+.profile-listItems li{
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    padding: 4px 6px;
+    margin: 2px 4px;
+    list-style: none;
 }
