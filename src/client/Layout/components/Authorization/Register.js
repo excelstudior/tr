@@ -38,7 +38,7 @@ class Register extends Component {
         return (
     
                 <div className='register-container'>
-                    <h4>Create your account</h4>
+                    <p>Welcome on board!</p>
                     <form onSubmit={this.onSubmit}>
                         <div>
                             <input 
@@ -75,7 +75,7 @@ class Register extends Component {
                             <div className='invalid-input'>{validationErrors!=={}?validationErrors.confirmPassword:''}</div>
                         </div>
                         
-                        <button type='submit' on>Submit</button>
+                        <button type='submit' className='btn-register-submit'>Submit</button>
                     </form>
                 </div>
 

@@ -31,16 +31,15 @@ class Navbar extends Component {
                     {Object.keys(user).length === 0
                         ? <ul>
                             <li><Link to='/'>Home</Link></li>
-                            <li>About</li>
-                            <li>Contact</li>
                         </ul>
-                        : <ul><li className='apps-menu'>
-                            <span>APPs</span>
-                            <ul className='apps-menu-app'>
-                                <li><Link to='/reddit'>Reddit</Link></li>
-                            </ul>
-                        </li>
+                        : <ul>
                             <li><Link to='/profile'>Profile</Link></li>
+                            <li className='dropdown'>
+                                <div className='dropdown-main'>App</div>
+                                <div className='dropdown-sub'>
+                                <Link to='/reddit'>Reddit</Link>
+                                </div>
+                            </li>
                         </ul>
                     }
 

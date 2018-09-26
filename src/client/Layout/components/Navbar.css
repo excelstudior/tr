@@ -1,11 +1,11 @@
 .container{
     width: 100%;
-    background: #b1cbdd;;
+    background: #fff;;
     color:#3c4859;
     margin: 0 auto;
-    font-weight: 600;
-    font-size: 18px;
-    border-bottom: solid 1px rgb(148, 147, 147)
+    font-weight: 400;
+    font-size: 16px;
+    border-bottom: solid 0.5px rgb(148, 147, 147)
     /* text-transform: uppercase; */
 }
 .container::after{
@@ -22,7 +22,7 @@
 
 .top-left-navbar ul{
     margin:0px 0px 0px 5px ;
-    padding: 0;
+    padding: 2px 2px;
     list-style: none;
 }
 
@@ -31,44 +31,22 @@
 }
 .top-left-navbar ul li {
     display: inline-block;
-    /* padding:0 auto; */
     position: relative;
     margin: 5px 5px;
     padding:5px;
 }
 .top-left-navbar ul li a{
     text-decoration: none;
-    
     color:rgba(68, 67, 67, 0.945);
 }
 
-
-.apps-menu-app{
-    visibility: hidden; /* hides sub-menu*/
-    opacity: 0; 
-    position: absolute;
-    top:100%;
-    left:-10px;
-    transform: translateY(-2em);
-    z-index: -1;
-    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-}
-.apps-menu:focus .apps-menu-app,
-.apps-menu:focus-within .apps-menu-app,
-.apps-menu:hover .apps-menu-app{ 
-    background: #b1cbdd;
-    visibility: visible; /* shows sub-menu */
-    opacity: 1;
-    z-index: 1;
-    transform: translateY(0%);
-    transition-delay: 0.1s; /* this removes the transition delay so the menu will be visible while the other styles transition */
-}
-.apps-menu:hover .apps-menu-app li a{ 
+.top-left-navbar ul li:hover{
     color:#000;
+    background: rgb(201, 199, 199);
 }
 
 
-.top-left-navbar ul li::before {
+/* .top-left-navbar ul li::before {
     content: '';
     display: block;
     height: 2px;
@@ -81,14 +59,12 @@
     transition: all ease-in-out 300ms;
 }
 
-.top-left-navbar ul li a:hover{
-    color:#000;
-}
+
 
 
 .top-left-navbar ul li:hover::before{
     width: 100%;
-}
+} */
 
 .top-right-auth-button{
     float:right;
@@ -97,23 +73,16 @@
 
 .top-right-auth-button ul{
     margin:0px 5px 0px 0px;
-    padding: 0;
+    padding: 2px 2px;
     list-style: none;
     
 }
 .top-right-auth-button ul li {
     display: inline-block;
-    padding:0px auto;
-    position: relative;
-    margin: 5px 5px;
+    padding:5px 8px;
+    margin: 5px 8px;
     text-transform: none;
     font-weight: 400;
-}
-
-.top-right-auth-button ul li:nth-child(1){
-    border-right:0.1px solid #000;
-    padding:5px;
-    margin-right:0px;
 }
 
 .top-right-auth-button ul li a{
@@ -121,6 +90,35 @@
     color:rgba(68, 67, 67, 0.945);
     
 }
-.top-right-auth-button ul li a:hover{
+.top-right-auth-button ul li:hover{
     color:#000;
+    background: rgb(201, 199, 199);
+
 }
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-main{
+    border: none;
+}
+.dropdown-sub{
+    display: none;
+    position: absolute;
+    background-color: inherit;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left:0px;
+    font-size: 12px;
+}
+.dropdown-sub a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-sub a:hover {background-color: rgb(201, 199, 199);}
+
+.dropdown:hover .dropdown-sub {display: block;}
+
