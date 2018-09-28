@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import './Home.css'
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import Calendar from '../../MiniApps/Calendar/components/Calendar';
 
 class Home extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class Home extends Component {
     
                 <div>
                     Home
+                    <div>
+                        <Calendar/>
+                    </div>
                 </div>
 
         )
