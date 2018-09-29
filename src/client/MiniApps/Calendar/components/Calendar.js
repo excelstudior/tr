@@ -17,17 +17,24 @@ const Year = ({ years, currentYear, classname, onChange }) => {
     </select>)
 }
 
-const Month =({currentMonth,classname,onChange})=>{
-    let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+const Month = ({ currentMonth, classname, onChange }) => {
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     return (
         <select name='month' className={classname} onChange={onChange}>
-        {months.map((month,i) => {
-            return month === currentMonth
-                ? <option selected value={i}>{month}</option>
-                : <option value={i}>{month}</option>
-        })}
-    </select>
+            {months.map((month, i) => {
+                return i === currentMonth
+                    ? <option selected value={i}>{month}</option>
+                    : <option value={i}>{month}</option>
+            })}
+        </select>
 
+    )
+}
+
+const DateButton = ({ value, onClick }) => {
+    console.log({ value })
+    return (
+        <button onClick={onClick}>{value}</button>
     )
 }
 class Calendar extends Component {
@@ -35,53 +42,182 @@ class Calendar extends Component {
         super(props);
         this.years = _.range(1900, 2100);
         this.currentYear = new Date().getFullYear();
-        this.currentMonth= new Date().getMonth();
-        this.currentDate =new Date().getDate();
-        this.currentDay= new Date().getDay();
+        this.currentMonth = new Date().getMonth(); // 0 base array, start from Jan
+        this.currentDate = new Date().getDate(); // get the date number of the month
+        this.currentDay = new Date().getDay(); // get the day number of the week, Sun is 0
         this.state = {
             year: this.currentYear,
+            month: this.currentMonth,
+            date: this.currentDate,
+            day: this.currentDay,
+            dates: this.createDateObj(this.currentMonth, this.currentYear),
+            numberOfWeekLines: 0,
         };
-        this.onChange = this.onChange.bind(this);
-
+        this.onMonthChange = this.onMonthChange.bind(this);
+        this.onYearChange = this.onYearChange.bind(this);
+        this.onForwardOneMonth = this.onForwardOneMonth.bind(this);
+        this.onBackwardOneMonth = this.onBackwardOneMonth.bind(this);
+        this.createDateObj = this.createDateObj.bind(this);
+        this.getNumberOfDaysOfMonth = this.getNumberOfDaysOfMonth.bind(this);
+        this.isLeapYear = this.isLeapYear.bind(this);
+        this.createWeekLines = this.createWeekLines.bind(this);
+        this.createDateItemsOfOtherMonths = this.createDateItemsOfOtherMonths.bind(this);
     }
 
     componentDidMount() {
-
+        this.createDateObj(this.state.month, this.state.year)
     }
-    componentWillReceiveProps(nextProps) {
-
-    }
-    componentDidUpdate() {
-
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     this.createDateObj(nextProps.month,nextProps.year)
+    // }
+    // componentDidUpdate() {
+    //     this.createDateObj(this.state.month,this.state.year)
+    // }
 
     componentWillUnmount() {
 
     }
 
-    setCurrentYear(){
+    isLeapYear(year) {
+        if (year / 4 === 0 || year / 100 === 0 && year / 400 === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    getNumberOfDaysOfMonth(month, year) {
+        console.log('this month number is', month)
+        let month_has_30_days = [3, 5, 8, 10];
+        let leapYear = this.isLeapYear(year);
+        return leapYear && month === 1
+            ? 29
+            : !leapYear && month === 1
+                ? 28
+                : month_has_30_days.indexOf(month) > -1
+                    ? 30
+                    : 31;
 
     }
-    setCurrentMonth(){
-        
+    createWeekLines(dates) {
+        if (dates.length === 0) {
+            return dates;
+        } else {
+            let weekLineIndex = 0;
+            return dates.reduce((newDatesArr, d, i) => {
+                newDatesArr[weekLineIndex].push(d);
+                if (d.day === 6 && dates.indexOf(dates[i + 1]) > -1) {
+                    newDatesArr.push([]);
+                    weekLineIndex++;
+                }
+                return newDatesArr;
+            }, [[]])
+        }
     }
-    onChange(e) {
-        //console.log(e.targe.value);
-        this.setState({ [e.target.name]: parseInt(e.target.value) })
+
+    createDateItemsOfOtherMonths(dates) {
+        let weeksMaxIndex = dates.length - 1;
+        let lastWeekMaxIndex = dates[weeksMaxIndex].length - 1;
+        let emptyDateObj = {};
+        let firstWeekOfEmptyObj = (dates[0][0].day);
+        //let lastWeekOfEmptyObj=(dates[weeksMaxIndex][lastWeekMaxIndex]);
+        for (let i = 0; i <= firstWeekOfEmptyObj - 1; i++) {
+            dates[0].unshift(emptyDateObj)
+        }
+        console.log(lastWeekMaxIndex, lastWeekMaxIndex)
+        for (let i = 0; i < 6 - lastWeekMaxIndex; i++) {
+            dates[weeksMaxIndex].push(emptyDateObj);
+        }
+        return dates;
+    }
+
+
+    createDateObj(month, year) {
+
+        let numberOfDays = this.getNumberOfDaysOfMonth(month, year);
+        // numberOfDays++;
+        let dates=[]
+        console.log(numberOfDays)
+        for(let i=1;i<=numberOfDays;i++){
+            dates.push(i);
+        }
+         //= _.range(1, numberOfDays);
+        console.log(dates)
+        let objDates = dates.map((date, i) => {
+            let objDate = {};
+            objDate.month = month;
+            objDate.date = date;
+            objDate.day = new Date(year, month, date).getDay();
+            return objDate;
+        })
+
+        objDates = this.createWeekLines(objDates);
+        objDates = this.createDateItemsOfOtherMonths(objDates);
+        // this.setState({
+        //     dates: objDates,
+        //     numberOfWeekLines: objDates.length
+        // })
+        return objDates;
+    }
+
+    onForwardOneMonth() {
+        if (this.state.month === 11) {
+            this.setState(prevState => ({
+                year: prevState.year + 1,
+                month: 0,
+            }))
+        } else {
+            this.setState(prevState => ({
+                month: prevState.month + 1,
+            }))
+        }
+    }
+    onBackwardOneMonth() {
+        if (this.state.month === 0) {
+            this.setState(prevState => ({
+                year: prevState.year - 1,
+                month: 11,
+            }))
+        } else {
+            this.setState(prevState => ({
+                month: prevState.month - 1,
+            }))
+        }
+    }
+
+    onMonthChange(e) {
+        this.setState({
+            [e.target.name]: parseInt(e.target.value),
+            dates: this.createDateObj(parseInt(e.target.value), this.state.year)
+        })
         console.log(this.state)
-    }
 
+    }
+    onYearChange(e) {
+        this.setState({
+            [e.target.name]: parseInt(e.target.value),
+            dates: this.createDateObj(this.state.month, parseInt(e.target.value))
+        })
+        console.log(this.state)
+
+    }
 
     render() {
+
+        const { year
+            , month
+            , date
+            , day
+            , dates
+            , numberOfWeekLines, } = this.state
 
         return (
 
             <div className='calendar'>
                 <div className='calendar-head'>
-                    <button className='btn-cal-prev'>Prev</button>
-                    <Year classname='btn-cal-year' onChange={this.onChange} years={this.years} currentYear={this.currentYear} />
-                    <Month classname='btn-cal-month' onChange={this.onChange} currentMonth={this.currentMonth}/>
-                    <button className='btn-cal-next'>Next</button>
+                    <button className='btn-cal-prev' onClick={this.onBackwardOneMonth}>Prev</button>
+                    <Year classname='btn-cal-year' onChange={this.onYearChange} years={this.years} currentYear={year} />
+                    <Month classname='btn-cal-month' onChange={this.onMonthChange} currentMonth={month} />
+                    <button className='btn-cal-next' onClick={this.onForwardOneMonth}>Next</button>
                 </div>
                 <div className='calendar-dayNames'>
                     <span>Sun</span>
@@ -92,7 +228,18 @@ class Calendar extends Component {
                     <span>Fri</span>
                     <span>Sat</span>
                 </div>
-                <div className='calendar-content'></div>
+                <div className='calendar-content'>
+                    {dates.length === 0
+                        ? <div></div>
+                        : dates.map((wl, i) => {
+                            return <div id={i}>{wl.map((d, i) => {
+                                return Object.keys(d).length === 0
+                                    ? <DateButton />
+                                    : <DateButton value={d.date} />
+                            })}</div>
+                        })}
+
+                </div>
             </div>
 
         )

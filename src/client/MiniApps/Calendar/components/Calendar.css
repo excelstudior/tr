@@ -38,4 +38,22 @@
 .calendar-dayNames{
     margin:0px 0px;
     text-align: center;
+    border-bottom: 0.5px solid grey;
+}
+.calendar-content div{
+    text-align:center;
+}
+.calendar-content button{
+    width: 14.28%;
+    padding:8px;
+    border:none;
+}
+
+.calendar-content button:hover{
+    background:grey;
+    color:white;
+
+}
+.calendar-content{
+    display: block;
 }
