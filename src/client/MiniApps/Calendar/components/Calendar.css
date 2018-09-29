@@ -6,29 +6,36 @@
 .calendar-head{
     border: 1px grey solid;
     padding: 5px 5px;
+    text-align: center;
 }
 
 .btn-cal-prev{
-    float: left;
+    width: 20%;
+    border:none;
 }
 
 .btn-cal-next{
-    float: right;
+    
+    width: 20%;
+    border:none;
 }
-
-.calendar-head span:nth-child(1){
-    margin-right: auto;
-    margin-left:20px;
+.btn-cal-year{
+    width: 30%;
+    text-align: center;
+    border: none;
 }
-.calendar-head span:nth-child(2){
-    margin-left: auto;
-    margin-right:20px;
+.btn-cal-month{
+    width: 30%;
+    /* text-align: center; */
+    border:none;
 }
 .calendar-dayNames span{
     width:30px;
     margin:2.5px;
     padding:5px;
+    
 }
 .calendar-dayNames{
     margin:0px 0px;
+    text-align: center;
 }
