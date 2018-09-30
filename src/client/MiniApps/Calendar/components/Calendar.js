@@ -79,7 +79,7 @@ class Calendar extends Component {
     }
 
     isLeapYear(year) {
-        if (year / 4 === 0 || year / 100 === 0 && year / 400 === 0) {
+        if (((year % 4 === 0) && ((year % 100) !== 0)) || (year % 400 === 0)) {
             return true;
         } else {
             return false;
@@ -89,6 +89,7 @@ class Calendar extends Component {
         console.log('this month number is', month)
         let month_has_30_days = [3, 5, 8, 10];
         let leapYear = this.isLeapYear(year);
+        console.log('Leap Year is', leapYear, year, month)
         return leapYear && month === 1
             ? 29
             : !leapYear && month === 1
@@ -134,13 +135,16 @@ class Calendar extends Component {
     createDateObj(month, year) {
 
         let numberOfDays = this.getNumberOfDaysOfMonth(month, year);
-        // numberOfDays++;
-        let dates=[]
-        console.log(numberOfDays)
-        for(let i=1;i<=numberOfDays;i++){
-            dates.push(i);
-        }
-         //= _.range(1, numberOfDays);
+
+        let dates = []
+        //use generic loop
+        // console.log(numberOfDays)
+        // for(let i=1;i<=numberOfDays;i++){
+        //     dates.push(i);
+        // }
+        //use lodash
+        numberOfDays++;
+        dates = _.range(1, numberOfDays);
         console.log(dates)
         let objDates = dates.map((date, i) => {
             let objDate = {};
