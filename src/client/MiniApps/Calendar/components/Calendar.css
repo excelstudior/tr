@@ -1,10 +1,13 @@
+.calendar-main{
+    display: block;
+}
 .calendar{
-    margin: 20px auto;
+    margin: 2px auto;
     border: 1px black solid;
-    display: inline-block;
+    z-index: 4;
 }
 .calendar-head{
-    border: 1px grey solid;
+    border-bottom: 1px grey solid;
     padding: 5px 5px;
     text-align: center;
 }
@@ -13,39 +16,45 @@
     width: 20%;
     border:none;
 }
-
+.btn-cal-now{
+    border:none;
+    width: 20%;
+}
 .btn-cal-next{
     
     width: 20%;
     border:none;
 }
 .btn-cal-year{
-    width: 30%;
+    width: 20%;
     text-align: center;
     border: none;
 }
+.btn-cal-year select option{
+    text-align: center;
+}
 .btn-cal-month{
-    width: 30%;
+    width: 20%;
     /* text-align: center; */
     border:none;
 }
-.calendar-dayNames span{
-    width:30px;
-    margin:2.5px;
-    padding:5px;
+.calendar-dayNames button{
+    width: 14.28%;
+    padding:5px 13px;
+    border:none;
     
 }
 .calendar-dayNames{
     margin:0px 0px;
     text-align: center;
-    border-bottom: 0.5px solid grey;
+    border-bottom: 1px solid grey;
 }
 .calendar-content div{
     text-align:center;
 }
 .calendar-content button{
     width: 14.28%;
-    padding:8px;
+    padding:13px;
     border:none;
 }
 
