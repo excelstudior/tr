@@ -120,7 +120,7 @@ router.post('/login', (req, res) => {
             .then(isMatch => {
                 if (isMatch) {
                     //User Matched
-                    const payload = { id: user.id, name: user.name, avatar: user.avatar,email:user.email }
+                    const payload = { id: user.id, name: user.name, avatar: user.avatar,email:user.email,type:user.type }
                     //Sign token
                     jwt.sign(
                         payload,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Auth.css'
 import PropTypes from 'prop-types';
+import {END_USER} from '../../../../server/common/constants'
 
 
 
@@ -11,7 +12,8 @@ class Register extends Component {
             "name":"",
             "email":"user@example.com",
             "password":"",
-            "confirmPassword":""
+            "confirmPassword":"",
+            "type":END_USER
         };
         this.error={};
         this.onSubmit=this.onSubmit.bind(this)

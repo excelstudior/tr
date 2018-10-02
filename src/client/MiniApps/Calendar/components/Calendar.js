@@ -74,7 +74,8 @@ class Calendar extends Component {
         this.createDateItemsOfOtherMonths = this.createDateItemsOfOtherMonths.bind(this);
         this.onDateClick = this.onDateClick.bind(this);
         this.onSelectDateClick = this.onSelectDateClick.bind(this);
-        this.setCurrentDate=this.setCurrentDate.bind(this);
+        this.setCurrentDate = this.setCurrentDate.bind(this);
+
     }
 
     componentDidMount() {
@@ -165,7 +166,7 @@ class Calendar extends Component {
         return objDates;
     }
 
-    setCurrentDate(){
+    setCurrentDate() {
         this.currentYear = new Date().getFullYear();
         this.currentMonth = new Date().getMonth(); // 0 base array, start from Jan
         this.currentDate = new Date().getDate(); // get the date number of the month
@@ -249,12 +250,13 @@ class Calendar extends Component {
                 })
 
             default:
-            return this.setState({
-                showCalendar: "none"
-            })
+                return this.setState({
+                    showCalendar: "none"
+                })
         }
 
     }
+
 
     render() {
 
@@ -266,7 +268,7 @@ class Calendar extends Component {
             , selectedDate
             , numberOfWeekLines
             , showCalendar } = this.state;
-        const {onChange}=this.props;
+        const { onChange } = this.props;
 
         return (
             <div className='calendar-main'>
@@ -280,7 +282,7 @@ class Calendar extends Component {
                 </div>
                 <div style={{ display: showCalendar }} className='calendar'>
                     <div className='calendar-head'>
-                        
+
                         <Year classname='btn-cal-year' onChange={this.onYearChange} years={this.years} currentYear={year} />
                         <Month classname='btn-cal-month' onChange={this.onMonthChange} currentMonth={month} />
                         <button className='btn-cal-prev' onClick={this.onBackwardOneMonth}>Prev</button>
@@ -313,8 +315,8 @@ class Calendar extends Component {
     }
 }
 
-Calendar.PropTypes={
-    onChange:PropTypes.func
+Calendar.PropTypes = {
+    onChange: PropTypes.func
 }
 
 export default Calendar
