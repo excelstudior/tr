@@ -4,7 +4,7 @@ import {isAuthenticated} from './util/isAuthenticated'
 import './app.css';
 import Reddit from './Reddit/containers/Reddits';
 import Calendar from './MiniApps/Calendar/components/Calendar';
-import Dashboard from './Layout/containers/Dashboard'
+import Dashboard from '../client/User/Admin/containers/Dashboard'
 import Profile from './User/Profile/containers/Profile';
 import Navbar from './Layout/containers/Navbar';
 import Register from './Layout/containers/Authorization/Register';

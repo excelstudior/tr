@@ -9,7 +9,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-
+        this.props.getUsers();
     }
 
     componentDidUpdate() {
@@ -20,8 +20,8 @@ class Dashboard extends Component {
         return (
     
                 <div className='Dashboard'>
-                    <h2>Super Admin Dashboard</h2>
-                    Today is {new Date().toLocaleDateString()} and time now is {new Date().toLocaleTimeString()}
+                    <h2>Admin Dashboard</h2>
+                    Today is {new Date().toLocaleDateString()} and logged on at {new Date().toLocaleTimeString()}
                 </div>
 
         )
@@ -29,7 +29,9 @@ class Dashboard extends Component {
 }
 
 Dashboard.PropTypes={
-    user:PropTypes.object.isRequired
+    user:PropTypes.object.isRequired,
+    users:PropTypes.array.isRequired,
+    getUsers:PropTypes.func.isRequired,
 }
 
 export default Dashboard
