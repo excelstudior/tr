@@ -75,7 +75,6 @@ class Calendar extends Component {
         this.onDateClick = this.onDateClick.bind(this);
         this.onSelectDateClick = this.onSelectDateClick.bind(this);
         this.setCurrentDate = this.setCurrentDate.bind(this);
-
     }
 
     componentDidMount() {

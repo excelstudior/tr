@@ -20,6 +20,7 @@ class Dashboard extends Component {
         return (
     
                 <div className='Dashboard'>
+                    <h2>Super Admin Dashboard</h2>
                     Today is {new Date().toLocaleDateString()} and time now is {new Date().toLocaleTimeString()}
                 </div>
 
@@ -27,8 +28,8 @@ class Dashboard extends Component {
     }
 }
 
-// Dashboard.PropTypes={
-//     Dashboard:PropTypes.array.isRequired
-// }
+Dashboard.PropTypes={
+    user:PropTypes.object.isRequired
+}
 
 export default Dashboard

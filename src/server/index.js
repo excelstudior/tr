@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 const users = require('./routes/api/users');
 const profile=require('./routes/api/profile');
 const posts=require('./routes/api/posts');
+const admin=require('./routes/api/admin');
 
 let webServer = new WebServer();
 webServer.start()
@@ -45,7 +46,8 @@ require('./config/passport')(passport);
 // Use Routes
 webServer.app.use('/api/users', users);
 webServer.app.use('/api/profile',profile);
-webServer.app.use('/api/posts',posts)
+webServer.app.use('/api/posts',posts);
+webServer.app.use('/api/admin',admin)
 
 
 const port = process.env.port || 5000;

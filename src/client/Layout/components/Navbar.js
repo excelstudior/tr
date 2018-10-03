@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Navbar.css'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import {ADMIN,END_USER} from '../../../server/common/constants';
 
 class Navbar extends Component {
     constructor(props) {
@@ -33,6 +34,9 @@ class Navbar extends Component {
                             <li><Link to='/'>Home</Link></li>
                         </ul>
                         : <ul>
+                            {user.type===ADMIN
+                                ?<li><Link to='/dashboard'>Dashboard</Link></li>
+                                :<li></li>}
                             <li><Link to='/profile'>Profile</Link></li>
                             <li className='dropdown'>
                                 <div className='dropdown-main'>App</div>
