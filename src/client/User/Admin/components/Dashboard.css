@@ -1,0 +1,22 @@
+.dashboard-tabs{
+    display: block;
+    margin: 5px 2px;
+    border: 1px solid;
+}
+.dashboard-tabs ul li{
+    list-style: none;
+    margin:inherit;
+    background: white;
+}
+.dashboard-tabs ul li button{
+    border:none;
+    font-size: 16px;
+    padding:20px 5px;
+    
+}
+.dashboard-tabs ul{
+    margin: 2px 2px;
+    width: 100px;
+    padding:2px 0px;
+    
+}
