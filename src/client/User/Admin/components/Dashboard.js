@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import './Dashboard.css'
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import Users from '../containers/Users';
 
 const Menu = [{ 0: 'Overview' }, { 1: 'Users' }, { 2: 'Projects' }, { 3: 'Statistics' }]
 const MenuItem = (props) => {
+    console.log(props.name)
     return (
         <li onClick={props.onClick}
             key={props.value}
             className={props.style}
             value={props.value}
-        ><Link to={`./${props.name}`}>{props.name}</Link></li>
+        ><Link to={`/dashboard/${props.name}`}>{props.name}</Link></li>
     )
 }
 
-const Users = (props) => {
-    return (
-        <div>
-            User
-        </div>
-    )
-}
+// const Users = (props) => {
+//     return (
+//         <div>
+//             User
+//         </div>
+//     )
+// }
 
 const Overview = (props) => {
     return (
@@ -33,7 +35,7 @@ const Overview = (props) => {
 const Projects = (props) => {
     return (
         <div>
-            Overview
+            Projects
         </div>
     )
 }
@@ -57,7 +59,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-        this.props.getUsers();
+       // this.props.getUsers();
     }
 
     componentDidUpdate() {
@@ -77,17 +79,22 @@ class Dashboard extends Component {
                     <div className='dashboard-tabs'>
                         <ul>
                             {Menu.map((mi, i) => {
+                                console.log(mi[i])
                                 return <MenuItem onClick={this.handleTabsChange} key={i} value={i} style={selectedTab === i ? 'dashboard-tabs-selected' : ''} name={mi[i]} />
 
                             })}
 
                         </ul>
 
-                    </div>   
-                    <Route path='/Overview' component={Overview} />
-                    <Route path='/Users' component={Users} />
-                    <Route path='/Projects' component={Projects} />
-                    <Route path='/Statistics' component={Statistics} />
+                    </div>  
+                    {/* {Menu.map((mi,i)=>{
+                        return <Route path={`''`}/>
+                    })} */}
+
+                    <Route path='/dashboard/Overview' component={Overview} />
+                    <Route path='/dashboard/Users' component={Users} />
+                    <Route path='/dashboard/Projects' component={Projects} />
+                    <Route path='/dashboard/Statistics' component={Statistics} />
                 </div>
             </Router>
         )

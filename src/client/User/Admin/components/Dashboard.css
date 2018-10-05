@@ -15,6 +15,7 @@
 .dashboard-tabs ul li a{
  text-decoration: none;
  font-weight: 400;
+ color:black;
 }
 .dashboard-tabs ul li:hover{
     color:white;
