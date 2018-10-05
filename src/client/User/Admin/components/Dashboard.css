@@ -1,17 +1,28 @@
+.dashboard div{
+    display: inline-block;
+}
 .dashboard-tabs{
     display: block;
-    margin: 5px 2px;
-    border: 1px solid;
+    margin: 5px 0px;
 }
 .dashboard-tabs ul li{
     list-style: none;
-    margin:inherit;
-    background: white;
+    margin-right:0px;
+    text-align: center;
+    padding: 10px 0px;
+    border-right: 1px solid black
 }
-.dashboard-tabs ul li button{
-    border:none;
-    font-size: 16px;
-    padding:20px 5px;
+.dashboard-tabs ul li a{
+ text-decoration: none;
+ font-weight: 400;
+}
+.dashboard-tabs ul li:hover{
+    color:white;
+    background: grey;
+}
+.dashboard-tabs-selected{
+    background:grey;
+    color: white;
     
 }
 .dashboard-tabs ul{

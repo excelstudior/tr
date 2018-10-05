@@ -4,7 +4,7 @@ const users=(state=[],action)=>{
     switch (action.type){
         case SET_USERS:
         console.log(action.users);
-        return [...state,action.users]
+        return action.users
         default:
         return state;
     }
