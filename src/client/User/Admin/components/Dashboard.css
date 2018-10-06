@@ -1,9 +1,11 @@
 .dashboard div{
     display: inline-block;
+    
 }
 .dashboard-tabs{
-    display: block;
     margin: 5px 0px;
+    float: left;
+   
 }
 .dashboard-tabs ul li{
     list-style: none;
@@ -31,4 +33,29 @@
     width: 100px;
     padding:2px 0px;
     
+}
+.dashboard-users{
+    margin: 5px 0px;
+    float: left;
+}
+.dashboard-users div{
+    display: block;
+}
+.dashboard-users-button{
+    /* border-bottom: 1px grey solid; */
+    padding: 5px 5px;
+}
+
+.dashboard-users-button button{
+    display: inline-block;
+    font-weight: 400;
+    font-size: 14px;
+    padding:5px 10px;
+    background: grey;
+    color:white;
+    margin-right: 10px;
+    border: none;
+}
+.dashboard-users-content{
+    padding: 5px 5px;
 }
