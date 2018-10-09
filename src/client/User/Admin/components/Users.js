@@ -3,59 +3,60 @@ import './Users.css'
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import { ADD, SAVE, DELETE, EDIT, CANCEL, NONE } from '../../../CommonComponents/Constants';
+import UsersTable from './UsersTable';
 
-const Tbl_Users = (props) => {
+// const Tbl_Users = (props) => {
 
-   //extract component to write controls on checkbox
+//    //extract component to write controls on checkbox
 
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th><input
-                        type='checkbox'
-                        name='all'
-                        defaultChecked={false}
-                        checked={props.checked}
-                        onChange={props.onChange}
-                        disabled={props.mode === NONE || props.mode === ADD}
-                    /></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Avatar</th>
-                    <th>Status</th>
-                    <th>Type</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.users.map((user, i) => {
-                    return <tr>
-                        <td><input
-                            type='checkbox'
-                            name={user._id}
-                            defaultChecked={false}
-                            onChange={props.onChange}
-                            disabled={props.mode === NONE || props.mode === ADD}
-                        /></td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        {/*write a onMouseOver method to display a long value */}
-                        <td>
-                            {user.avatar === null
-                                ? ''
-                                : user.avatar.length >= 6
-                                    ? user.avatar.substring(0, 5)
-                                    : user.avatar
-                            }</td>
-                        <td>{user.isActive?'Active':'Inactive'}</td>
-                        <td>{user.type}</td>git 
-                    </tr>
-                })}
-            </tbody>
+//     return (
+//         <table>
+//             <thead>
+//                 <tr>
+//                     <th><input
+//                         type='checkbox'
+//                         name='all'
+//                         defaultChecked={false}
+//                         checked={props.checked}
+//                         onChange={props.onChange}
+//                         disabled={props.mode === ADD}
+//                     /></th>
+//                     <th>Name</th>
+//                     <th>Email</th>
+//                     <th>Avatar</th>
+//                     <th>Status</th>
+//                     <th>Type</th>
+//                 </tr>
+//             </thead>
+//             <tbody>
+//                 {props.users.map((user, i) => {
+//                     return <tr>
+//                         <td><input
+//                             type='checkbox'
+//                             name={user._id}
+//                             defaultChecked={false}
+//                             onChange={props.onChange}
+//                             disabled={props.mode === ADD}
+//                         /></td>
+//                         <td>{user.name}</td>
+//                         <td>{user.email}</td>
+//                         {/*write a onMouseOver method to display a long value */}
+//                         <td>
+//                             {user.avatar === null
+//                                 ? ''
+//                                 : user.avatar.length >= 6
+//                                     ? user.avatar.substring(0, 5)
+//                                     : user.avatar
+//                             }</td>
+//                         <td>{user.isActive?'Active':'Inactive'}</td>
+//                         <td>{user.type}</td>
+//                     </tr>
+//                 })}
+//             </tbody>
 
-        </table>
-    )
-}
+//         </table>
+//     )
+// }
 
 class Users extends Component {
     constructor(props) {
@@ -99,7 +100,7 @@ class Users extends Component {
                 <div className='dashboard-users-content'>
                     There are {users.length} users
                     {users.length !== 0
-                        ? <Tbl_Users
+                        ? <UsersTable
                             mode={mode}
                             users={users}
                         />
