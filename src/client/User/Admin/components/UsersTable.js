@@ -29,11 +29,18 @@ class UsersTable extends Component {
     }
 
     handleRowCheck(e){
-        this.setState(prevState=>({
-            currentUserIds:e.targe.checked
-                ?[...prevState.currentUserIds,e.target.value]
-                :prevState.currentUserIds.filter(id=>id!==e.targe.value)
-        }))
+        
+        let ids=this.state.currentUserIds;
+        console.log(ids);
+        this.setState({
+            currentUserIds:e.target.checked===false
+                ?ids.filter(id=>id!==e.target.value)
+                :ids.indexOf(e.target.value)<0
+                ?[...ids,e.target.value]
+                :[...ids]
+                
+        })
+        
     }
     selectAll(e) {
 
@@ -49,7 +56,7 @@ class UsersTable extends Component {
 
     render() {
         const { users, mode, onChange } = this.props;
-        const {selectAllRows}=this.state;
+        const {selectAllRows,currentUserIds}=this.state;
 
         return (
             <table>
@@ -58,7 +65,7 @@ class UsersTable extends Component {
                         <th><input
                             type='checkbox'
                             name='all'
-                            defaultChecked={false}
+                            //defaultChecked={false}
                             onChange={this.selectAll}
                             disabled={mode === ADD}
                         /></th>
@@ -76,9 +83,9 @@ class UsersTable extends Component {
                                 type='checkbox'
                                 name={i}
                                 value={user._id}
-                                defaultChecked={false}
+                               // defaultChecked={false}
                                 onChange={this.handleRowCheck}
-                               // checked={currentUsers[]}
+                                checked={currentUserIds.indexOf(user._id)>-1}
                                 disabled={mode === ADD}
                             /></td>
                             <td>{user.name}</td>
