@@ -9,11 +9,11 @@ class UsersTable extends Component {
         super(props);
 
         this.state = {
-            selectAllRows:false,
-            currentUserIds: []
+            selectAllRows: false,
+            currentUsers: []
         }
         this.selectAll = this.selectAll.bind(this);
-        this.handleRowCheck=this.handleRowCheck.bind(this);
+        this.handleRowCheck = this.handleRowCheck.bind(this);
     }
 
     componentDidMount() {
@@ -28,83 +28,91 @@ class UsersTable extends Component {
 
     }
 
-    handleRowCheck(e){
-        
-        let ids=this.state.currentUserIds;
-        console.log(ids);
+    handleRowCheck(e) {
+        console.log(this.state);
+        let propsUsers = this.props.users;
+        let currentUsers = this.state.currentUsers;
         this.setState({
-            currentUserIds:e.target.checked===false
-                ?ids.filter(id=>id!==e.target.value)
-                :ids.indexOf(e.target.value)<0
-                ?[...ids,e.target.value]
-                :[...ids]
-                
+            currentUsers: e.target.checked === false
+                ? currentUsers.filter(currentUser => currentUser._id !== e.target.value)
+                : currentUsers.indexOf(propsUsers[e.target.name]) < 0
+                    ? [...currentUsers, propsUsers[e.target.name]]
+                    : [...currentUsers],
+            selectAllRows: e.target.checked === false
+                ? e.target.checked
+                : currentUsers.indexOf(propsUsers[e.target.name]) > -1
+                    ? this.state.selectAllRows
+                    : [...currentUsers, propsUsers[e.target.name]].length === propsUsers.length
+                        ? true
+                        : this.state.selectAllRows
+
         })
-        
+
     }
     selectAll(e) {
-
-        let userIds=this.props.users.map((user,i)=>{
-            return user._id;
-        })
-        this.setState({
-            currentUserIds: e.target.checked === true ?userIds : [],
-            selectAllRows:e.target.checked
-        })
         console.log(this.state)
+        this.setState({
+            currentUsers: e.target.checked === true ? this.props.users : [],
+            selectAllRows: e.target.checked
+        })
     }
 
     render() {
         const { users, mode, onChange } = this.props;
-        const {selectAllRows,currentUserIds}=this.state;
+        const { selectAllRows, currentUsers } = this.state;
 
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th><input
-                            type='checkbox'
-                            name='all'
-                            //defaultChecked={false}
-                            onChange={this.selectAll}
-                            disabled={mode === ADD}
-                        /></th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Avatar</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, i) => {
-                        return <tr>
-                            <td><input
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input
                                 type='checkbox'
-                                name={i}
-                                value={user._id}
-                               // defaultChecked={false}
-                                onChange={this.handleRowCheck}
-                                checked={currentUserIds.indexOf(user._id)>-1}
-                                disabled={mode === ADD}
-                            /></td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            {/*write a onMouseOver method to display a long value */}
-                            <td>
-                                {user.avatar === null
-                                    ? ''
-                                    : user.avatar.length >= 6
-                                        ? user.avatar.substring(0, 5)
-                                        : user.avatar
-                                }</td>
-                            <td>{user.isActive ? 'Active' : 'Inactive'}</td>
-                            <td>{user.type}</td>
+                                name='all'
+                                checked={selectAllRows}
+                                onChange={this.selectAll}
+                                disabled={mode !== NONE}
+                            /></th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Avatar</th>
+                            <th>Status</th>
+                            <th>Type</th>
                         </tr>
-                    })}
-                </tbody>
+                    </thead>
+                    <tbody>
+                        {users.map((user, i) => {
+                            return <tr>
+                                <td><input
+                                    type='checkbox'
+                                    name={i}
+                                    value={user._id}
+                                    onChange={this.handleRowCheck}
+                                    checked={currentUsers.indexOf(user) > -1}
+                                    disabled={mode !== NONE}
+                                /></td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                {/*write a onMouseOver method to display a long value */}
+                                <td>
+                                    {user.avatar === null
+                                        ? ''
+                                        : user.avatar.length >= 6
+                                            ? user.avatar.substring(0, 5)
+                                            : user.avatar
+                                    }</td>
+                                <td>{user.isActive ? 'Active' : 'Inactive'}</td>
+                                <td>{user.type}</td>
+                            </tr>
+                        })}
 
-            </table>
+
+
+                    </tbody>
+                    
+                </table>
+                <button name={mode}>{mode}</button>
+            </div>
         )
     }
 }
