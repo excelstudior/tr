@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Users from '../components/Users';
 import {getUsers} from '../actions/index'
+import {addUser} from '../../Admin/actions/index'
 
 import { withRouter } from 'react-router-dom';
 const mapStateToProps = (state,ownProps) => ({
@@ -9,7 +10,7 @@ const mapStateToProps = (state,ownProps) => ({
     users:state.users,
  })
  const mapDispatchToProps = (dispatch) => ({
-    //getUsers:(user,history)=>dispatch(getUsers(user,history))
+    addUser:(user,history)=>dispatch(addUser(user,history)),
     getUsers:()=>dispatch(getUsers())
  })
 

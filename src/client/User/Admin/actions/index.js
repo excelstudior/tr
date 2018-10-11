@@ -14,3 +14,9 @@ export const getUsers=()=>dispatch=>{
     .then(res=>dispatch(setUsers(res.data)))
     .catch(err=>console.log(err))
 }
+export const addUser=(user,history)=>dispatch=>{
+    axios
+    .post('/api/users/register', user)
+    .then(res => { dispatch(getUsers()) })
+    .catch(err => console.log(err))
+}
