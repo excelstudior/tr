@@ -59,3 +59,28 @@
 .dashboard-users-content{
     padding: 5px 5px;
 }
+.dashboard-users-table{
+    display: block;
+}
+.dashboard-users-table table{
+        border-collapse: collapse;
+        border: 2px solid rgb(200,200,200);
+        letter-spacing: 1px;
+        font-size: 14px;
+}
+.dashboard-users-table th{
+   background:grey;
+   color: white;
+   border: 2px solid rgb(200,200,200);
+   padding: 5px 20px;
+   font-weight: 400;
+}
+.dashboard-users-table td{
+    text-align: center;
+    border: 2px solid rgb(200,200,200);
+    padding: 5px 20px;
+}
+.dashboard-users-table td input{
+    text-align: center;
+    padding: 5px 20px;
+}

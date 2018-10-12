@@ -47,7 +47,7 @@ class Users extends Component {
         } else {
             content =
                 <div className='dashboard-users-content'>
-                    There are {users.length} users
+                    
                     {users.length !== 0
                         ? <UsersTable
                             mode={mode}

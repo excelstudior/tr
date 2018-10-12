@@ -138,7 +138,7 @@ class UsersTable extends Component {
         const { selectAllRows, currentUsers} = this.state;
 
         return (
-            <div>
+            <div className='dashboard-users-table'>
                 <table>
                     <thead>
                         <tr>
