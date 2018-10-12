@@ -6,59 +6,70 @@ import { ADD, SAVE, DELETE, EDIT, CANCEL, NONE } from '../../../CommonComponents
 import { ADMIN, END_USER } from '../../../../server/common/constants'
 
 
-const NewUser = ({ onChange }) => {
-    return (
-        <tr>
-            <td>
-                <input
-                    type='checkbox'
-                    disabled={true}
-                    onChange={onChange}
-                />
-            </td>
-            <td>
+class NewUser extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            newUser: { password: "123456", confirmPassword: "123456" },
+        }
+        this.onInputChange = this.onInputChange.bind(this);
+        this.onAddUser=this.onAddUser.bind(this);
+    }
+
+    onInputChange(e) {
+        console.log(this.state.newUser)
+        let user = this.state.newUser
+        this.setState({
+            newUser: {
+                ...user, [e.target.name]:
+                    e.target.name!=='isActive'
+                        ? e.target.value
+                        : ([e.target.checked])===Boolean && e.target.checked
+                            ? true : false
+            }
+        })
+    }
+
+    onAddUser(e) {
+        console.log(this.state.newUser)
+        e.preventDefault();
+        this.props.addUser(this.state.newUser, this.props.history)
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.onAddUser}>
+                <label>User Name</label><br />
                 <input type='text'
                     name='name'
                     placeholder={'User Name'}
-                    onChange={onChange}
-                />
-            </td>
-            <td>
+                    onChange={this.onInputChange}
+                /><br />
+                <label>User Email</label><br />
                 <input type='text'
                     name='email'
                     placeholder={'User Email'}
-                    onChange={onChange}
-                />
-            </td>
-            {/* <td>
-                <input type='text'
-                    disabled={true}
-                    placeholder={'Avatar'}
-                    onChange={onChange}
-                />
-            </td> */}
-            <td>
-                <select name='isActive' onChange={onChange}>
-                    <option selected value={Boolean(true)}>
-                        Active
-                    </option>
-                    <option value={Boolean(false)}>
-                        Inactive
-                    </option>
-                </select>
-            </td>
-            <td>
-                <select name='type' onChange={onChange}>
+                    onChange={this.onInputChange}
+                /><br />
+                <label>Activated</label><br />
+                <input
+                    type='checkbox'
+                    name='isActive'
+                    onChange={this.onInputChange}
+                /><br />
+                <label>Type</label><br />
+                <select name='type' onChange={this.onInputChange}>
                     <option selected value={ADMIN}>
                         {ADMIN}
                     </option>
                     <option value={END_USER}>
                         {END_USER}
                     </option>
-                </select>
-            </td>
-        </tr>
-    )
+                </select><br/>
+                <input type='submit' value='Add' />
+            </form>
+        )
+    }
 }
 
 class UsersTable extends Component {
@@ -68,12 +79,9 @@ class UsersTable extends Component {
         this.state = {
             selectAllRows: false,
             currentUsers: [],
-            newUser: { password: "123456", confirmPassword: "123456" },
         }
         this.selectAll = this.selectAll.bind(this);
         this.handleRowCheck = this.handleRowCheck.bind(this);
-        this.onNewUserInputChange = this.onNewUserInputChange.bind(this);
-        this.onAddUser = this.onAddUser.bind(this);
     }
 
     componentDidMount() {
@@ -117,24 +125,10 @@ class UsersTable extends Component {
         })
     }
 
-    onAddUser(e) {
-        console.log(this.state.newUser)
-        e.preventDefault();
-        this.props.addUser(this.state.newUser, this.props.history)
-    }
-    onNewUserInputChange(e) {
-        console.log(this.state.newUser)
-        let user = this.state.newUser
-        this.setState({
-            newUser: {
-                ...user, [e.target.name]: [e.target.name] === 'isActive'
-                    ? Boolean(e.target.value)
-                    : e.target.value
-            }
-        })
-    }
+    
+ 
     render() {
-        const { users, mode } = this.props;
+        const { users, mode,addUser } = this.props;
 
         const { selectAllRows, currentUsers, newUser } = this.state;
 
@@ -152,7 +146,6 @@ class UsersTable extends Component {
                             /></th>
                             <th>Name</th>
                             <th>Email</th>
-                            {/* <th>Avatar</th> */}
                             <th>Status</th>
                             <th>Type</th>
                         </tr>
@@ -170,29 +163,22 @@ class UsersTable extends Component {
                                 /></td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                {/*write a onMouseOver method to display a long value */}
-                                {/* <td>
-                                    {user.avatar === null
-                                        ? ''
-                                        : user.avatar.length >= 6
-                                            ? user.avatar.substring(0, 5)
-                                            : user.avatar
-                                    }</td> */}
                                 <td>{user.isActive ? 'Active' : 'Inactive'}</td>
                                 <td>{user.type}</td>
                             </tr>
                         })}
-                        {mode === ADD
-                            ? <NewUser onChange={this.onNewUserInputChange} />
-                            : <tr></tr>}
+
                     </tbody>
 
                 </table>
-                <div className='dashboard-users-button'>
+                {/* <div className='dashboard-users-button'>
                     {mode === ADD ? <button onClick={this.onAddUser} name={ADD}>{ADD}</button> : ''}
                     {mode === EDIT ? <button name={EDIT}>SAVE</button> : ''}
 
-                </div>
+                </div> */}
+                {mode === ADD
+                    ? <NewUser addUser={addUser} />
+                    : <br />}
             </div>
         )
     }

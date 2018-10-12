@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {SET_USERS,LOADING_USERS} from './constants';
+import {SET_USERS,LOADING_USERS, CHANGE_MODE} from './constants';
 const setUsers=(users)=>({
     type:SET_USERS,
     users
@@ -20,3 +20,7 @@ export const addUser=(user,history)=>dispatch=>{
     .then(res => { dispatch(getUsers()) })
     .catch(err => console.log(err))
 }
+export const changeMode=(mode)=>({
+    type:CHANGE_MODE,
+    mode
+})

@@ -1,8 +1,10 @@
 
-import {SET_USERS,LOADING_USERS} from '../actions/constants';
+import {SET_USERS,LOADING_USERS, CHANGE_MODE} from '../actions/constants';
+import { NONE } from '../../../CommonComponents/Constants';
 const initialState={
     users:[],
     loading:false,
+    mode:NONE,
 }
 
 const users=(state=initialState,action)=>{
@@ -13,6 +15,8 @@ const users=(state=initialState,action)=>{
         case LOADING_USERS:
         console.log('loading')
         return {...state,loading:true}
+        case CHANGE_MODE:
+        return {...state,mode:action.mode}
         default:
         return state;
     }
