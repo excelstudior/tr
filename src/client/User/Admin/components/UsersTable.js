@@ -25,7 +25,7 @@ class NewUser extends Component {
                 ...user, [e.target.name]:
                     e.target.name!=='isActive'
                         ? e.target.value
-                        : ([e.target.checked])===Boolean && e.target.checked
+                        : e.target.checked
                             ? true : false
             }
         })
@@ -63,10 +63,10 @@ class NewUser extends Component {
                 /><br />
                 <label>Type</label><br />
                 <select name='type' onChange={this.onInputChange}>
-                    <option selected value={ADMIN}>
+                    <option value={ADMIN}>
                         {ADMIN}
                     </option>
-                    <option value={END_USER}>
+                    <option selected value={END_USER}>
                         {END_USER}
                     </option>
                 </select><br/>
