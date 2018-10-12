@@ -10,7 +10,7 @@ class Users extends Component {
         super(props);
         this.state = {
             editUsers: [],
-            mode: NONE
+            
         }
         this.handleSwitchMode = this.handleSwitchMode.bind(this);
 
@@ -30,16 +30,17 @@ class Users extends Component {
     }
 
     handleSwitchMode(e) {
-        this.setState({
-            //editUsers: [],
-            mode: e.target.name,
-        })
+        // this.setState({
+        //     //editUsers: [],
+        //     mode: e.target.name,
+        // })
+        this.props.changeMode(e.target.name)
         console.log(this.state)
     }
     render() {
-        const { loading, users, } = this.props.users;
-        const {addUser}=this.props
-        const { editUsers, mode } = this.state;
+        const { loading, users, mode} = this.props.users;
+        const {addUser,changeMode}=this.props
+        const { editUsers} = this.state;
         let content;
         if (users.length === 0 || loading) {
             content = <p>Loading...</p>
@@ -52,6 +53,7 @@ class Users extends Component {
                             mode={mode}
                             users={users}
                             addUser={addUser}
+                            changeMode={changeMode}
                         />
                         : ''}
                 </div>
@@ -62,6 +64,8 @@ class Users extends Component {
                 <div className='dashboard-users-button'>
                     {mode === NONE ? <button onClick={this.handleSwitchMode} name={ADD}>{ADD}</button> : ''}
                     {mode === NONE ? <button onClick={this.handleSwitchMode} name={EDIT}>{EDIT}</button> : ''}
+                    {/* need to delet below when edit user table created */}
+                    
                     {mode === NONE ? '' : <button onClick={this.handleSwitchMode} name={NONE}>{CANCEL}</button>}
                 </div>
 
@@ -74,9 +78,10 @@ class Users extends Component {
 
 Users.PropTypes = {
     user: PropTypes.object.isRequired,
-    users: PropTypes.array.isRequired,
+    users: PropTypes.object.isRequired,
     getUsers: PropTypes.func.isRequired,
     addUser:PropTypes.func.isRequired,
+    changeMode:PropTypes.func.isRequired,
 }
 
 export default Users

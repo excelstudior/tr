@@ -14,6 +14,7 @@ class NewUser extends Component {
         }
         this.onInputChange = this.onInputChange.bind(this);
         this.onAddUser=this.onAddUser.bind(this);
+        this.onCancel=this.onCancel.bind(this);
     }
 
     onInputChange(e) {
@@ -34,6 +35,9 @@ class NewUser extends Component {
         console.log(this.state.newUser)
         e.preventDefault();
         this.props.addUser(this.state.newUser, this.props.history)
+    }
+    onCancel(e){
+        this.props.changeMode(NONE);
     }
 
     render() {
@@ -67,6 +71,7 @@ class NewUser extends Component {
                     </option>
                 </select><br/>
                 <input type='submit' value='Add' />
+                <input type='button' value='Cancel' onClick={this.onCancel}/>
             </form>
         )
     }
@@ -128,9 +133,9 @@ class UsersTable extends Component {
     
  
     render() {
-        const { users, mode,addUser } = this.props;
+        const { users, mode,addUser,changeMode } = this.props;
 
-        const { selectAllRows, currentUsers, newUser } = this.state;
+        const { selectAllRows, currentUsers} = this.state;
 
         return (
             <div>
@@ -177,7 +182,7 @@ class UsersTable extends Component {
 
                 </div> */}
                 {mode === ADD
-                    ? <NewUser addUser={addUser} />
+                    ? <NewUser addUser={addUser} changeMode={changeMode} />
                     : <br />}
             </div>
         )
@@ -187,7 +192,8 @@ class UsersTable extends Component {
 UsersTable.PropTypes = {
     mode: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired,
-    addUser: PropTypes.func,
+    addUser: PropTypes.func.isRequired,
+    changeMode:PropTypes.func.isRequired,
 }
 
 export default UsersTable
