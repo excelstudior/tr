@@ -12,8 +12,7 @@ const mapStateToProps = (state,ownProps) => ({
  })
  const mapDispatchToProps = (dispatch) => ({
 addUser:(user,history)=>{
-    dispatch(addUser(user,history));
-    
+    dispatch(addUser(user,history));  
 },
     getUsers:()=>dispatch(getUsers()),
     changeMode:(mode)=>dispatch(changeMode(mode)),

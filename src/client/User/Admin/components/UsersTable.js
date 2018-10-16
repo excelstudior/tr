@@ -42,7 +42,8 @@ class NewUser extends Component {
     }
 
     render() {
-        const { mode } = this.props;
+        const { mode,errors } = this.props;
+        console.log(errors)
         return (
             <div className='dashboard-modal-users-newUser'>
                 <div className='dashboard-users-newUser-content'>
@@ -54,13 +55,17 @@ class NewUser extends Component {
                 <label>User Name</label><br />
                 <TextField name='name'
                     placeholder={'User Name'}
-                    onChange={this.onInputChange} />
+                    onChange={this.onInputChange} 
+                    error={errors.name!==undefined?errors.name:''}
+                    />
                 <br />
                 <label>User Email</label><br />
                 <TextField type='text'
                     name='email'
                     placeholder={'User Email'}
-                    onChange={this.onInputChange} />
+                    onChange={this.onInputChange}
+                    error={errors.email!==undefined?errors.email:''}
+                    />
                 <br />
                 <label>Type</label><br/>
                 <select name='type' onChange={this.onInputChange}>
@@ -82,41 +87,6 @@ class NewUser extends Component {
                 
                 </div>
             </div>
-            // <form onSubmit={this.onAddUser}
-            //     className='dashboard-users-newUser'
-            //     style={mode === ADD ? { display: 'block' } : { display:'none'}}>
-            //     <input type='submit' value='Add' />
-            //     <input type='button' value='Cancel' onClick={this.onCancel} />
-            //     <br/>
-            //     <label>User Name</label><br />
-            //     <input type='text'
-            //         name='name'
-            //         placeholder={'User Name'}
-            //         onChange={this.onInputChange}
-            //     /><br />
-            //     <label>User Email</label><br />
-            //     <input type='text'
-            //         name='email'
-            //         placeholder={'User Email'}
-            //         onChange={this.onInputChange}
-            //     /><br />
-            //     <label>Activated</label>
-            //     <input
-            //         type='checkbox'
-            //         name='isActive'
-            //         onChange={this.onInputChange}
-            //     /><br />
-            //     <label>Type</label>
-            //     <select name='type' onChange={this.onInputChange}>
-            //         <option value={ADMIN}>
-            //             {ADMIN}
-            //         </option>
-            //         <option selected value={END_USER}>
-            //             {END_USER}
-            //         </option>
-            //     </select><br />
-
-            // </form>
         )
     }
 }
@@ -177,7 +147,7 @@ class UsersTable extends Component {
 
 
     render() {
-        const { users, mode, addUser, changeMode } = this.props;
+        const { users, mode, addUser, changeMode,errors } = this.props;
 
         const { selectAllRows, currentUsers } = this.state;
 
@@ -221,7 +191,7 @@ class UsersTable extends Component {
 
                 </table>
                 {mode === ADD
-                    ? <NewUser addUser={addUser} changeMode={changeMode} mode={mode} />
+                    ? <NewUser addUser={addUser} changeMode={changeMode} mode={mode} errors={errors} />
                     : <br />}
             </div>
         )
@@ -233,6 +203,7 @@ UsersTable.PropTypes = {
     users: PropTypes.array.isRequired,
     addUser: PropTypes.func.isRequired,
     changeMode: PropTypes.func.isRequired,
+    errors:PropTypes.object.isRequired,
 }
 
 export default UsersTable

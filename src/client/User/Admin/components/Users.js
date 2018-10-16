@@ -34,7 +34,7 @@ class Users extends Component {
         console.log(this.state)
     }
     render() {
-        const { loading, users, mode} = this.props.users;
+        const { loading, users, mode,errors} = this.props.users;
         const {addUser,changeMode}=this.props
         const { editUsers} = this.state;
         let content;
@@ -50,6 +50,7 @@ class Users extends Component {
                             users={users}
                             addUser={addUser}
                             changeMode={changeMode}
+                            errors={errors}
                         />
                         : ''}
                 </div>
