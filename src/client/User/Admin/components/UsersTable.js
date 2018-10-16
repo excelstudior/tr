@@ -3,6 +3,7 @@ import './Users.css'
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import { ADD, SAVE, DELETE, EDIT, CANCEL, NONE } from '../../../CommonComponents/Constants';
+import TextField from '../../../CommonComponents/TextField'
 import { ADMIN, END_USER } from '../../../../server/common/constants'
 
 
@@ -13,8 +14,8 @@ class NewUser extends Component {
             newUser: { password: "123456", confirmPassword: "123456" },
         }
         this.onInputChange = this.onInputChange.bind(this);
-        this.onAddUser=this.onAddUser.bind(this);
-        this.onCancel=this.onCancel.bind(this);
+        this.onAddUser = this.onAddUser.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     onInputChange(e) {
@@ -23,7 +24,7 @@ class NewUser extends Component {
         this.setState({
             newUser: {
                 ...user, [e.target.name]:
-                    e.target.name!=='isActive'
+                    e.target.name !== 'isActive'
                         ? e.target.value
                         : e.target.checked
                             ? true : false
@@ -36,32 +37,32 @@ class NewUser extends Component {
         e.preventDefault();
         this.props.addUser(this.state.newUser, this.props.history)
     }
-    onCancel(e){
+    onCancel() {
         this.props.changeMode(NONE);
     }
 
     render() {
+        const { mode } = this.props;
         return (
-            <form onSubmit={this.onAddUser}>
+            <div className='dashboard-modal-users-newUser'>
+                <div className='dashboard-users-newUser-content'>
+                <div className='dashboard-users-button'>
+                    <button onClick={this.onAddUser}>{ADD}</button>
+                    <button onClick={this.onCancel}>{CANCEL}</button>
+                </div>
+                <br />
                 <label>User Name</label><br />
-                <input type='text'
-                    name='name'
+                <TextField name='name'
                     placeholder={'User Name'}
-                    onChange={this.onInputChange}
-                /><br />
+                    onChange={this.onInputChange} />
+                <br />
                 <label>User Email</label><br />
-                <input type='text'
+                <TextField type='text'
                     name='email'
                     placeholder={'User Email'}
-                    onChange={this.onInputChange}
-                /><br />
-                <label>Activated</label><br />
-                <input
-                    type='checkbox'
-                    name='isActive'
-                    onChange={this.onInputChange}
-                /><br />
-                <label>Type</label><br />
+                    onChange={this.onInputChange} />
+                <br />
+                <label>Type</label><br/>
                 <select name='type' onChange={this.onInputChange}>
                     <option value={ADMIN}>
                         {ADMIN}
@@ -69,10 +70,53 @@ class NewUser extends Component {
                     <option selected value={END_USER}>
                         {END_USER}
                     </option>
-                </select><br/>
-                <input type='submit' value='Add' />
-                <input type='button' value='Cancel' onClick={this.onCancel}/>
-            </form>
+                </select>
+                <br />
+                <label>Activated</label>
+                <br/>
+                <input
+                    type='checkbox'
+                    name='isActive'
+                    onChange={this.onInputChange}
+                />
+                
+                </div>
+            </div>
+            // <form onSubmit={this.onAddUser}
+            //     className='dashboard-users-newUser'
+            //     style={mode === ADD ? { display: 'block' } : { display:'none'}}>
+            //     <input type='submit' value='Add' />
+            //     <input type='button' value='Cancel' onClick={this.onCancel} />
+            //     <br/>
+            //     <label>User Name</label><br />
+            //     <input type='text'
+            //         name='name'
+            //         placeholder={'User Name'}
+            //         onChange={this.onInputChange}
+            //     /><br />
+            //     <label>User Email</label><br />
+            //     <input type='text'
+            //         name='email'
+            //         placeholder={'User Email'}
+            //         onChange={this.onInputChange}
+            //     /><br />
+            //     <label>Activated</label>
+            //     <input
+            //         type='checkbox'
+            //         name='isActive'
+            //         onChange={this.onInputChange}
+            //     /><br />
+            //     <label>Type</label>
+            //     <select name='type' onChange={this.onInputChange}>
+            //         <option value={ADMIN}>
+            //             {ADMIN}
+            //         </option>
+            //         <option selected value={END_USER}>
+            //             {END_USER}
+            //         </option>
+            //     </select><br />
+
+            // </form>
         )
     }
 }
@@ -130,12 +174,12 @@ class UsersTable extends Component {
         })
     }
 
-    
- 
-    render() {
-        const { users, mode,addUser,changeMode } = this.props;
 
-        const { selectAllRows, currentUsers} = this.state;
+
+    render() {
+        const { users, mode, addUser, changeMode } = this.props;
+
+        const { selectAllRows, currentUsers } = this.state;
 
         return (
             <div className='dashboard-users-table'>
@@ -176,13 +220,8 @@ class UsersTable extends Component {
                     </tbody>
 
                 </table>
-                {/* <div className='dashboard-users-button'>
-                    {mode === ADD ? <button onClick={this.onAddUser} name={ADD}>{ADD}</button> : ''}
-                    {mode === EDIT ? <button name={EDIT}>SAVE</button> : ''}
-
-                </div> */}
                 {mode === ADD
-                    ? <NewUser addUser={addUser} changeMode={changeMode} />
+                    ? <NewUser addUser={addUser} changeMode={changeMode} mode={mode} />
                     : <br />}
             </div>
         )
@@ -193,7 +232,7 @@ UsersTable.PropTypes = {
     mode: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired,
     addUser: PropTypes.func.isRequired,
-    changeMode:PropTypes.func.isRequired,
+    changeMode: PropTypes.func.isRequired,
 }
 
 export default UsersTable

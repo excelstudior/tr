@@ -30,10 +30,6 @@ class Users extends Component {
     }
 
     handleSwitchMode(e) {
-        // this.setState({
-        //     //editUsers: [],
-        //     mode: e.target.name,
-        // })
         this.props.changeMode(e.target.name)
         console.log(this.state)
     }
@@ -59,12 +55,10 @@ class Users extends Component {
                 </div>
         }
         return (
-            //EDIT||mode===ADD||mode===DELETE
             <div className='dashboard-users'>
                 <div className='dashboard-users-button'>
                     {mode === NONE ? <button onClick={this.handleSwitchMode} name={ADD}>{ADD}</button> : ''}
                     {mode === NONE ? <button onClick={this.handleSwitchMode} name={EDIT}>{EDIT}</button> : ''}
-                    {/* need to delet below when edit user table created */}
                     
                     {mode === NONE ? '' : <button onClick={this.handleSwitchMode} name={NONE}>{CANCEL}</button>}
                 </div>
