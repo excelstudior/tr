@@ -42,49 +42,49 @@ class NewUser extends Component {
     }
 
     render() {
-        const { mode,errors } = this.props;
+        const { mode, errors } = this.props;
         console.log(errors)
         return (
             <div className='dashboard-modal-users-newUser'>
                 <div className='dashboard-users-newUser-content'>
-                <div className='dashboard-users-button'>
-                    <button onClick={this.onAddUser}>{ADD}</button>
-                    <button onClick={this.onCancel}>{CANCEL}</button>
-                </div>
-                <br />
-                <label>User Name</label><br />
-                <TextField name='name'
-                    placeholder={'User Name'}
-                    onChange={this.onInputChange} 
-                    error={errors.name!==undefined?errors.name:''}
+                    <div className='dashboard-users-button'>
+                        <button onClick={this.onAddUser}>{ADD}</button>
+                        <button onClick={this.onCancel}>{CANCEL}</button>
+                    </div>
+                    <br />
+                    <label>User Name</label><br />
+                    <TextField name='name'
+                        placeholder={'User Name'}
+                        onChange={this.onInputChange}
+                        error={errors.name !== undefined ? errors.name : ''}
                     />
-                <br />
-                <label>User Email</label><br />
-                <TextField type='text'
-                    name='email'
-                    placeholder={'User Email'}
-                    onChange={this.onInputChange}
-                    error={errors.email!==undefined?errors.email:''}
+                    <br />
+                    <label>User Email</label><br />
+                    <TextField type='text'
+                        name='email'
+                        placeholder={'User Email'}
+                        onChange={this.onInputChange}
+                        error={errors.email !== undefined ? errors.email : ''}
                     />
-                <br />
-                <label>Type</label><br/>
-                <select name='type' onChange={this.onInputChange}>
-                    <option value={ADMIN}>
-                        {ADMIN}
-                    </option>
-                    <option selected value={END_USER}>
-                        {END_USER}
-                    </option>
-                </select>
-                <br />
-                <label>Activated</label>
-                <br/>
-                <input
-                    type='checkbox'
-                    name='isActive'
-                    onChange={this.onInputChange}
-                />
-                
+                    <br />
+                    <label>Type</label><br />
+                    <select name='type' onChange={this.onInputChange}>
+                        <option value={ADMIN}>
+                            {ADMIN}
+                        </option>
+                        <option selected value={END_USER}>
+                            {END_USER}
+                        </option>
+                    </select>
+                    <br />
+                    <label>Activated</label>
+                    <br />
+                    <input
+                        type='checkbox'
+                        name='isActive'
+                        onChange={this.onInputChange}
+                    />
+
                 </div>
             </div>
         )
@@ -147,7 +147,7 @@ class UsersTable extends Component {
 
 
     render() {
-        const { users, mode, addUser, changeMode,errors } = this.props;
+        const { users, mode, addUser, changeMode, errors } = this.props;
 
         const { selectAllRows, currentUsers } = this.state;
 
@@ -182,7 +182,16 @@ class UsersTable extends Component {
                                 /></td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.isActive ? 'Active' : 'Inactive'}</td>
+                                <td>{mode === EDIT
+                                    ? <input
+                                        type='checkbox'
+                                        name='isActive'
+                                        checked={user.isActive}
+                                    //onChange={this.selectAll}
+                                    />
+                                    : user.isActive ? 'Active' : 'Inactive'
+                                }
+                                </td>
                                 <td>{user.type}</td>
                             </tr>
                         })}
@@ -203,7 +212,7 @@ UsersTable.PropTypes = {
     users: PropTypes.array.isRequired,
     addUser: PropTypes.func.isRequired,
     changeMode: PropTypes.func.isRequired,
-    errors:PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
 }
 
 export default UsersTable
