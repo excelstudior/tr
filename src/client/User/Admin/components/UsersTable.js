@@ -115,6 +115,8 @@ class UsersTable extends Component {
 
     }
 
+    
+
     handleRowCheck(e) {
         console.log(this.state);
         let propsUsers = this.props.users;
@@ -150,6 +152,13 @@ class UsersTable extends Component {
         const { users, mode, addUser, changeMode, errors } = this.props;
 
         const { selectAllRows, currentUsers } = this.state;
+console.log(currentUsers)
+        let usersToRender;
+        if (mode===EDIT){
+            usersToRender=currentUsers;
+        } else{
+            usersToRender=users;
+        }
 
         return (
             <div className='dashboard-users-table'>
@@ -170,7 +179,7 @@ class UsersTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, i) => {
+                        {usersToRender.map((user, i) => {
                             return <tr>
                                 <td><input
                                     type='checkbox'
@@ -186,6 +195,7 @@ class UsersTable extends Component {
                                     ? <input
                                         type='checkbox'
                                         name='isActive'
+                                        value={i}
                                         checked={user.isActive}
                                     //onChange={this.selectAll}
                                     />
