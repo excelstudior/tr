@@ -9,7 +9,7 @@ class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editUsers: [],
+           
             
         }
         this.handleSwitchMode = this.handleSwitchMode.bind(this);
@@ -35,8 +35,8 @@ class Users extends Component {
     }
     render() {
         const { loading, users, mode,errors} = this.props.users;
-        const {addUser,changeMode}=this.props
-        const { editUsers} = this.state;
+        const {addUser,changeMode,saveUser}=this.props
+        
         let content;
         if (users.length === 0 || loading) {
             content = <p>Loading...</p>
@@ -49,6 +49,7 @@ class Users extends Component {
                             mode={mode}
                             users={users}
                             addUser={addUser}
+                            saveUser={saveUser}
                             changeMode={changeMode}
                             errors={errors}
                         />
@@ -77,6 +78,7 @@ Users.PropTypes = {
     getUsers: PropTypes.func.isRequired,
     addUser:PropTypes.func.isRequired,
     changeMode:PropTypes.func.isRequired,
+    saveUser:PropTypes.func.isRequired,
 }
 
 export default Users

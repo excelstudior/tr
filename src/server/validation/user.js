@@ -8,9 +8,9 @@ module.exports = function validateUserInput(data) {
     let errors = {};
 
     data.name = !isEmpty(data.name) ? data.name : '';
-    data.type = !isEmpty(data.type) ? data.name:'';
+    data.type = !isEmpty(data.type) ? data.type:'';
     data.isActive = !isEmpty(data.isActive) ? data.isActive : '';
-
+    
     if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
         errors.name = 'name must be between 2 and 30 characters';
     }
@@ -20,15 +20,15 @@ module.exports = function validateUserInput(data) {
     }
 
     if (!Validator.isEmpty(data.type)){
-        error.type-"User type can't be empty"
+        errors.type-"User type can't be empty"
     }
 
     if (userTypes.indexOf(data.type)<0){
         errors.type="User type doesn't exist"
     }
 
-    if (!Validator.isEmpty(data.isActive)) {
-        if (!Validator.isBoolean(data.isActive)) {
+    if (!Validator.isEmpty((data.isActive).toString())) {
+        if (!Validator.isBoolean((data.isActive).toString())) {
             errors.isActive = 'from field needs to be a boolean'
         }
     }

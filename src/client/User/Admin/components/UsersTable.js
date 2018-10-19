@@ -91,47 +91,170 @@ class NewUser extends Component {
     }
 }
 
+class UserRowData extends Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        const { user, index, onSelectedUsersChange, onSaveSelectedUserChanges } = this.props;
+        return (
+            <tr>
+                <td><i class="far fa-save" onClick={() => onSaveSelectedUserChanges(user._id)}></i></td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td><input
+                    type='checkbox'
+                    name='isActive'
+                    defaultChecked={user.isActive}
+                    onChange={(e) => onSelectedUsersChange(user._id, e.target.name, e.target.checked)}
+                />
+                </td>
+                <td><select name='type' onChange={(e) => onSelectedUsersChange(user._id, e.target.name, e.target.value)}>
+                    {[ADMIN, END_USER].map((el) => {
+                        if (el === user.type) {
+                            return <option selected value={el}>{el}</option>
+                        } else {
+                            return <option value={el}>{el}</option>
+                        }
+                    })}
+
+                </select></td>
+            </tr>
+        )
+    }
+}
+
+class EditUser extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+
+    
+
+    render() {
+        const { selectedUsers,onSelectedUsersChange, onSaveSelectedUserChanges } = this.props;
+        console.log(selectedUsers)
+        let userIds = selectedUsers.map((user) => user._id);
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-save" onClick={() => onSaveSelectedUserChanges(userIds)}></i></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Active</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {selectedUsers.map((user, i) => {
+                        return <UserRowData user={user} index={i}
+                            onSelectedUsersChange={onSelectedUsersChange}
+                            onSaveSelectedUserChanges={onSaveSelectedUserChanges}
+                        />
+                    })}
+
+                </tbody>
+
+            </table>
+        )
+    }
+}
+
 class UsersTable extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             selectAllRows: false,
-            currentUsers: [],
+            selectedUsers: [],
         }
         this.selectAll = this.selectAll.bind(this);
         this.handleRowCheck = this.handleRowCheck.bind(this);
+        this.onSelectedUsersChange = this.onSelectedUsersChange.bind(this);
+        this.onSaveSelectedUserChanges = this.onSaveSelectedUserChanges.bind(this);
     }
 
     componentDidMount() {
 
     }
 
-    componentWillMount() {
+    // componentWillMount() {
+
+    //     this.setState(prevState => ({
+    //         selectedUsers: prevState.selectedUsers.length === 0
+    //             ? []
+    //             : prevState.selectedUsers.filter((user)=>{
+    //                 if(this.props.users.indexOf(user)>-1){
+    //                     return user
+    //                 }
+    //             })
+    //             }))
+       
+    // }
+
+    componentWillReceiveProps(nextProps){
+        console.log('users',nextProps.users)
+        console.log('nextProps',this.state.selectedUsers)
+        this.setState(prevState => ({
+            selectedUsers: prevState.selectedUsers.length === 0
+                ? []
+                : prevState.selectedUsers.filter((user)=>{
+                    if(nextProps.users.indexOf(user)>-1){
+                        return user
+                    }
+                })
+                }))
 
     }
 
     componentDidUpdate() {
 
     }
+   
 
-    
+    onSaveSelectedUserChanges(id) {
+        let userToBeUpdated = this.state.selectedUsers.find(user => user._id === id)
+        console.log(userToBeUpdated);
+        this.props.saveUser(userToBeUpdated, this.props.history);
+    }
+
+    onSelectedUsersChange(id, name, value) {
+        console.log(id, name, value)
+        const { selectedUsers } = this.state;
+        let updatedUser = selectedUsers.find(user => user._id === id);
+        console.log(updatedUser)
+        this.setState({
+            selectedUsers: selectedUsers.map((user, i) => {
+                if (user._id !== updatedUser._id) {
+                    return user
+                } else {
+                    return { ...user, [name]: value }
+                }
+
+            })
+        })
+
+    }
+
 
     handleRowCheck(e) {
         console.log(this.state);
         let propsUsers = this.props.users;
-        let currentUsers = this.state.currentUsers;
+        let selectedUsers = this.state.selectedUsers;
         this.setState({
-            currentUsers: e.target.checked === false
-                ? currentUsers.filter(currentUser => currentUser._id !== e.target.value)
-                : currentUsers.indexOf(propsUsers[e.target.name]) < 0
-                    ? [...currentUsers, propsUsers[e.target.name]]
-                    : [...currentUsers],
+            selectedUsers: e.target.checked === false
+                ? selectedUsers.filter(selectedUser => selectedUser._id !== e.target.value)
+                : selectedUsers.indexOf(propsUsers[e.target.name]) < 0
+                    ? [...selectedUsers, propsUsers[e.target.name]]
+                    : [...selectedUsers],
             selectAllRows: e.target.checked === false
                 ? e.target.checked
-                : currentUsers.indexOf(propsUsers[e.target.name]) > -1
+                : selectedUsers.indexOf(propsUsers[e.target.name]) > -1
                     ? this.state.selectAllRows
-                    : [...currentUsers, propsUsers[e.target.name]].length === propsUsers.length
+                    : [...selectedUsers, propsUsers[e.target.name]].length === propsUsers.length
                         ? true
                         : this.state.selectAllRows
 
@@ -141,7 +264,7 @@ class UsersTable extends Component {
     selectAll(e) {
         console.log(this.state)
         this.setState({
-            currentUsers: e.target.checked === true ? this.props.users : [],
+            selectedUsers: e.target.checked === true ? this.props.users : [],
             selectAllRows: e.target.checked
         })
     }
@@ -151,18 +274,13 @@ class UsersTable extends Component {
     render() {
         const { users, mode, addUser, changeMode, errors } = this.props;
 
-        const { selectAllRows, currentUsers } = this.state;
-console.log(currentUsers)
-        let usersToRender;
-        if (mode===EDIT){
-            usersToRender=currentUsers;
-        } else{
-            usersToRender=users;
-        }
+        const { selectAllRows, selectedUsers } = this.state;
+        console.log(selectedUsers)
+
 
         return (
             <div className='dashboard-users-table'>
-                <table>
+                {mode === NONE && <table>
                     <thead>
                         <tr>
                             <th><input
@@ -174,33 +292,24 @@ console.log(currentUsers)
                             /></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Active</th>
                             <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {usersToRender.map((user, i) => {
+                        {users.map((user, i) => {
                             return <tr>
                                 <td><input
                                     type='checkbox'
                                     name={i}
                                     value={user._id}
                                     onChange={this.handleRowCheck}
-                                    checked={currentUsers.indexOf(user) > -1}
+                                    checked={selectedUsers.indexOf(user) > -1}
                                     disabled={mode !== NONE}
                                 /></td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{mode === EDIT
-                                    ? <input
-                                        type='checkbox'
-                                        name='isActive'
-                                        value={i}
-                                        checked={user.isActive}
-                                    //onChange={this.selectAll}
-                                    />
-                                    : user.isActive ? 'Active' : 'Inactive'
-                                }
+                                <td>{user.isActive ? 'Active' : 'Inactive'}
                                 </td>
                                 <td>{user.type}</td>
                             </tr>
@@ -208,10 +317,14 @@ console.log(currentUsers)
 
                     </tbody>
 
-                </table>
-                {mode === ADD
-                    ? <NewUser addUser={addUser} changeMode={changeMode} mode={mode} errors={errors} />
-                    : <br />}
+                </table>}
+                {mode === EDIT && <EditUser
+                    users={users}
+                    selectedUsers={selectedUsers}
+                    onSelectedUsersChange={this.onSelectedUsersChange}
+                    onSaveSelectedUserChanges={this.onSaveSelectedUserChanges}
+                />}
+                {mode === ADD && <NewUser addUser={addUser} changeMode={changeMode} mode={mode} errors={errors} />}
             </div>
         )
     }
@@ -221,6 +334,7 @@ UsersTable.PropTypes = {
     mode: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired,
     addUser: PropTypes.func.isRequired,
+    saveUser: PropTypes.func.isRequired,
     changeMode: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
 }

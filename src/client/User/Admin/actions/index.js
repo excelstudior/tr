@@ -39,6 +39,17 @@ export const addUser = (user, history) => dispatch => {
         })
         .catch(err => dispatch(getRegisterUserValidationErrors(err.response.data)))
 }
+
+export const saveUser = (user, history) => dispatch => {
+    axios
+        .post('/api/admin/user', user)
+        .then(res => {
+            dispatch(clearValidationErrors());
+            dispatch(getUsers());
+           // dispatch(changeMode(NONE))
+        })
+        .catch(err => dispatch(getRegisterUserValidationErrors(err.response.data)))
+}
 export const changeMode = (mode) => ({
     type: CHANGE_MODE,
     mode

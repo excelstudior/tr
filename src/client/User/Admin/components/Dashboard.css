@@ -64,25 +64,28 @@
 }
 .dashboard-users-table table{
         border-collapse: collapse;
-        border: 2px solid rgb(200,200,200);
+        border: 1px solid rgb(200,200,200);
         letter-spacing: 1px;
         font-size: 14px;
 }
 .dashboard-users-table th{
    background:grey;
    color: white;
-   border: 2px solid rgb(200,200,200);
+   border: 1px solid rgb(200,200,200);
    padding: 5px 20px;
    font-weight: 400;
 }
 .dashboard-users-table td{
     text-align: center;
-    border: 2px solid rgb(200,200,200);
+    border: 1px solid rgb(200,200,200);
     padding: 5px 20px;
+    color:rgb(90, 89, 89);
+    
 }
 .dashboard-users-table td input{
     text-align: center;
     padding: 5px 20px;
+    color:rgb(90, 89, 89);
 }
 .dashboard-modal-users-newUser{
     position: fixed;
@@ -113,7 +116,7 @@
 .dashboard-users-newUser-content input{
     padding:5px 10px;
     margin:5px auto;
-    color:gray;
+    
     font-weight: 400;
     font-size: 16px;
     width:-webkit-fill-available;
@@ -123,6 +126,7 @@
     font-size: 12px;
     padding:5px 10px;
     margin:5px auto;
+    
 }
 .dashboard-users-newUser-content small{
     color:red;
