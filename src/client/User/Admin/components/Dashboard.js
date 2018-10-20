@@ -79,7 +79,7 @@ class Dashboard extends Component {
                     <div className='dashboard-tabs'>
                         <ul>
                             {Menu.map((mi, i) => {
-                                console.log(mi[i])
+                                
                                 return <MenuItem onClick={this.handleTabsChange} key={i} value={i} style={selectedTab === i ? 'dashboard-tabs-selected' : ''} name={mi[i]} />
 
                             })}

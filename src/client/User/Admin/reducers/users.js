@@ -5,6 +5,7 @@ import {
     , CHANGE_MODE
     , GET_VALIDATION_ERRORS
     , CLEAR_VALIDATION_ERROR
+    , UPDATE_USERS
 } from '../actions/constants';
 import { NONE } from '../../../CommonComponents/Constants';
 const initialState = {
@@ -26,6 +27,18 @@ const users = (state = initialState, action) => {
             return { ...state, errors: action.errors }
         case CLEAR_VALIDATION_ERROR:
             return { ...state, errors: {} }
+        case UPDATE_USERS: {
+            if (Array.isArray(action.users)) {
+                return { ...state }
+            } else {
+                let users = state.users.map((user) => {
+                    if (user._id !== action.users._id) {
+                        return user;
+                    } else { return action.users }
+                })
+                return { ...state, users: users }
+            }
+        }
         default:
             return state;
     }

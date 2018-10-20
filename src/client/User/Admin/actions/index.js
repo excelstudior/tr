@@ -3,6 +3,7 @@ import {
     SET_USERS
     , LOADING_USERS
     , CHANGE_MODE
+    , UPDATE_USERS
     , GET_VALIDATION_ERRORS
     , CLEAR_VALIDATION_ERROR
 } from './constants';
@@ -14,7 +15,10 @@ const setUsers = (users) => ({
 const loadingUsers = () => ({
     type: LOADING_USERS
 })
-
+const updateUsers=(users)=>({
+    type:UPDATE_USERS,
+    users
+})
 const getRegisterUserValidationErrors = (errors) => ({
     type: GET_VALIDATION_ERRORS,
     errors
@@ -44,9 +48,9 @@ export const saveUser = (user, history) => dispatch => {
     axios
         .post('/api/admin/user', user)
         .then(res => {
-            dispatch(clearValidationErrors());
-            dispatch(getUsers());
-           // dispatch(changeMode(NONE))
+            // dispatch(clearValidationErrors());
+            dispatch(updateUsers(res.data));
+            // dispatch(changeMode(NONE))
         })
         .catch(err => dispatch(getRegisterUserValidationErrors(err.response.data)))
 }
