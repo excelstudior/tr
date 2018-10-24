@@ -1,9 +1,6 @@
 const Validator = require('validator');
 const { isEmpty } = require('./ud_validation');
 
-
-
-
 module.exports = function validateCustomerInput(data) {
     let errors = {};
 
