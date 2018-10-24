@@ -37,7 +37,7 @@ mongoose
   .connect(keys.url + keys.Name)
   .then(() => console.log(`MongoDB connected!`))
   .catch(err => console.log);
-
+console.log(mongoose.connection.readyState)
 //Passport middleware
 webServer.app.use(passport.initialize());
 //Passport config
