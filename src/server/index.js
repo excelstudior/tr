@@ -8,6 +8,7 @@ const users = require('./routes/api/users');
 const profile=require('./routes/api/profile');
 const posts=require('./routes/api/posts');
 const admin=require('./routes/api/admin');
+const customer=require('./routes/api/customer')
 
 let webServer = new WebServer();
 webServer.start()
@@ -48,6 +49,7 @@ webServer.app.use('/api/users', users);
 webServer.app.use('/api/profile',profile);
 webServer.app.use('/api/posts',posts);
 webServer.app.use('/api/admin',admin)
+webServer.app.use('/api/customer',customer)
 
 
 const port = process.env.port || 5000;

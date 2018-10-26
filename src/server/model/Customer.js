@@ -40,7 +40,7 @@ const CustomerSchema = new Schema({
         address2: { type: String ,trim: true,},
         suburb: { type: String ,trim: true,},
         state: { type: String ,trim: true,},
-        postCode: { type: String ,trim: true,},
+        postcode: { type: String ,trim: true,},
         country: { type: String ,trim: true,},
         isDefault: false,
     }],

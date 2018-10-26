@@ -3,7 +3,7 @@ const { isEmpty } = require('./ud_validation');
 
 module.exports = function validateCustomerInput(data) {
     let errors = {};
-
+    console.log(data)
     data.name = !isEmpty(data.name) ? data.name : '';
     data.email = !isEmpty(data.email) ? data.email:'';
     data.isActive = !isEmpty(data.isActive) ? data.isActive : '';
@@ -24,11 +24,11 @@ module.exports = function validateCustomerInput(data) {
     }
     
     if (Validator.isEmpty(data.name)) {
-        errors.name = "name field can'' be empty";
+        errors.name = "name field can't be empty";
     }
 
-    if (!Validator.isEmpty(data.email)){
-        errors.email-"User email can't be empty"
+    if (Validator.isEmpty(data.email)){
+        errors.email="Customer email can't be empty";
     }
     if (!Validator.isEmpty((data.isActive).toString())) {
         if (!Validator.isBoolean((data.isActive).toString())) {
