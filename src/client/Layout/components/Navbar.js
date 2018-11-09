@@ -42,6 +42,7 @@ class Navbar extends Component {
                                 <div className='dropdown-main'>App</div>
                                 <div className='dropdown-sub'>
                                 <Link to='/reddit'>Reddit</Link>
+                                <Link to='/japaneseCharacter'>Japanese Character</Link>
                                 </div>
                             </li>
                         </ul>

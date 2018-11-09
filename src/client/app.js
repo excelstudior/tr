@@ -4,6 +4,7 @@ import {isAuthenticated} from './util/isAuthenticated'
 import './app.css';
 import Reddit from './Reddit/containers/Reddits';
 import Calendar from './MiniApps/Calendar/components/Calendar';
+import JapaneseCharacter from './MiniApps/JapaneseCharater/components/JapaneseCharacter'
 import Dashboard from '../client/User/Admin/containers/Dashboard'
 import Profile from './User/Profile/containers/Profile';
 import Navbar from './Layout/containers/Navbar';
@@ -55,6 +56,7 @@ class App extends Component {
                     <Route path='/dashboard' component={Dashboard}/>
                     <Route path='/profile' component={Profile}/>
                     <Route path='/calendar' component={Calendar}/>
+                    <Route path='/japaneseCharacter' component={JapaneseCharacter}/>
                     <Footer />
 
                 </div>
