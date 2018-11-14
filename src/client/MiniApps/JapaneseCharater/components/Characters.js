@@ -61,6 +61,7 @@ Characters.prototype.groupBy = function (property) {
         let shown=Math.random()>0.5
         currentObj.shown=shown;
         currentObj.answer=!shown;
+        currentObj.userInput='';
         let key=currentObj[property];
         if (!acc[key]){
             acc[key]=[];

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Calendar from '../../MiniApps/Calendar/components/Calendar';
+import JapaneseCharacter from '../../MiniApps/JapaneseCharater/components/JapaneseCharacter'
 
 class Home extends Component {
     constructor(props) {
@@ -26,14 +27,9 @@ class Home extends Component {
                     <Calendar />
                 </div>
                 <div>
-                    <Calendar />
+                    <JapaneseCharacter />
                 </div>
-                <div>
-                    <Calendar />
-                </div>
-                <div>
-                    <Calendar />
-                </div>
+                
             </div>
 
         )

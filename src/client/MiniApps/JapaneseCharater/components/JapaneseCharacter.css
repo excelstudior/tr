@@ -14,6 +14,16 @@
     display: inline-block;
     border: 1px solid gray;
     padding:5px;
+    
+    /* width: 30px;
+    height: 30px; */
+}
+
+.jp-cha-line li input{
+    width: 20px;
+    height: 20px;
+    background: beige;
+    border: none;
     font-weight: 600;
     font-size: 20px;
 }
