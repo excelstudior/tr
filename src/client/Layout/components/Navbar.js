@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Navbar.css'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import {ADMIN,END_USER} from '../../../server/common/constants';
+import { ADMIN, END_USER } from '../../../server/common/constants';
 
 class Navbar extends Component {
     constructor(props) {
@@ -34,15 +34,25 @@ class Navbar extends Component {
                             <li><Link to='/'>Home</Link></li>
                         </ul>
                         : <ul>
-                            {user.type===ADMIN
-                                ?<li><Link to='/dashboard'>Dashboard</Link></li>
-                                :<li></li>}
+                            {user.type === ADMIN
+                                // ?<li><Link to='/dashboard'>Dashboard</Link>
+                                // <Link to='/customer'>Customer</Link>
+                                // </li>
+                                // :<li></li>
+                                ? <li className='dropdown'>
+                                    <div className='dropdown-main'>{ADMIN}</div>
+                                    <div className='dropdown-sub'>
+                                        <Link to='/dashboard'>Dashboard</Link>
+                                        <Link to='/customer'>Customer</Link>
+                                    </div>
+                                </li>:<li></li>
+                            }
                             <li><Link to='/profile'>Profile</Link></li>
                             <li className='dropdown'>
                                 <div className='dropdown-main'>App</div>
                                 <div className='dropdown-sub'>
-                                <Link to='/reddit'>Reddit</Link>
-                                <Link to='/japaneseCharacter'>Japanese Character</Link>
+                                    <Link to='/reddit'>Reddit</Link>
+                                    <Link to='/japaneseCharacter'>Japanese Character</Link>
                                 </div>
                             </li>
                         </ul>

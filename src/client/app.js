@@ -6,6 +6,7 @@ import Reddit from './Reddit/containers/Reddits';
 import Calendar from './MiniApps/Calendar/components/Calendar';
 import JapaneseCharacter from './MiniApps/JapaneseCharater/components/JapaneseCharacter'
 import Dashboard from '../client/User/Admin/containers/Dashboard'
+import Customer from '../client/Customer/containers/Customer'
 import Profile from './User/Profile/containers/Profile';
 import Navbar from './Layout/containers/Navbar';
 import Register from './Layout/containers/Authorization/Register';
@@ -57,6 +58,7 @@ class App extends Component {
                     <Route path='/profile' component={Profile}/>
                     <Route path='/calendar' component={Calendar}/>
                     <Route path='/japaneseCharacter' component={JapaneseCharacter}/>
+                    <Route path='/Customer' component={Customer}/>
                     <Footer />
 
                 </div>

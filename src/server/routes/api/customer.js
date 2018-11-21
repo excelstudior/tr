@@ -11,12 +11,27 @@ const Customer = require('../../model/Customer')
 //Load validations
 const validateCustomerInput = require('../../validation/customer');
 const validateAddressInput = require('../../validation/address');
+import {ADMIN,END_USER} from '../../common/constants';
 
 
 const errors = {}
 
+router.use(passport.authenticate('jwt',{session:false}),(req,res,next)=>{
+    req.user.type===ADMIN
+    ?next()
+    :res.status(401).json(errors);
+})
+
 router.get('/', (req, res) => {
-    res.status(200).send('customer')
+    Customer.find()
+            .then(customers=>{
+                if (!customers){
+                    errors.noCustomers='No customers'
+                    return res.status(404).json(errors)
+                }
+                res.json(customers)
+            })
+    //res.status(200).send('customer')
 })
 //create new customer, no address and phone data
 router.post('/', (req, res) => {
