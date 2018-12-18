@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Customer from '../components/Customer';
-import {getCustomers,changeMode} from '../actions/index'
+import {getCustomers,changeMode,addCustomer,clearValidationErrors} from '../actions/index'
 import { withRouter } from 'react-router-dom';
 import {NONE} from '../../CommonComponents/Constants'
 const mapStateToProps = (state, ownProps) => ({
@@ -16,13 +16,14 @@ const mapDispatchToProps = (dispatch) => ({
     getCustomers: () => dispatch(getCustomers()),
     changeMode: (mode) => { 
         dispatch(changeMode(mode));
+        dispatch(clearValidationErrors());
         if(mode===NONE){
             dispatch(getCustomers());
         } 
     },
-    // saveUser: (user, history) => {
-    //     dispatch(saveUser(user, history));
-    // },
+    addCustomer: (customer, history) => {
+        dispatch(addCustomer(customer, history));
+    },
 })
 
 //export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Customer))

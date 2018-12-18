@@ -28,7 +28,7 @@ module.exports = function validateCustomerInput(data) {
     }
 
     if (Validator.isEmpty(data.email)){
-        errors.email="Customer email can't be empty";
+        errors.email="Customer email cannot be empty";
     }
     if (!Validator.isEmpty((data.isActive).toString())) {
         if (!Validator.isBoolean((data.isActive).toString())) {

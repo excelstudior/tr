@@ -28,7 +28,7 @@ class Customer extends Component {
 
     }
     render() {
-        const {customers}=this.props
+        const {customers,addCustomer}=this.props
 
         return (
            // <Router>
@@ -64,7 +64,10 @@ class Customer extends Component {
                 }
                 {customers.mode===ADD?<NewCustomer
                                         mode={customers.mode}
-                                        changeMode={this.handleModeChange}/>:<br></br>
+                                        errors={customers.errors}
+                                        changeMode={this.handleModeChange}
+                                        addCustomer={addCustomer}
+                                        />:<br></br>
                 }
                     {/* <Route path='/dashboard/Statistics' component={Statistics} /> */}
                 </div>
@@ -78,6 +81,7 @@ Customer.PropTypes = {
     customers:PropTypes.object.isRequired,
     getCustomers:PropTypes.func.isRequired,
     changeMode:PropTypes.func.isRequired,
+    addCustomer:PropTypes.func.isRequired,
 }
 
 export default Customer
