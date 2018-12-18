@@ -41,21 +41,22 @@ class Customer extends Component {
                   {customers.loading?<p>Customer loading......</p>:
                     <table>
                         <thead>
-                            <th>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Email</td>
-                                    <td>Status</td>
-                                </tr>
-                            </th>
+                           
+                                    <th>Trading Name</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                
+                        
                         </thead>
                         <tbody>
                             {customers.customers.length>0
                                 ?customers.customers.map((customer)=>{
                                       return  <tr>
+                                            <td>{customer.tradingName}</td>
                                             <td>{customer.name}</td>
                                             <td>{customer.email}</td>
-                                            <td>{customer.isActive}</td>
+                                            <td>{customer.isActive?'Active':'Inactive'}</td>
                                         </tr>
                                 })
                             :<tr>No Customer created</tr>}
